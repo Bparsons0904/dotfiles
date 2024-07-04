@@ -42,5 +42,16 @@ return {
 				vim.lsp.buf.format({ async = false, timeout_ms = 1000 })
 			end,
 		})
+
+		vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+			pattern = { "*.tsx" },
+			callback = function()
+				conform.format({
+					lsp_fallback = true,
+					async = false,
+					timeout_ms = 1000,
+				})
+			end,
+		})
 	end,
 }

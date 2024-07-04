@@ -10,7 +10,7 @@ opt.tabstop = 2 -- 2 spaces for tabs (prettier default)
 opt.shiftwidth = 2 -- 2 spaces for indent width
 opt.expandtab = true -- expand tab to spaces
 opt.autoindent = true -- copy indent from current line when starting new one
-
+opt.scrolloff = 8
 opt.wrap = false
 
 -- search settings
@@ -47,10 +47,9 @@ end
 -- opt.undodir = undodir
 -- opt.undofile = true
 
-vim.opt.laststatus = 0
-vim.opt.cmdheight = 0
+opt.laststatus = 0
+opt.cmdheight = 0
 
-vim.opt.relativenumber = false
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("highlight_yank", {}),
 	pattern = "*",

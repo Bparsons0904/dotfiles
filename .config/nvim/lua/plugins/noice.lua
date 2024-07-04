@@ -15,6 +15,12 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
+			routes = {
+				{
+					view = "notify",
+					filter = { event = "msg_showmode" },
+				},
+			},
 			presets = {
 				bottom_search = false,
 				command_palette = true,

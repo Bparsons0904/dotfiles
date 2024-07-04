@@ -41,7 +41,7 @@ return {
 				keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
 
 				opts.desc = "See available code actions"
-				keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+				keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
 
 				opts.desc = "Smart rename"
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
@@ -66,24 +66,46 @@ return {
 			end,
 		})
 
-		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		local function filterTsxDefinitions(err, result, ctx, config)
+			if result == nil or vim.tbl_isempty(result) then
+				vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
+				return
+			end
+
+			local filtered_result = vim.tbl_filter(function(definition)
+				return not string.match(definition.uri, "index.d.ts")
+			end, result)
+
+			if vim.tbl_isempty(filtered_result) then
+				filtered_result = result
+			end
+
+			vim.lsp.handlers["textDocument/definition"](err, filtered_result, ctx, config)
+		end
+
 		mason_lspconfig.setup_handlers({
-			-- default handler for installed servers
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
 				})
 			end,
+			-- ["tsserver"] = function()
+			-- 	lspconfig["tsserver"].setup({
+			-- 		capabilities = capabilities,
+			-- 		---@diagnostic disable-next-line: unused-local
+			-- 		on_attach = function(client, bufner)
+			-- 			vim.lsp.handlers["textDocument/definition"] = filterTsxDefinitions
+			-- 		end,
+			-- 	})
+			-- end,
 			["html"] = function()
 				lspconfig["html"].setup({
 					capabilities = capabilities,
@@ -91,14 +113,12 @@ return {
 				})
 			end,
 			["graphql"] = function()
-				-- configure graphql language server
 				lspconfig["graphql"].setup({
 					capabilities = capabilities,
 					filetypes = { "graphql", "gql", "typescriptreact", "javascriptreact" },
 				})
 			end,
 			["emmet_ls"] = function()
-				-- configure emmet language server
 				lspconfig["emmet_ls"].setup({
 					capabilities = capabilities,
 					filetypes = {
@@ -113,12 +133,10 @@ return {
 				})
 			end,
 			["lua_ls"] = function()
-				-- configure lua server (with special settings)
 				lspconfig["lua_ls"].setup({
 					capabilities = capabilities,
 					settings = {
 						Lua = {
-							-- make the language server recognize "vim" global
 							diagnostics = {
 								globals = { "vim" },
 							},

@@ -44,7 +44,6 @@ return {
 				"pylint",
 				"eslint_d",
 				"templ",
-				"golangci_lint_ls",
 				"goimports",
 				"golines",
 			},

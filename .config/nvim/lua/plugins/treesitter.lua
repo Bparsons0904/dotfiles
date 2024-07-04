@@ -12,6 +12,7 @@ return {
 		treesitter.setup({
 			highlight = {
 				enable = true,
+				additional_vim_regex_highlighting = false,
 			},
 			indent = { enable = true },
 			autotag = {
@@ -37,6 +38,15 @@ return {
 				"vimdoc",
 				"go",
 				"templ",
+				"sql",
+			},
+			injections = {
+				enable = true,
+				languages = {
+					go = {
+						sql = "(raw_string_literal) @sql",
+					},
+				},
 			},
 			incremental_selection = {
 				enable = true,

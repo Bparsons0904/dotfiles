@@ -41,16 +41,20 @@ opt.swapfile = false
 local undodir = vim.fn.stdpath("data") .. "/undodir"
 -- Create the directory if it doesn't exist
 if vim.fn.isdirectory(undodir) == 0 then
-    vim.fn.mkdir(undodir, "p")
+	vim.fn.mkdir(undodir, "p")
 end
 
-opt.undodir = undodir
-opt.undofile = true
+-- opt.undodir = undodir
+-- opt.undofile = true
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('highlight_yank', {}),
-  pattern = '*',
-  callback = function()
-    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 300 }
-  end,
+vim.opt.laststatus = 0
+vim.opt.cmdheight = 0
+
+vim.opt.relativenumber = false
+vim.api.nvim_create_autocmd("TextYankPost", {
+	group = vim.api.nvim_create_augroup("highlight_yank", {}),
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
+	end,
 })

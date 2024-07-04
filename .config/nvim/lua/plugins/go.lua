@@ -4,8 +4,13 @@ return {
 		"ray-x/guihua.lua",
 		"neovim/nvim-lspconfig",
 		"nvim-treesitter/nvim-treesitter",
+		"mfussenegger/nvim-dap",
+		"rcarriga/nvim-dap-ui",
+		"theHamsta/nvim-dap-virtual-text",
+		"nvim-neotest/nvim-nio",
 	},
 	config = function()
+		-- Configure go.nvim
 		local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			pattern = "*.go",
@@ -17,39 +22,36 @@ return {
 		require("go").setup({
 			lsp_inlay_hints = {
 				enable = true,
-				-- hint style, set to 'eol' for end-of-line hints, 'inlay' for inline hints
-				-- inlay only available for 0.10.x
 				style = "inlay",
-				-- Note: following setup only works for style = 'eol', you do not need to set it for 'inlay'
-				-- Only show inlay hints for the current line
 				only_current_line = false,
-				-- Event which triggers a refersh of the inlay hints.
-				-- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
-				-- not that this may cause higher CPU usage.
-				-- This option is only respected when only_current_line and
-				-- autoSetHints both are true.
 				only_current_line_autocmd = "CursorHold",
-				-- whether to show variable name before type hints with the inlay hints or not
-				-- default: false
 				show_variable_name = true,
-				-- prefix for parameter hints
 				parameter_hints_prefix = "󰊕 ",
 				show_parameter_hints = true,
-				-- prefix for all the other hints (type, chaining)
 				other_hints_prefix = "=> ",
-				-- whether to align to the length of the longest line in the file
 				max_len_align = false,
-				-- padding from the left if max_len_align is true
 				max_len_align_padding = 1,
-				-- whether to align to the extreme right or not
 				right_align = false,
-				-- padding from the right if right_align is true
 				right_align_padding = 6,
-				-- The color of the hints
 				highlight = "Comment",
 			},
 			gofmt = "gofumpt",
 		})
+
+		local dap = require("dap")
+		local dapui = require("dapui")
+		dapui.setup()
+		require("nvim-dap-virtual-text").setup()
+
+		dap.listeners.after.event_initialized["dapui_config"] = function()
+			dapui.open()
+		end
+		dap.listeners.before.event_terminated["dapui_config"] = function()
+			dapui.close()
+		end
+		dap.listeners.before.event_exited["dapui_config"] = function()
+			dapui.close()
+		end
 	end,
 	event = { "CmdlineEnter" },
 	ft = { "go", "gomod" },

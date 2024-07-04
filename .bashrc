@@ -139,7 +139,9 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Add Go binary directories to the PATH
 export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
 export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin:$GOBIN"
 
 # Make sure GOPATH/bin from go env is added
 export PATH="$PATH:$(go env GOPATH)/bin"
@@ -161,3 +163,4 @@ export EDITOR=nvim
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+export PATH="/opt/nvim-linux64/bin:$PATH"

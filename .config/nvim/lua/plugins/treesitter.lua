@@ -39,6 +39,7 @@ return {
 				"go",
 				"templ",
 				"sql",
+				"regex",
 			},
 			injections = {
 				enable = true,

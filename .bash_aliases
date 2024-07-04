@@ -1,5 +1,5 @@
 # Neovim 
-alias neo='NVIM_APPNAME="nvim-nvim" nvim'
+alias neo='nvim'
 alias lazy='NVIM_APPNAME="nvim-lazy" nvim'
 alias chad='NVIM_APPNAME="nvim-chad" nvim'
 alias ks='cd ~/.config/nvim-kickstart'

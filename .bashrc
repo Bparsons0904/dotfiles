@@ -148,7 +148,7 @@ if test -f /home/bobparsons/.cargo/bin; then
   export PATH=$PATH:/home/bobparsons/.cargo/bin
 fi
 
-export EDITOR=lvim
+export EDITOR=nvim
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

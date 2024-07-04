@@ -107,9 +107,13 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+    source ~/.bash_aliases
 fi
-source ~/.bash_aliases
 
+if [ -f ~/.bash_profile ]; then
+    . ~/.bash_profile
+    source ~/.bash_profile
+fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -127,18 +131,24 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 export PATH="$PATH:/opt/nvim-linux64/bin"
-. "$HOME/.cargo/env"
 export PATH=/home/bobparsons/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export GOPATH=$HOME/go
 export PATH=$PATH:$PATH:$GOPATH/bin
 export PATH=$PATH:$(go env GOPATH)/bin
 
-eval $(thefuck --alias)
-eval $(thefuck --alias FUCK)
+if command -v thefuck &> /dev/null
+then
+  eval $(thefuck --alias)
+  eval $(thefuck --alias FUCK)
+fi
+
+if test -f /home/bobparsons/.cargo/bin; then
+  . "$HOME/.cargo/env"
+  export PATH=$PATH:/home/bobparsons/.cargo/bin
+fi
 
 export EDITOR=lvim
-export PATH=$PATH:/home/bobparsons/.cargo/bin
 export PATH="$PATH:/opt/nvim-linux64/bin"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

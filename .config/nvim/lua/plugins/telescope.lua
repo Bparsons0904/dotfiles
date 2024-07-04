@@ -57,6 +57,7 @@ return {
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
+		telescope.load_extension("noice")
 
 		addKeys({
 			{ "n", "<leader>f", "<cmd>Telescope find_files<cr>", "Fuzzy find files in cwd" },

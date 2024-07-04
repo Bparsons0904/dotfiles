@@ -31,6 +31,7 @@ return {
 				"pyright",
 				"gopls",
 				"templ",
+				"htmx",
 			},
 		})
 
@@ -43,6 +44,9 @@ return {
 				"pylint",
 				"eslint_d",
 				"templ",
+				"golangci_lint_ls",
+				"goimports",
+				"golines",
 			},
 		})
 	end,

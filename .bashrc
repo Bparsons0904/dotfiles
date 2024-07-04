@@ -130,13 +130,22 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$PATH:/opt/nvim-linux64/bin"
-export PATH=/home/bobparsons/.local/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH=$HOME/go
-export PATH=$PATH:$PATH:$GOPATH/bin
-export PATH=$PATH:$(go env GOPATH)/bin
 
+# Add Neovim to the PATH
+export PATH="$PATH:/opt/nvim-linux64/bin"
+
+# Add local bin to the PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Add Go binary directories to the PATH
+export GOPATH="$HOME/go"
+export PATH="$PATH:/usr/local/go/bin:$GOPATH/bin"
+
+# Make sure GOPATH/bin from go env is added
+export PATH="$PATH:$(go env GOPATH)/bin"
+
+
+# - WARNING Some binaries are not installed, please check if your $HOME/go/bin or $GOBIN $exists and in your $PATH
 if command -v thefuck &> /dev/null
 then
   eval $(thefuck --alias)

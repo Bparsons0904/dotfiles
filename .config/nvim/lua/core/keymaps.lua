@@ -4,6 +4,12 @@ function _G.addToKeyMap(mode, key, cmd, desc)
 	vim.keymap.set(mode, key, cmd, { noremap = true, silent = true, desc = desc })
 end
 
+function _G.addKeys(keymaps)
+	for _, maps in pairs(keymaps) do
+		addToKeyMap(unpack(maps))
+	end
+end
+
 local keymaps = {
 	{ "n", "<leader>w", ":w<CR>", "Save file" },
 	{ "n", "<leader>q", ":wqa<CR>", "Save all, quit all and exit" },
@@ -43,10 +49,8 @@ local keymaps = {
 	{ "n", "J", "mzJ`z", "Join line below to current and center cursor" },
 	{ "n", "G", "Gzz", "Go to end of file and center cursor" },
 	{ "n", "gg", "ggzz", "Go to beginning of file and center cursor" },
-	{ "n", "<leader>/", "gcc", "Comment current line" },
-	{ "v", "<leader>/", "gc", "Comment current block" },
+	-- { "n", "<leader>/", "gcc", "Comment current line" },
+	-- { "v", "<leader>/", "gc", "Comment current block" },
 }
 
-for _, maps in pairs(keymaps) do
-	addToKeyMap(unpack(maps))
-end
+addKeys(keymaps)

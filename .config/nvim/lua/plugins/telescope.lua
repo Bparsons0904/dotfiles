@@ -58,13 +58,14 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
 
-		local keymap = vim.keymap
-		keymap.set("n", "<leader>f", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-		keymap.set("n", "<leader>sr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
-		keymap.set("n", "<leader>st", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
-		keymap.set("n", "<leader>sc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
-		keymap.set("n", "<leader>sk", "<cmd>Telescope keymaps<cr>", { desc = "Find keymaps" })
-		keymap.set("n", "<leader>sh", "<cmd>Telescope history<cr>", { desc = "Search history" })
-		keymap.set("n", "<leader>ss", "<cmd>TodoTelescope<cr>", { desc = "Find todos" })
+		addKeys({
+			{ "n", "<leader>f", "<cmd>Telescope find_files<cr>", "Fuzzy find files in cwd" },
+			{ "n", "<leader>sr", "<cmd>Telescope oldfiles<cr>", "Fuzzy find recent files" },
+			{ "n", "<leader>st", "<cmd>Telescope live_grep<cr>", "Find string in cwd" },
+			{ "n", "<leader>sc", "<cmd>Telescope grep_string<cr>", "Find string under cursor in cwd" },
+			{ "n", "<leader>sk", "<cmd>Telescope keymaps<cr>", "Find keymaps" },
+			{ "n", "<leader>sh", "<cmd>Telescope history<cr>", "Search history" },
+			{ "n", "<leader>ss", "<cmd>TodoTelescope<cr>", "Find todos" },
+		})
 	end,
 }

@@ -58,9 +58,10 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("ui-select")
 		telescope.load_extension("noice")
+		telescope.load_extension("smart_open")
 
 		addKeys({
-			{ "n", "<leader>f", "<cmd>Telescope find_files<cr>", "Fuzzy find files in cwd" },
+			{ "n", "<leader>sf", "<cmd>Telescope find_files<cr>", "Fuzzy find files in cwd" },
 			{ "n", "<leader>sr", "<cmd>Telescope oldfiles<cr>", "Fuzzy find recent files" },
 			{ "n", "<leader>st", "<cmd>Telescope live_grep<cr>", "Find string in cwd" },
 			{ "n", "<leader>sc", "<cmd>Telescope grep_string<cr>", "Find string under cursor in cwd" },

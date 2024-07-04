@@ -16,7 +16,7 @@ alias ncon='cd ~/.config/nvim'
 alias dev='cd ~/Development/'
 alias bp='cd ~/Development/bobparsons.dev;'
 alias kcon='nvim ~/.config/kitty/kitty.conf'
-alias dot='nvim ~/dotfiles/'
+alias dot='cd ~/dotfiles/'
 
 # Via 
 alias via='cd ~/Development/bickford/via-platform/'

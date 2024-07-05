@@ -14,7 +14,7 @@ return {
 				fg = "#081633",
 			}
 		end,
-		style = "moon",
+		style = "night",
 		transparent = true,
 		terminal_colors = true,
 		styles = {

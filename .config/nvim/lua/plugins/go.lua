@@ -10,7 +10,6 @@ return {
 		"nvim-neotest/nvim-nio",
 	},
 	config = function()
-		-- Configure go.nvim
 		local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			pattern = "*.go",
@@ -41,7 +40,7 @@ return {
 		local dap = require("dap")
 		local dapui = require("dapui")
 		dapui.setup()
-		require("nvim-dap-virtual-text").setup()
+		require("nvim-dap-virtual-text").setup({})
 
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open()

@@ -13,7 +13,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 		{ import = "themes" },
 	},
-	-- install = { colorscheme = { "tokyonight" } },
+	install = { colorscheme = { "tokyonight" } },
 	checker = {
 		enabled = true,
 		notify = false,

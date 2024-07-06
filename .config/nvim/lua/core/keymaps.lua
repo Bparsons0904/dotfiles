@@ -25,6 +25,8 @@ local keymaps = {
 	{ "v", "<", "<gv", "Better indenting (decrease)" },
 	{ "v", ">", ">gv", "Better indenting (increase)" },
 	{ "n", "<leader>tt", ":terminal<CR>", "Open terminal" },
+	{ "n", "<leader>lm", ":Mason<CR>", "Open Mason" },
+	{ "n", "<leader>li", ":LspInfo<CR>", "Open Mason" },
 
 	-- Scrolling and Centering
 	{ "n", "<C-u>", "<C-u>zz", "Scroll up and center cursor" },

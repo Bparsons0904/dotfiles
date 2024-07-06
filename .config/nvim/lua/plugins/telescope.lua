@@ -68,6 +68,12 @@ return {
 			{ "n", "<leader>sk", "<cmd>Telescope keymaps<cr>", "Find keymaps" },
 			{ "n", "<leader>sh", "<cmd>Telescope history<cr>", "Search history" },
 			{ "n", "<leader>ss", "<cmd>TodoTelescope<cr>", "Find todos" },
+			{
+				"n",
+				"<leader>sd",
+				"<cmd>lua require('telescope.builtin').live_grep({ additional_args = function() return { '--hidden' } end })<cr>",
+				"Find string in cwd including hidden files",
+			},
 		})
 	end,
 }

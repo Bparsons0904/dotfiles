@@ -8,7 +8,7 @@ return {
 				filename_first = true,
 				cwd_only = true,
 			})
-		end, { noremap = true, silent = true })
+		end, { noremap = true, silent = true, desc = "Smart Open" })
 	end,
 	dependencies = {
 		"kkharji/sqlite.lua",

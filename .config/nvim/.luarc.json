@@ -2,6 +2,7 @@
     "diagnostics.globals": [
         "vim",
         "trouble",
-        "addToKeyMape"
+        "addToKeyMape",
+        "addToKeyMap"
     ]
 }

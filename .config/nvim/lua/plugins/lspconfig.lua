@@ -69,36 +69,10 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		local function filterTsxDefinitions(err, result, ctx, config)
-			if result == nil or vim.tbl_isempty(result) then
-				vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
-				return
-			end
-
-			local filtered_result = vim.tbl_filter(function(definition)
-				return not string.match(definition.uri, "index.d.ts")
-			end, result)
-
-			if vim.tbl_isempty(filtered_result) then
-				filtered_result = result
-			end
-
-			vim.lsp.handlers["textDocument/definition"](err, filtered_result, ctx, config)
-		end
-
 		mason_lspconfig.setup_handlers({
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
-				})
-			end,
-			["tsserver"] = function()
-				lspconfig["tsserver"].setup({
-					capabilities = capabilities,
-					---@diagnostic disable-next-line: unused-local
-					on_attach = function(client, bufner)
-						vim.lsp.handlers["textDocument/definition"] = filterTsxDefinitions
-					end,
 				})
 			end,
 			["html"] = function()

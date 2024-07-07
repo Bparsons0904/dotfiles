@@ -46,6 +46,7 @@ return {
 				"templ",
 				"goimports",
 				"golines",
+				"gofumpt",
 			},
 		})
 		-- require("go").setup({

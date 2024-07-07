@@ -36,10 +36,10 @@ return {
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
 				["<C-e>"] = cmp.mapping.abort(),
-				["<CR>"] = cmp.mapping.confirm({ select = false }),
+				["<C-y>"] = cmp.mapping.confirm({ select = false }),
 			}),
 			sources = cmp.config.sources({
-				{ name = "copilot", group_index = 2 },
+				-- { name = "copilot", group_index = 2 },
 				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "path", group_index = 2 },
 				{ name = "buffer", group_index = 2 },
@@ -48,7 +48,7 @@ return {
 			sorting = {
 				priority_weight = 2,
 				comparators = {
-					require("copilot_cmp.comparators").prioritize,
+					-- require("copilot_cmp.comparators").prioritize,
 
 					-- Below is the default comparitor list and order for nvim-cmp
 					cmp.config.compare.offset,

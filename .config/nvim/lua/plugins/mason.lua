@@ -49,10 +49,9 @@ return {
 			},
 		})
 		-- require("go").setup({
-		-- 	lsp_cfg = false,
-		-- 	-- other setups...
+		-- 	-- lsp_cfg = false,
 		-- })
-		-- local cfg = require("go.lsp").config() -- config() return the go.nvim gopls setup
+		-- local cfg = require("go.lsp").config()
 		--
 		-- require("lspconfig").gopls.setup(cfg)
 	end,

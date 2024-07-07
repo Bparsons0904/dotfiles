@@ -84,6 +84,14 @@ return {
 					},
 				},
 			},
+			custom_highlights = function(colors)
+				return {
+					Keyword = { fg = colors.lavender },
+					goPackage = { fg = colors.lavender },
+					goImport = { fg = colors.lavender },
+					goFunc = { fg = colors.lavender },
+				}
+			end,
 		})
 	end,
 }

@@ -92,15 +92,15 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			-- ["tsserver"] = function()
-			-- 	lspconfig["tsserver"].setup({
-			-- 		capabilities = capabilities,
-			-- 		---@diagnostic disable-next-line: unused-local
-			-- 		on_attach = function(client, bufner)
-			-- 			vim.lsp.handlers["textDocument/definition"] = filterTsxDefinitions
-			-- 		end,
-			-- 	})
-			-- end,
+			["tsserver"] = function()
+				lspconfig["tsserver"].setup({
+					capabilities = capabilities,
+					---@diagnostic disable-next-line: unused-local
+					on_attach = function(client, bufner)
+						vim.lsp.handlers["textDocument/definition"] = filterTsxDefinitions
+					end,
+				})
+			end,
 			["html"] = function()
 				lspconfig["html"].setup({
 					capabilities = capabilities,

@@ -20,7 +20,7 @@ return {
 		})
 		require("go").setup({
 			lsp_inlay_hints = {
-				enable = true,
+				enable = false,
 				style = "inlay",
 				only_current_line = false,
 				only_current_line_autocmd = "CursorHold",
@@ -51,6 +51,11 @@ return {
 		dap.listeners.before.event_exited["dapui_config"] = function()
 			dapui.close()
 		end
+
+		addKeys({
+			{ "n", "<leader>ww", ":w<CR>", "Save file" },
+			{ "n", "<leader>wq", ":wqa<CR>", "Save all, quit all and exit" },
+		})
 	end,
 	event = { "CmdlineEnter" },
 	ft = { "go", "gomod" },

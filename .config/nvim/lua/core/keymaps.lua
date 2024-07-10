@@ -40,6 +40,7 @@ local keymaps = {
 	{ "n", "gg", "ggzz", "Go to beginning of file and center cursor" },
 
 	-- Buffers
+	{ "n", "<leader>x", ":bd<CR>", "Close the current buffer" },
 	{ "n", "<leader>bc", ":bd<CR>", "Close the current buffer" },
 	{ "n", "<leader>bb", ":bprevious<CR>", "Go to previous buffer" },
 	{ "n", "<leader>bn", ":bnext<CR>", "Go to next buffer" },

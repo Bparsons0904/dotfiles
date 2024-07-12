@@ -55,7 +55,7 @@ return {
 					flamingo = "#7aa2f7",
 					pink = "#7aa2f7",
 					-- maroon = "#ff0000",
-					-- mauve = "#ff0000",
+					mauve = "#5F80C4",
 					-- white = "#ff0000",
 					-- black = "#ff0000",
 					-- gray = "#ff0000",

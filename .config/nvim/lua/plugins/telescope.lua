@@ -43,6 +43,7 @@ return {
 							["<C-k>"] = actions.move_selection_previous,
 							["<C-j>"] = actions.move_selection_next,
 							["<C-q>"] = actions.send_selected_to_qflist + custom_actions.open_trouble_qflist,
+							["<C-y>"] = actions.select_default,
 						},
 					},
 				},

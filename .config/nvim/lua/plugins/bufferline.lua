@@ -90,7 +90,7 @@ return {
 					italic = true,
 				},
 				numbers = {
-					fg = "#737aa2",
+					fg = "#0764fe",
 					bg = "NONE",
 				},
 				numbers_visible = {
@@ -98,7 +98,7 @@ return {
 					bg = "NONE",
 				},
 				numbers_selected = {
-					fg = "#c0caf5",
+					fg = "#65fe08",
 					bg = "NONE",
 					bold = true,
 					italic = true,

@@ -52,11 +52,12 @@ return {
 			dapui.close()
 		end
 
-		addKeys({
-			{ "n", "<leader>ww", ":w<CR>", "Save file" },
-			{ "n", "<leader>wq", ":wqa<CR>", "Save all, quit all and exit" },
-		})
+		-- addKeys({
+		-- 	{ "n", "<leader>ww", ":w<CR>", "Save file" },
+		-- 	{ "n", "<leader>wq", ":wqa<CR>", "Save all, quit all and exit" },
+		-- })
 	end,
+
 	event = { "CmdlineEnter" },
 	ft = { "go", "gomod" },
 	build = ':lua require("go.install").update_all_sync()',

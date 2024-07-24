@@ -32,7 +32,7 @@ return {
 				-- Add padding to the buffers
 				separator_style = "slant",
 				enforce_regular_tabs = true,
-				show_buffer_close_icons = false,
+				show_buffer_close_icons = true,
 				show_close_icon = false,
 			},
 			highlights = {
@@ -76,7 +76,7 @@ return {
 					bg = "NONE",
 				},
 				close_button_selected = {
-					fg = "#f7768e",
+					fg = "#ffffff",
 					bg = "NONE",
 				},
 				buffer_visible = {
@@ -84,7 +84,7 @@ return {
 					bg = "NONE",
 				},
 				buffer_selected = {
-					fg = "#c0caf5",
+					fg = "#ffffff",
 					bg = "NONE",
 					bold = true,
 					italic = true,
@@ -98,7 +98,7 @@ return {
 					bg = "NONE",
 				},
 				numbers_selected = {
-					fg = "#65fe08",
+					fg = "#ffffff",
 					bg = "NONE",
 					bold = true,
 					italic = true,
@@ -112,7 +112,8 @@ return {
 					bg = "NONE",
 				},
 				diagnostic_selected = {
-					fg = "#f7768e",
+					-- fg = "#f7768e",
+					fg = "#ffffff",
 					bg = "NONE",
 					bold = true,
 					italic = true,
@@ -191,7 +192,8 @@ return {
 					bg = "NONE",
 				},
 				warning_selected = {
-					fg = "#e0af68",
+					-- fg = "#e0af68",
+					fg = "#ffffff",
 					bg = "NONE",
 					sp = "#e0af68",
 					bold = true,

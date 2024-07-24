@@ -25,6 +25,7 @@ return {
 				},
 			},
 			renderer = {
+				root_folder_modifier = false,
 				full_name = true,
 				indent_markers = {
 					enable = true,
@@ -46,7 +47,7 @@ return {
 				},
 			},
 			filters = {
-				custom = { ".DS_Store" },
+				custom = { ".DS_Store", ".git" },
 			},
 			git = {
 				ignore = true,

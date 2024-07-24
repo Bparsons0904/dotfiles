@@ -18,7 +18,7 @@ local keymaps = {
 	-- General
 	{ "i", "jk", "<ESC>", "Exit insert mode with jk" },
 	{ "i", "kj", "<ESC>", "Exit insert mode with kj" },
-	{ "n", "<C-a>", "ggVGy", "Yank entire file" },
+	{ "n", "<C-a>", "ggVG", "Select entire file" },
 	{ "n", "<leader>h", ":nohl<CR>", "Clear search highlights" },
 	{ "n", "<leader>+", "<C-a>", "Increment number" },
 	{ "n", "<leader>-", "<C-x>", "Decrement number" },

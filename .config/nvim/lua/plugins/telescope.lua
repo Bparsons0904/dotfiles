@@ -25,6 +25,13 @@ return {
 
 			telescope.setup({
 				defaults = {
+					file_ignore_patterns = {
+						".git",
+						"node_modules",
+						"vendor",
+						".*_templ%.go",
+						".*_templ%.txt",
+					},
 					path_display = { "smart" },
 					layout_strategy = "horizontal",
 					sorting_strategy = "ascending",

@@ -42,7 +42,7 @@ return {
 				"isort",
 				"black",
 				"pylint",
-				"eslint_d",
+				-- "eslint_d",
 				"templ",
 				"goimports",
 				"golines",

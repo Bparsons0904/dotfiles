@@ -7,6 +7,10 @@ return {
 			require("telescope").extensions.smart_open.smart_open({
 				filename_first = true,
 				cwd_only = true,
+				ignore_patterns = {
+					".*_templ%.go",
+					".*_templ%.txt",
+				},
 			})
 		end, { noremap = true, silent = true, desc = "Smart Open" })
 	end,

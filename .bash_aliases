@@ -26,8 +26,11 @@ alias migrations='cd ~/Development/bickford/via-platform/packages/serviam-db/mig
 alias core='cd ~/Development/bickford/via-platform/packages/via-core/'
 
 # Services
-alias gcp='./cloud_sql_proxy -instances=bickford-nonprod-system:us-central1:nonprod-1=tcp:2234 &'
-alias via-stage='./cloud_sql_proxy -instances=bickford-nonprod-system:us-central1:nonprod-1=tcp:2234 &'
+alias gcp='~/cloud_sql_proxy -instances=bickford-nonprod-system:us-central1:nonprod-1=tcp:2234 &'
+alias via-stage='rm -rf ~/Development/bickford/database-backups/stage-backup && pg_dump -h localhost -p 2234 -U stage-crm-backend -W -F d -j 4 -d stage -f "/home/bobparsons/Development/bickford/database-backups/stage-backup"'
+alias via-dev='rm -rf ~/Development/bickford/database-backups/dev-backup && pg_dump -h localhost -p 2234 -U stage-crm-backend -W -F d -j 4 -d dev -f "/home/bobparsons/Development/bickford/database-backups/dev-backup"'
+alias via-dev-restore='pg_restore -h localhost -p 9432 -U postgres -d via_dev -j 4 -F d "/home/bobparsons/Development/bickford/database-backups/dev-backup"'
+alias via-stage-restore='pg_restore -h localhost -p 9432 -U postgres -d via_stage -j 4 -F d "/home/bobparsons/Development/bickford/database-backups/stage-backup"'
 alias lg='lazygit'
 alias python=python3
 alias z='zellij'

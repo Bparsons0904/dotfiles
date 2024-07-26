@@ -78,7 +78,7 @@ return {
 			["html"] = function()
 				lspconfig["html"].setup({
 					capabilities = capabilities,
-					filetypes = { "html" },
+					filetypes = { "html", "templ" },
 				})
 			end,
 			["graphql"] = function()

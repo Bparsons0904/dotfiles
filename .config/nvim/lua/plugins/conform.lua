@@ -12,7 +12,7 @@ return {
 				typescriptreact = { "prettier" },
 				css = { "prettier" },
 				scss = { "prettier" },
-				-- html = { "prettier" },
+				html = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
@@ -20,6 +20,7 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
+				-- go = { "gofumpt", "goimports" },
 				-- go = { "gofumpt", "goimports", "golines" },
 			},
 			format_on_save = {

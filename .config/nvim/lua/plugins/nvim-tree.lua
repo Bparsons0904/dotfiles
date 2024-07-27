@@ -44,13 +44,39 @@ return {
 					window_picker = {
 						enable = true,
 					},
+					quit_on_open = true,
 				},
 			},
 			filters = {
-				custom = { ".DS_Store", ".git" },
+				custom = { ".DS_Store" },
+				git_ignored = true,
 			},
+			-- git = {
+			-- 	ignore = true,
+			-- },
 			git = {
-				ignore = true,
+				enable = true,
+				ignore = false,
+				timeout = 500,
+			},
+			diagnostics = {
+				enable = true,
+				show_on_dirs = true,
+				icons = {
+					hint = "",
+					info = "",
+					warning = "",
+					error = "",
+				},
+			},
+			modified = {
+				enable = true,
+				show_on_dirs = true,
+				show_on_open_dirs = true,
+			},
+			live_filter = {
+				prefix = "[FILTER]: ",
+				always_show_folders = true,
 			},
 			reload_on_bufenter = true,
 

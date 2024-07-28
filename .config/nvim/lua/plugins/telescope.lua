@@ -87,6 +87,7 @@ return {
 					"<cmd>lua require('telescope.builtin').live_grep({ additional_args = function() return { '--hidden' } end })<cr>",
 					"Find string in cwd including hidden files",
 				},
+				{ "n", "<leader>sb", "<cmd>Telescope buffers<cr>", "Find buffers" },
 			})
 		end,
 	},

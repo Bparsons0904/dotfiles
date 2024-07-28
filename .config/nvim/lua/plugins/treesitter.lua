@@ -5,10 +5,10 @@ return {
 	dependencies = {
 		"windwp/nvim-ts-autotag",
 		"andymass/vim-matchup",
+		"nvim-treesitter/nvim-treesitter-context",
 	},
 	config = function()
 		local treesitter = require("nvim-treesitter.configs")
-
 		---@diagnostic disable-next-line: missing-fields
 		treesitter.setup({
 			highlight = {
@@ -16,9 +16,6 @@ return {
 				additional_vim_regex_highlighting = false,
 			},
 			indent = { enable = true },
-			autotag = {
-				enable = true,
-			},
 			matchup = {
 				enable = true,
 			},
@@ -84,14 +81,34 @@ return {
 					},
 				},
 			},
-			custom_highlights = function(colors)
-				return {
-					Keyword = { fg = colors.lavender },
-					goPackage = { fg = colors.lavender },
-					goImport = { fg = colors.lavender },
-					goFunc = { fg = colors.lavender },
-				}
-			end,
+			-- custom_highlights = function(colors)
+			-- 	return {
+			-- 		Keyword = { fg = colors.lavender },
+			-- 		goPackage = { fg = colors.lavender },
+			-- 		goImport = { fg = colors.lavender },
+			-- 		goFunc = { fg = colors.lavender },
+			-- 	}
+			-- end,
+		})
+
+		-- Set up nvim-ts-autotag after Treesitter
+		require("nvim-ts-autotag").setup({
+			enable = true,
+			enable_rename = true,
+			enable_close = true,
+			enable_close_on_slash = false,
+		})
+
+		require("treesitter-context").setup({
+			enable = true,
+			max_lines = 0,
+			min_window_height = 0,
+			line_numbers = true,
+			multiline_threshold = 3,
+			trim_scope = "outer",
+			mode = "cursor",
+			separator = nil,
+			zindex = 20,
 		})
 	end,
 }

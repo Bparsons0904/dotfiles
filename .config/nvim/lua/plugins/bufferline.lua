@@ -11,6 +11,10 @@ return {
 		require("bufferline").setup({
 			options = {
 				numbers = "ordinal",
+				max_name_length = 20,
+				max_prefix_length = 20,
+				truncate_names = true,
+				tab_size = 20,
 				diagnostics = "nvim_lsp",
 				diagnostics_indicator = function(count, level)
 					local icon = level:match("error") and " " or " "

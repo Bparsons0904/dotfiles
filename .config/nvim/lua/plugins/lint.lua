@@ -4,6 +4,10 @@ return {
 	config = function()
 		local lint = require("lint")
 		lint.linters_by_ft = {
+			-- javascript = { "eslint" },
+			-- typescript = { "eslint" },
+			-- javascriptreact = { "eslint" },
+			-- typescriptreact = { "eslint" },
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
 			javascriptreact = { "eslint_d" },
@@ -15,7 +19,7 @@ return {
 		lint.linters.eslint_d.args = {
 			"--format",
 			"json",
-			"--no-warn-ignored",
+			-- "--no-warn-ignored",
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

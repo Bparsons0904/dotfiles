@@ -19,7 +19,8 @@ function Get_git_project_and_file()
 		return file_icon .. " " .. file
 	else
 		local dir_icon = "📁"
-		return file_icon .. " " .. file .. " | " .. dir_icon .. " " .. vim.fn.fnamemodify(git_dir, ":t")
+		return dir_icon .. " " .. vim.fn.fnamemodify(git_dir, ":t") .. " | " .. file_icon .. " " .. file
+		-- return file_icon .. " " .. file .. " | " .. dir_icon .. " " .. vim.fn.fnamemodify(git_dir, ":t")
 	end
 end
 

@@ -8,25 +8,13 @@ return {
 	opts = {},
 	config = function()
 		local wk = require("which-key")
-		wk.register({
-			b = {
-				name = "Buffers",
-			},
-			c = {
-				name = "CoPilot",
-			},
-			l = {
-				name = "LSP",
-			},
-			g = {
-				name = "General",
-			},
-			s = {
-				name = "Search",
-			},
-			t = {
-				name = "Tabs",
-			},
-		}, { prefix = "<leader>" })
+		wk.add({
+			{ "<leader>b", group = "Buffers" },
+			{ "<leader>c", group = "CoPilot" },
+			{ "<leader>g", group = "General" },
+			{ "<leader>l", group = "LSP" },
+			{ "<leader>s", group = "Search" },
+			{ "<leader>t", group = "Tabs" },
+		})
 	end,
 }

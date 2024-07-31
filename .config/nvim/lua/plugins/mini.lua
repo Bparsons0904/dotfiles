@@ -11,6 +11,7 @@ return {
 					textobject = "gc",
 				},
 			})
+			-- require("mini.icons").setup({})
 			require("mini.move").setup({
 				mappings = {
 					left = "<M-h>",

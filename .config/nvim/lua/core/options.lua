@@ -3,31 +3,42 @@ vim.cmd("let g:netrw_liststyle = 3")
 
 local opt = vim.opt
 
-function Get_git_project_and_file()
+local function get_git_project_and_file()
 	local file = vim.fn.expand("%:t")
 	if file == "" then
 		file = "[No Name]"
 	end
-
 	local file_icon = "📄"
-
 	local git_dir = vim.fn
 		.system("git -C " .. vim.fn.shellescape(vim.fn.expand("%:p:h")) .. " rev-parse --show-toplevel 2>/dev/null")
 		:gsub("\n", "")
-
 	if vim.v.shell_error ~= 0 then
 		return file_icon .. " " .. file
 	else
 		local dir_icon = "📁"
 		return dir_icon .. " " .. vim.fn.fnamemodify(git_dir, ":t") .. " | " .. file_icon .. " " .. file
-		-- return file_icon .. " " .. file .. " | " .. dir_icon .. " " .. vim.fn.fnamemodify(git_dir, ":t")
 	end
 end
 
-vim.opt.title = true
-vim.opt.titlestring = "%{v:lua.Get_git_project_and_file()}"
+-- Cache for the titlestring
+local cached_titlestring = ""
 
+local function update_titlestring()
+	local new_titlestring = get_git_project_and_file()
+	if new_titlestring ~= cached_titlestring then
+		cached_titlestring = new_titlestring
+		vim.opt.titlestring = new_titlestring
+	end
+end
+
+-- Set up autocmds to update the titlestring
+vim.api.nvim_create_autocmd({ "BufEnter", "BufFilePost", "BufWritePost" }, {
+	callback = update_titlestring,
+})
+
+-- Initial setup
 vim.opt.title = true
+update_titlestring()
 vim.opt.titlestring = "%{v:lua.Get_git_project_and_file()}"
 
 -- Lines

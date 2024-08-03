@@ -16,11 +16,11 @@ return {
 		}
 
 		-- Configure ESLint to use the project's ESLint configuration
-		lint.linters.eslint_d.args = {
-			"--format",
-			"json",
-			-- "--no-warn-ignored",
-		}
+		-- lint.linters.eslint_d.args = {
+		-- 	"--format",
+		-- 	"json",
+		-- 	-- "--no-warn-ignored",
+		-- }
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
@@ -29,6 +29,7 @@ return {
 				lint.try_lint()
 			end,
 		})
+
 		vim.keymap.set("n", "<leader>ll", function()
 			lint.try_lint()
 		end, { desc = "Trigger linting for current file" })

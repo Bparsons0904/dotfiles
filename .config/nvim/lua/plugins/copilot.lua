@@ -6,14 +6,14 @@ return {
 		config = function()
 			require("copilot").setup({
 				panel = {
-					enabled = false,
+					enabled = true,
 					auto_refresh = false,
 					keymap = {
 						jump_prev = "[[",
 						jump_next = "]]",
-						accept = "<CR>",
+						accept = "]]",
 						refresh = "gr",
-						open = "<M-CR>",
+						open = "<M-n>",
 					},
 					layout = {
 						position = "bottom", -- | top | left | right
@@ -23,15 +23,15 @@ return {
 				suggestion = {
 					enabled = false,
 					auto_trigger = false,
-					hide_during_completion = true,
+					hide_during_completion = false,
 					debounce = 75,
 					keymap = {
-						accept = "<M-l>",
+						accept = "<C-l>",
 						accept_word = false,
 						accept_line = false,
-						next = "<M-]>",
-						prev = "<M-[>",
-						dismiss = "<C-]>",
+						next = "<C-i>",
+						prev = "<C-u>",
+						dismiss = "<C-p>",
 					},
 				},
 				filetypes = {
@@ -52,7 +52,7 @@ return {
 	},
 	{
 		"zbirenbaum/copilot-cmp",
-		enabled = false,
+		enabled = true,
 		config = function()
 			require("copilot_cmp").setup()
 		end,

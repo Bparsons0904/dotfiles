@@ -15,8 +15,10 @@ alias lcon='cd ~/.config/lvim'
 alias ncon='cd ~/.config/nvim'
 alias dev='cd ~/Development/'
 alias bp='cd ~/Development/bobparsons.dev/'
+alias dead='cd ~/Development/deadigations/'
 alias switches='cd ~/Development/switches/'
-alias kcon='nvim ~/.config/kitty/kitty.conf'
+alias post='cd ~/Development/postgres/'
+alias kcon='cd ~/.config/kitty/'
 alias dot='cd ~/dotfiles/'
 
 # Via 

@@ -98,6 +98,7 @@ return {
 						"sass",
 						"scss",
 						"less",
+						"templ",
 					},
 				})
 			end,

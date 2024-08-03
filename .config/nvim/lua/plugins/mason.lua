@@ -32,6 +32,7 @@ return {
 				"gopls",
 				"templ",
 				"htmx",
+				"dockerls",
 			},
 		})
 
@@ -48,6 +49,7 @@ return {
 				"goimports",
 				"golines",
 				"gofumpt",
+				"yamlls",
 			},
 		})
 		-- require("go").setup({

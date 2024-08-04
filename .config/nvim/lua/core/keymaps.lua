@@ -73,10 +73,10 @@ local keymaps = {
 	{ "n", "<leader>ph", "<C-w>s", "Split window horizontally" },
 	{ "n", "<leader>pe", "<C-w>=", "Make splits equal size" },
 	{ "n", "<leader>pc", "<cmd>close<CR>", "Close current split" },
-	{ "n", "<leader>pp", ":vertical resize +5<CR>", "Increase window size" },
-	{ "n", "<leader>pn", ":vertical resize -5<CR>", "Increase window size" },
-	{ "n", "<leader>pP", ":vertical resize +15<CR>", "Increase window size" },
-	{ "n", "<leader>pN", ":vertical resize -15<CR>", "Increase window size" },
+	{ "n", "<leader>pp", ":vertical resize +15<CR>", "Increase window size" },
+	{ "n", "<leader>pn", ":vertical resize -15<CR>", "Increase window size" },
+	{ "n", "<leader>pP", ":vertical resize +30<CR>", "Increase window size" },
+	{ "n", "<leader>pN", ":vertical resize -30<CR>", "Increase window size" },
 
 	-- Tabs
 	{ "n", "<leader>to", "<cmd>tabnew<CR>", "Open new tab" },

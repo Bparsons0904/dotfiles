@@ -33,6 +33,7 @@ return {
 				"templ",
 				"htmx",
 				"dockerls",
+				"yamlls",
 			},
 		})
 
@@ -43,13 +44,12 @@ return {
 				"isort",
 				"black",
 				"pylint",
-				"eslint",
 				"eslint_d",
 				"templ",
 				"goimports",
 				"golines",
 				"gofumpt",
-				"yamlls",
+				"yamlfmt",
 			},
 		})
 		-- require("go").setup({

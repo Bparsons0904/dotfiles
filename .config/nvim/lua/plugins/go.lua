@@ -19,8 +19,18 @@ return {
 			group = format_sync_grp,
 		})
 		require("go").setup({
+			linter = "golangci-lint",
+			linter_flags = { "--fast" },
+			-- tag_transform = "snakecase",
+			-- tag_options = "json=omitempty",
+			-- luasnip = true,
+			-- gopher_map = true,
+			-- test_runner = 'go',
+			-- run_in_floaterm = true,
+			-- test_efm = true, -- error format for quickfix
+			-- test_template = '', -- default to testify if not set; vim.g.go_nvim_tests_template  = "testify"
 			lsp_inlay_hints = {
-				enable = false,
+				enable = true,
 				style = "inlay",
 				only_current_line = false,
 				only_current_line_autocmd = "CursorHold",
@@ -35,6 +45,9 @@ return {
 				highlight = "Comment",
 			},
 			gofmt = "gofumpt",
+			on_save = {
+				goline = true,
+			},
 		})
 
 		local dap = require("dap")

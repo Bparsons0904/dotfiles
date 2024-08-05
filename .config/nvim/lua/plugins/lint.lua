@@ -12,6 +12,35 @@ return {
 			python = { "pylint" },
 		}
 
+		-- local function find_eslint_config()
+		-- 	local possible_paths = {
+		-- 		"/packages/via-core/.eslintrc.js",
+		-- 		-- Add more possible paths as needed
+		-- 	}
+		-- 	local project_root = vim.fn.getcwd()
+		-- 	for _, path in ipairs(possible_paths) do
+		-- 		local full_path = project_root .. path
+		-- 		if vim.fn.filereadable(full_path) == 1 then
+		-- 			return full_path
+		-- 		end
+		-- 	end
+		-- 	return nil -- Return nil if no config is found
+		-- end
+		--
+		-- lint.linters.eslint_d.args = {
+		-- 	"--format",
+		-- 	"json",
+		-- 	"--stdin",
+		-- 	"--stdin-filename",
+		-- 	function(_, bufnr)
+		-- 		return vim.api.nvim_buf_get_name(bufnr)
+		-- 	end,
+		-- 	"--config",
+		-- 	function(_, _)
+		-- 		return find_eslint_config()
+		-- 	end,
+		-- }
+		--
 		lint.linters.eslint_d = {
 			cmd = "eslint_d",
 			name = "eslint_d",

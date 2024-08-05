@@ -22,7 +22,7 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				go = { "golines" },
+				-- go = { "golines" },
 				-- go = { "gofumpt", "goimports", "golines" },
 			},
 			format_on_save = {

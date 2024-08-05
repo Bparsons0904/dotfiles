@@ -50,6 +50,7 @@ return {
 				"golines",
 				"gofumpt",
 				"yamlfmt",
+				"eslint",
 			},
 		})
 		-- require("go").setup({

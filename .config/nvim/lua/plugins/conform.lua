@@ -23,7 +23,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				-- go = { "golines" },
-				-- go = { "gofumpt", "goimports", "golines" },
+				go = { "gofumpt", "goimports", "golines" },
 			},
 			format_on_save = {
 				lsp_fallback = true,

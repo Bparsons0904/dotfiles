@@ -53,11 +53,5 @@ return {
 				"eslint",
 			},
 		})
-		-- require("go").setup({
-		-- 	-- lsp_cfg = false,
-		-- })
-		-- local cfg = require("go.lsp").config()
-		--
-		-- require("lspconfig").gopls.setup(cfg)
 	end,
 }

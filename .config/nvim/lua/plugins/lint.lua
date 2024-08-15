@@ -50,6 +50,9 @@ return {
 				"--stdin",
 				"--stdin-filename",
 				function(_, bufnr)
+					if bufnr == nil or not vim.api.nvim_buf_is_loaded(bufnr) then
+						return ""
+					end
 					return vim.api.nvim_buf_get_name(bufnr)
 				end,
 			},

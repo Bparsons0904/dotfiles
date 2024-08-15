@@ -20,6 +20,7 @@ alias switches='cd ~/Development/switches/'
 alias post='cd ~/Development/postgres/'
 alias kcon='cd ~/.config/kitty/'
 alias dot='cd ~/dotfiles/'
+alias keydb='cd ~/Development/keydb-switches/'
 
 # Via 
 alias via='cd ~/Development/bickford/via-platform/'

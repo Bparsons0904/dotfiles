@@ -88,6 +88,7 @@ return {
 					"Find string in cwd including hidden files",
 				},
 				{ "n", "<leader>sb", "<cmd>Telescope buffers<cr>", "Find buffers" },
+				{ "n", "<leader>sl", "<cmd>Telescope resume<cr>", "Find string in cwd" },
 			})
 		end,
 	},

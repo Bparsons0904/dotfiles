@@ -44,6 +44,7 @@ return {
 		lint.linters.eslint_d = {
 			cmd = "eslint_d",
 			name = "eslint_d",
+			root = true,
 			args = {
 				"--format",
 				"json",
@@ -58,22 +59,28 @@ return {
 			},
 			parser = function(output, _)
 				local diagnostics = {}
-				if output and output ~= "" then
-					local decoded = vim.json.decode(output)
-					if decoded and decoded[1] and decoded[1].messages then
-						for _, message in ipairs(decoded[1].messages) do
-							table.insert(diagnostics, {
-								source = "eslint",
-								lnum = message.line - 1,
-								col = message.column - 1,
-								end_lnum = message.endLine and (message.endLine - 1) or nil,
-								end_col = message.endColumn and (message.endColumn - 1) or nil,
-								severity = message.severity == 2 and vim.diagnostic.severity.ERROR
-									or vim.diagnostic.severity.WARN,
-								message = message.message,
-								code = message.ruleId,
-							})
-						end
+
+				local json_start = output:find("%[")
+				if not json_start then
+					return diagnostics
+				end
+
+				local json_output = output:sub(json_start)
+
+				local decoded = vim.json.decode(json_output)
+				if decoded and decoded[1] and decoded[1].messages then
+					for _, message in ipairs(decoded[1].messages) do
+						table.insert(diagnostics, {
+							source = "eslint",
+							lnum = message.line - 1,
+							col = message.column - 1,
+							end_lnum = message.endLine and (message.endLine - 1) or nil,
+							end_col = message.endColumn and (message.endColumn - 1) or nil,
+							severity = message.severity == 2 and vim.diagnostic.severity.ERROR
+								or vim.diagnostic.severity.WARN,
+							message = message.message,
+							code = message.ruleId,
+						})
 					end
 				end
 				return diagnostics

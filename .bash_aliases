@@ -21,6 +21,7 @@ alias post='cd ~/Development/postgres/'
 alias kcon='cd ~/.config/kitty/'
 alias dot='cd ~/dotfiles/'
 alias keydb='cd ~/Development/keydb-switches/'
+alias auth='cd ~/Development/zitadel-auth//'
 alias dev='cd ~/Development/'
 
 # Via 

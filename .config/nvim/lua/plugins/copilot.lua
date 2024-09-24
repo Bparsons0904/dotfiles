@@ -3,6 +3,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
+		enabled = false,
 		config = function()
 			require("copilot").setup({
 				panel = {
@@ -52,7 +53,7 @@ return {
 	},
 	{
 		"zbirenbaum/copilot-cmp",
-		enabled = true,
+		enabled = false,
 		config = function()
 			require("copilot_cmp").setup()
 		end,
@@ -60,6 +61,7 @@ return {
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
 		branch = "canary",
+		enabled = false,
 		dependencies = {
 			{ "zbirenbaum/copilot.lua" },
 			{ "nvim-lua/plenary.nvim" },

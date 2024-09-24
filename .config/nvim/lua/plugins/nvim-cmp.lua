@@ -17,13 +17,13 @@ return {
 		local cmp = require("cmp")
 		-- local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
-		lspkind.init({
-			symbol_map = {
-				Copilot = "",
-			},
-		})
+		-- lspkind.init({
+		-- 	symbol_map = {
+		-- 		Copilot = "",
+		-- 	},
+		-- })
 
-		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+		-- vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 		-- require("luasnip.loaders.from_vscode").lazy_load()
 		-- local has_words_before = function()
@@ -59,7 +59,7 @@ return {
 				-- end),
 			}),
 			sources = cmp.config.sources({
-				{ name = "copilot", group_index = 2 },
+				-- { name = "copilot", group_index = 2 },
 				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "path", group_index = 2 },
 				{ name = "buffer", group_index = 2 },
@@ -68,7 +68,7 @@ return {
 			sorting = {
 				priority_weight = 2,
 				comparators = {
-					require("copilot_cmp.comparators").score,
+					-- require("copilot_cmp.comparators").score,
 
 					-- Below is the default comparitor list and order for nvim-cmp
 					cmp.config.compare.offset,

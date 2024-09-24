@@ -50,7 +50,7 @@ return {
 				"golines",
 				"gofumpt",
 				"yamlfmt",
-				"eslint",
+				-- "eslint",
 			},
 		})
 	end,

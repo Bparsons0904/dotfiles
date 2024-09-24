@@ -4,18 +4,18 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
-		{
-			"L3MON4D3/LuaSnip",
-			version = "v2.*",
-			build = "make install_jsregexp",
-		},
-		"saadparwaiz1/cmp_luasnip",
-		"rafamadriz/friendly-snippets",
+		-- {
+		-- 	"L3MON4D3/LuaSnip",
+		-- 	version = "v2.*",
+		-- 	build = "make install_jsregexp",
+		-- },
+		-- "saadparwaiz1/cmp_luasnip",
+		-- "rafamadriz/friendly-snippets",
 		"onsails/lspkind.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
-		local luasnip = require("luasnip")
+		-- local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
 		lspkind.init({
 			symbol_map = {
@@ -25,7 +25,7 @@ return {
 
 		vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
-		require("luasnip.loaders.from_vscode").lazy_load()
+		-- require("luasnip.loaders.from_vscode").lazy_load()
 		-- local has_words_before = function()
 		-- 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
 		-- 		return false
@@ -37,11 +37,11 @@ return {
 			completion = {
 				completeopt = "menu,menuone,preview,noselect",
 			},
-			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body)
-				end,
-			},
+			-- snippet = {
+			-- 	expand = function(args)
+			-- 		luasnip.lsp_expand(args.body)
+			-- 	end,
+			-- },
 			mapping = cmp.mapping.preset.insert({
 				["<C-k>"] = cmp.mapping.select_prev_item(),
 				["<C-j>"] = cmp.mapping.select_next_item(),
@@ -63,7 +63,7 @@ return {
 				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "path", group_index = 2 },
 				{ name = "buffer", group_index = 2 },
-				{ name = "luasnip", group_index = 2 },
+				-- { name = "luasnip", group_index = 2 },
 			}),
 			sorting = {
 				priority_weight = 2,

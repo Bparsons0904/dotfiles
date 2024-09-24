@@ -166,3 +166,6 @@ export PATH="$PATH:/opt/nvim-linux64/bin"
 export PATH="/opt/nvim-linux64/bin:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+eval "$(zoxide init bash)"
+
+PATH=~/.console-ninja/.bin:$PATH

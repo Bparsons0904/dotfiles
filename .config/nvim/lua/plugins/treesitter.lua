@@ -5,7 +5,7 @@ return {
 	dependencies = {
 		"windwp/nvim-ts-autotag",
 		"andymass/vim-matchup",
-		"nvim-treesitter/nvim-treesitter-context",
+		-- "nvim-treesitter/nvim-treesitter-context",
 	},
 	config = function()
 		local treesitter = require("nvim-treesitter.configs")
@@ -114,16 +114,16 @@ return {
 			-- 	},
 			-- },
 		})
-		require("treesitter-context").setup({
-			enable = true,
-			max_lines = 0,
-			min_window_height = 0,
-			line_numbers = true,
-			multiline_threshold = 3,
-			trim_scope = "outer",
-			mode = "cursor",
-			separator = nil,
-			zindex = 20,
-		})
+		-- require("treesitter-context").setup({
+		-- 	enable = true,
+		-- 	max_lines = 0,
+		-- 	min_window_height = 0,
+		-- 	line_numbers = true,
+		-- 	multiline_threshold = 3,
+		-- 	trim_scope = "outer",
+		-- 	mode = "cursor",
+		-- 	separator = nil,
+		-- 	zindex = 20,
+		-- })
 	end,
 }

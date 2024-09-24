@@ -15,12 +15,12 @@ return {
 					["cmp.entry.get_documentation"] = true,
 				},
 			},
-			routes = {
-				{
-					view = "notify",
-					filter = { event = "msg_showmode" },
-				},
-			},
+			-- routes = {
+			-- 	{
+			-- 		view = "notify",
+			-- 		filter = { event = "msg_showmode" },
+			-- 	},
+			-- },
 			presets = {
 				bottom_search = false,
 				command_palette = true,
@@ -32,8 +32,8 @@ return {
 		---@diagnostic disable-next-line: missing-fields
 		require("notify").setup({
 			background_colour = "#000000",
-			top_down = false,
-			max_width = 80,
+			top_down = true,
+			max_width = 100,
 		})
 	end,
 }

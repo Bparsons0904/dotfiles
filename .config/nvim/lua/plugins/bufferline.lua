@@ -10,9 +10,9 @@ return {
 	config = function()
 		require("bufferline").setup({
 			options = {
-				numbers = "ordinal",
-				max_name_length = 20,
-				max_prefix_length = 20,
+				-- numbers = "ordinal",
+				max_name_length = 18,
+				max_prefix_length = 18,
 				truncate_names = true,
 				tab_size = 20,
 				diagnostics = "nvim_lsp",

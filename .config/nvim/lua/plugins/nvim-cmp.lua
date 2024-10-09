@@ -37,6 +37,7 @@ return {
 			completion = {
 				completeopt = "menu,menuone,preview,noselect",
 			},
+
 			-- snippet = {
 			-- 	expand = function(args)
 			-- 		luasnip.lsp_expand(args.body)
@@ -60,6 +61,7 @@ return {
 			}),
 			sources = cmp.config.sources({
 				-- { name = "copilot", group_index = 2 },
+				{ name = "codeium", group_index = 2 },
 				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "path", group_index = 2 },
 				{ name = "buffer", group_index = 2 },
@@ -85,10 +87,16 @@ return {
 			},
 			---@diagnostic disable-next-line: missing-fields
 			formatting = {
-				format = lspkind.cmp_format({
-					mode = "symbol_text",
+				-- format = lspkind.cmp_format({
+				-- 	mode = "symbol_text",
+				-- 	maxwidth = 50,
+				-- 	ellipsis_char = "...",
+				-- }),
+				format = require("lspkind").cmp_format({
+					mode = "symbol",
 					maxwidth = 50,
 					ellipsis_char = "...",
+					symbol_map = { Codeium = "" },
 				}),
 			},
 			window = {

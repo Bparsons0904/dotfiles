@@ -54,7 +54,11 @@ return {
 						},
 					},
 				},
-				pickers = {},
+				pickers = {
+					buffers = {
+						initial_mode = "normal",
+					},
+				},
 				extensions = {
 					fzf = {
 						fuzzy = true,

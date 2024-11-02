@@ -23,7 +23,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"hrsh7th/nvim-cmp",
 	},
-	enables = true,
+	enables = false,
 	config = function()
 		require("codeium").setup({})
 	end,

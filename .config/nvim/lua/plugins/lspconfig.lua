@@ -115,15 +115,15 @@ return {
 						workingDirectory = { mode = "auto" },
 						-- You can add more ESLint-specific settings here
 					},
-					root_dir = lspconfig.util.root_pattern(
-						".eslintrc",
-						".eslintrc.js",
-						".eslintrc.cjs",
-						".eslintrc.yaml",
-						".eslintrc.yml",
-						".eslintrc.json",
-						"package.json"
-					),
+					-- root_dir = lspconfig.util.root_pattern(
+					-- 	".eslintrc",
+					-- 	".eslintrc.js",
+					-- 	".eslintrc.cjs",
+					-- 	".eslintrc.yaml",
+					-- 	".eslintrc.yml",
+					-- 	".eslintrc.json",
+					-- 	"package.json"
+					-- ),
 				})
 			end,
 			["lua_ls"] = function()

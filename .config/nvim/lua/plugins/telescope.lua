@@ -55,6 +55,9 @@ return {
 					},
 				},
 				pickers = {
+					marks = {
+						initial_mode = "normal",
+					},
 					buffers = {
 						initial_mode = "normal",
 					},
@@ -93,6 +96,7 @@ return {
 				},
 				{ "n", "<leader>sb", "<cmd>Telescope buffers<cr>", "Find buffers" },
 				{ "n", "<leader>sl", "<cmd>Telescope resume<cr>", "Find string in cwd" },
+				{ "n", "<leader>sm", "<cmd>Telescope marks<cr>", "Find Marks" },
 			})
 		end,
 	},

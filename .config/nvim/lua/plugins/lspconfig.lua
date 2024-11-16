@@ -105,12 +105,12 @@ return {
 			["eslint"] = function()
 				lspconfig["eslint"].setup({
 					capabilities = capabilities,
-					on_attach = function(_, bufnr)
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							buffer = bufnr,
-							command = "EslintFixAll",
-						})
-					end,
+					-- on_attach = function(_, bufnr)
+					-- 	vim.api.nvim_create_autocmd("BufWritePre", {
+					-- 		buffer = bufnr,
+					-- 		command = "EslintFixAll",
+					-- 	})
+					-- end,
 					settings = {
 						workingDirectory = { mode = "auto" },
 						-- You can add more ESLint-specific settings here

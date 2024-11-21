@@ -97,6 +97,8 @@ return {
 				{ "n", "<leader>sb", "<cmd>Telescope buffers<cr>", "Find buffers" },
 				{ "n", "<leader>sl", "<cmd>Telescope resume<cr>", "Find string in cwd" },
 				{ "n", "<leader>sm", "<cmd>Telescope marks<cr>", "Find Marks" },
+				{ "n", "<leader>sS", "<cmd>Telescope lsp_document_symbols<cr>", "Find Symbols" },
+				{ "n", "<leader>sF", "<cmd>Telescope lsp_document_symbols symbols=function<cr>", "Find Functions" },
 			})
 		end,
 	},

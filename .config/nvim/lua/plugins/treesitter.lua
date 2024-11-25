@@ -2,6 +2,7 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
+	version = "v0.9.2",
 	dependencies = {
 		"windwp/nvim-ts-autotag",
 		"andymass/vim-matchup",

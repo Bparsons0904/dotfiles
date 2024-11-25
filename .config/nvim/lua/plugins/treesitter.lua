@@ -41,6 +41,7 @@ return {
 				"templ",
 				"sql",
 				"regex",
+				"gleam",
 			},
 			injections = {
 				enable = true,

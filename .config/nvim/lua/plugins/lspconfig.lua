@@ -75,6 +75,12 @@ return {
 					capabilities = capabilities,
 				})
 			end,
+			["gleam"] = function()
+				lspconfig["gleam"].setup({
+					capabilities = capabilities,
+					filetypes = { "gleam" },
+				})
+			end,
 			["html"] = function()
 				lspconfig["html"].setup({
 					capabilities = capabilities,

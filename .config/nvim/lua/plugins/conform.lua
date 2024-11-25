@@ -21,6 +21,7 @@ return {
 				graphql = { "prettier" },
 				liquid = { "prettier" },
 				lua = { "stylua" },
+				gleam = { "gleam" },
 				python = { "isort", "black" },
 				-- go = { "golines" },
 				go = { "gofumpt", "goimports", "golines" },

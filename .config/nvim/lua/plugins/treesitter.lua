@@ -2,11 +2,11 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	event = { "BufReadPre", "BufNewFile" },
 	build = ":TSUpdate",
-	version = "v0.9.2",
+	-- version = "v0.9.2",
 	dependencies = {
 		"windwp/nvim-ts-autotag",
 		"andymass/vim-matchup",
-		-- "nvim-treesitter/nvim-treesitter-context",
+		-- "nvim-treesitter/nvim-treesitter-context", // adds the context flow
 	},
 	config = function()
 		local treesitter = require("nvim-treesitter.configs")

@@ -169,3 +169,5 @@ export PATH="/opt/nvim-linux64/bin:$PATH"
 eval "$(zoxide init bash)"
 
 PATH=~/.console-ninja/.bin:$PATH
+
+# set -o vi

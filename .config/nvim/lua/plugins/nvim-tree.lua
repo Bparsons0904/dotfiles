@@ -86,7 +86,7 @@ return {
 			},
 		})
 
-		addToKeyMap("n", "<leader>e", "<cmd>NvimTreeFindFileToggle<CR>", "Toggle file explorer on current file")
+		addToKeyMap("n", "<leader>et", "<cmd>NvimTreeFindFileToggle<CR>", "Toggle file explorer on current file")
 		-- addToKeyMap("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", "Toggle file explorer")
 		-- addToKeyMap("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", "Collapse file explorer")
 		-- addToKeyMap("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", "Refresh file explorer")

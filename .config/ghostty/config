@@ -1,0 +1,9 @@
+background = "000000"
+background-opacity = .97
+font-family = "FiraCode Nerd Font"
+font-size = 14
+theme = Abernathy
+window-theme = ghostty
+window-titlebar-background = "301934"
+gtk-titlebar = true
+window-decoration = false

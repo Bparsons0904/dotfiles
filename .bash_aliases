@@ -12,7 +12,7 @@ alias cd="z"
 # Directory
 alias lcon='cd ~/.config/lvim'
 alias ncon='cd ~/.config/nvim'
-alias neocon='cd ~/.config/nvim-'
+alias neocon='cd ~/.config/nvim-neo'
 alias dev='cd ~/Development/'
 alias bp='cd ~/Development/bobparsons.dev/'
 alias dead='cd ~/Development/deadigations/'

@@ -10,12 +10,13 @@ return {
 		-- 	build = "make install_jsregexp",
 		-- },
 		-- "saadparwaiz1/cmp_luasnip",
-		-- "rafamadriz/friendly-snippets",
+		"rafamadriz/friendly-snippets",
 		"onsails/lspkind.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")
 		-- local luasnip = require("luasnip")
+		local types = require("cmp.types")
 		local lspkind = require("lspkind")
 		-- lspkind.init({
 		-- 	symbol_map = {
@@ -44,8 +45,8 @@ return {
 			-- 	end,
 			-- },
 			mapping = cmp.mapping.preset.insert({
-				["<C-k>"] = cmp.mapping.select_prev_item(),
-				["<C-j>"] = cmp.mapping.select_next_item(),
+				["<C-k>"] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+				["<C-j>"] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-Space>"] = cmp.mapping.complete(),
@@ -65,7 +66,7 @@ return {
 				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "path", group_index = 2 },
 				{ name = "buffer", group_index = 2 },
-				-- { name = "luasnip", group_index = 2 },
+				{ name = "luasnip", group_index = 2 },
 			}),
 			sorting = {
 				priority_weight = 2,

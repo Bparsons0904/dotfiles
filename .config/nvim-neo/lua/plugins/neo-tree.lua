@@ -8,7 +8,9 @@ return {
 		"3rd/image.nvim",
 	},
 	config = function()
-		require("neo-tree").setup({})
+		require("neo-tree").setup({
+			use_popups_for_input = false,
+		})
 	end,
 
 	addKeyMaps({

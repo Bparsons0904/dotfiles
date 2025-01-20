@@ -4,7 +4,7 @@ function _G.addToKeyMap(mode, key, cmd, desc)
 	vim.keymap.set(mode, key, cmd, { noremap = true, silent = true, desc = desc })
 end
 
-function _G.addKeys(keymaps)
+function _G.addKeyMaps(keymaps)
 	for _, maps in pairs(keymaps) do
 		addToKeyMap(unpack(maps))
 	end
@@ -56,4 +56,4 @@ local keymaps = {
 	{ "n", "<C-l>", "<C-w>l", "Move to right split" },
 }
 
-addKeys(keymaps)
+addKeyMaps(keymaps)

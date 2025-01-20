@@ -3,7 +3,7 @@ return {
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons", 
+		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 		"3rd/image.nvim",
 	},
@@ -11,6 +11,24 @@ return {
 		require("neo-tree").setup({})
 	end,
 
-	addToKeyMap("n", "<leader>ee", "<cmd>Neotree reveal position=float<CR>", "Toggle file explorer on current file"),
-	addToKeyMap("n", "<leader>eb", "<cmd>Neotree buffers position=float<CR>", "Toggle file explorer on current file"),
+	addKeyMaps({
+		{
+			"n",
+			"<leader>ee",
+			"<cmd>Neotree reveal position=float<CR>",
+			"Toggle file explorer on current file in a float",
+		},
+		{
+			"n",
+			"<leader>es",
+			"<cmd>Neotree reveal position=left<CR>",
+			"Toggle file explorer on current file on left Window",
+		},
+		{
+			"n",
+			"<leader>eb",
+			"<cmd>Neotree buffers position=float<CR>",
+			"Toggle file explorer on current file in a float",
+		},
+	}),
 }

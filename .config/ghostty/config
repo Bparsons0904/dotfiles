@@ -1,0 +1,10 @@
+background = 000000
+font-family = FiraCode Nerd Font
+font-size = 14
+background-opacity = .9
+background-blur-radius = 20
+gtk-titlebar = true
+window-theme = ghostty
+macos-titlebar-style = tabs
+theme = Brogrammer
+keybind = alt+t=new_tab

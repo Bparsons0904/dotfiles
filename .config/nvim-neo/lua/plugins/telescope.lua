@@ -29,7 +29,6 @@ return {
 					},
 					smart_open = {
 						match_algorithm = "fzf",
-						theme = "dropdown",
 					},
 				},
 			})
@@ -40,9 +39,11 @@ return {
 				{
 					"n",
 					"<leader>ff",
-   function()
-                        telescope.extensions.smart_open.smart_open(require("telescope.themes").get_dropdown({previewer=false}))
-                    end,
+					function()
+						telescope.extensions.smart_open.smart_open(
+							require("telescope.themes").get_dropdown({ previewer = false })
+						)
+					end,
 					"Find files the smart way",
 				},
 				{ "n", "<leader>fo", builtin.find_files, "Find files the smart way" },

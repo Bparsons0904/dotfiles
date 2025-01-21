@@ -11,8 +11,6 @@ opt.cursorline = true -- Highlights the current line
 opt.backspace = "indent,eol,start" -- Makes backspace work over indents, line breaks, and insertion start
 opt.scrolloff = 8 -- Keeps 8 lines visible above/below cursor when scrolling
 opt.wrap = false -- Prevents lines from wrapping
-opt.foldmethod = "expr" -- Use treesitter for fold expressions
-opt.foldexpr = "nvim_treesitter#foldexpr()" -- Set folding to use treesitter
 
 -- Appearance
 opt.termguicolors = true -- Enables 24-bit RGB colors

@@ -61,6 +61,13 @@ return {
                 diagnostics = { disable = { "missing-fields" } },
               },
             },
+            templ = {},
+            html = {
+              filetypes = { "html", "templ" },
+            },
+            htmx = {
+              filetypes = { "html", "templ" },
+            },
           },
         }
 
@@ -74,6 +81,13 @@ return {
           "prettier",
           "isort",
           "black",
+          "gopls",
+          "gofumpt",
+          "goimports",
+          "golangci-lint",
+          "templ",
+          "html-lsp",
+          "htmx-lsp",
         })
         require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -82,7 +96,6 @@ return {
           handlers = {
             function(server_name)
               local server = servers[server_name] or {}
-              -- Merge any server-specific capabilities with blink.cmp capabilities
               server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
               require("lspconfig")[server_name].setup(server)
             end,

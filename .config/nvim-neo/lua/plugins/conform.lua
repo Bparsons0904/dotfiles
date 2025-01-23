@@ -28,6 +28,8 @@ return {
       lua = { "stylua" },
       python = { "isort", "black" },
       javascript = { { "prettierd", "prettier" }, stop_after_first = true },
+      go = { "gofumpt", "golines", "goimport" },
+      templ = { "templ" },
     },
 
     formatters = {

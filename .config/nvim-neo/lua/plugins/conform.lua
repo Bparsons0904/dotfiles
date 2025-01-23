@@ -19,8 +19,10 @@ return {
       local disable_filetypes = { c = true, cpp = true }
       local lsp_format_opt = disable_filetypes[vim.bo[bufnr].filetype] and "never" or "fallback"
       return {
-        timeout_ms = 500,
+        timeout_ms = 750,
+        lsp_fallback = true,
         lsp_format = lsp_format_opt,
+        async = false,
       }
     end,
 

@@ -32,11 +32,11 @@ local keymaps = {
   { "n", "N", "Nzzzv", "Previous search result and center cursor" },
 
   -- Buffers
-  -- { "n", "<leader>x", ":Bdelete<CR>", "Close the current buffer" },
-  -- { "n", "<leader>bb", ":bprevious<CR>", "Go to previous buffer" },
-  -- { "n", "<leader>bn", ":bnext<CR>", "Go to next buffer" },
-  -- { "n", "<leader>ba", ":%bd|e#|bd#<CR>", "Close all buffers except current" },
-  -- { "n", "<leader>bx", ":bufdo Bdelete<CR>", "Close all buffers" },
+  { "n", "<leader>x", ":Bdelete<CR>", "Close the current buffer" },
+  { "n", "<leader>bb", ":bprevious<CR>", "Go to previous buffer" },
+  { "n", "<leader>bn", ":bnext<CR>", "Go to next buffer" },
+  { "n", "<leader>ba", ":%bd|e#|bd#<CR>", "Close all buffers except current" },
+  { "n", "<leader>bx", ":bufdo Bdelete<CR>", "Close all buffers" },
   { "n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", "Go to buffer 1" },
   { "n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", "Go to buffer 2" },
   { "n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", "Go to buffer 3" },

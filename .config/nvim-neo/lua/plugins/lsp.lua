@@ -16,10 +16,9 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
         { "j-hui/fidget.nvim", opts = {} },
-        "saghen/blink.cmp", -- Add blink.cmp as dependency
+        "saghen/blink.cmp",
       },
       config = function()
-        -- Your existing LSP attach autocmd
         vim.api.nvim_create_autocmd("LspAttach", {
           group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
           callback = function(event)
@@ -47,10 +46,8 @@ return {
           end,
         })
 
-        -- Setup base capabilities with blink.cmp
         local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-        -- Your server configurations
         local servers = {
           lua_ls = {
             settings = {
@@ -61,17 +58,22 @@ return {
                 diagnostics = { disable = { "missing-fields" } },
               },
             },
-            templ = {},
+            templ = {
+              filetypes = { "templ" },
+              root_dir = require("lspconfig").util.root_pattern("go.mod", ".git"),
+            },
             html = {
               filetypes = { "html", "templ" },
             },
             htmx = {
               filetypes = { "html", "templ" },
             },
+            emmet_ls = {
+              filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "templ" },
+            },
           },
         }
 
-        -- Setup Mason ensures
         local ensure_installed = vim.tbl_keys(servers or {})
         vim.list_extend(ensure_installed, {
           "stylua",
@@ -88,10 +90,10 @@ return {
           "templ",
           "html-lsp",
           "htmx-lsp",
+          "emmet_ls",
         })
         require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-        -- Setup LSP with blink.cmp capabilities
         require("mason-lspconfig").setup({
           handlers = {
             function(server_name)
@@ -105,33 +107,3 @@ return {
     },
   },
 }
-
--- return {
--- 	{
--- 		"williamboman/mason.nvim",
--- 		cmd = "Mason",
--- 		config = function()
--- 			require("mason").setup()
--- 		end,
--- 	},
--- 	{
--- 		"williamboman/mason-lspconfig.nvim",
--- 		dependencies = {
--- 			"williamboman/mason.nvim",
--- 		},
---     config = function()
---       require("mason").setup()
---       require("mason-lspconfig").setup {
---         ensure_installed = { "lua_ls" },
---       }
---     end,
--- 	},
--- 	{
--- 		"neovim/nvim-lspconfig",
--- 		dependencies = {
--- 			"williamboman/mason.nvim",
--- 			"williamboman/mason-lspconfig.nvim",
--- 		},
--- 		config = function() end,
--- 	},
--- }

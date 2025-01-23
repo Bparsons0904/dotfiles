@@ -22,13 +22,3 @@ require("lazy").setup({
   -- install = { colorscheme = { "habamax" } },
   checker = { enabled = true },
 })
-
-vim.api.nvim_create_augroup("templ", { clear = true })
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-  group = "templ",
-  pattern = "*.templ",
-  callback = function()
-    vim.bo.filetype = "templ"
-    vim.bo.syntax = "templ"
-  end,
-})

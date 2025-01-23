@@ -58,10 +58,6 @@ return {
                 diagnostics = { disable = { "missing-fields" } },
               },
             },
-            templ = {
-              filetypes = { "templ" },
-              root_dir = require("lspconfig").util.root_pattern("go.mod", ".git"),
-            },
             html = {
               filetypes = { "html", "templ" },
             },

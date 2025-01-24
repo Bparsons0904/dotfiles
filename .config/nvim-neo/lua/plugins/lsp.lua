@@ -42,6 +42,23 @@ return {
                   vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
                 end,
               })
+
+              local opts = { buffer = event.buf }
+              addKeyMaps({
+                { "n", "gR", "<cmd>Telescope lsp_references<CR>", "Show LSP references", opts },
+                { "n", "gD", vim.lsp.buf.declaration, "Go to declaration", opts },
+                { "n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Show LSP definitions", opts },
+                { "n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Show LSP implementations", opts },
+                { "n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show LSP type definitions", opts },
+                { { "n", "v" }, "<leader>la", vim.lsp.buf.code_action, "See available code actions", opts },
+                { "n", "<leader>ln", vim.lsp.buf.rename, "Smart rename", opts },
+                { "n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics", opts },
+                { "n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics", opts },
+                { "n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic", opts },
+                { "n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic", opts },
+                { "n", "K", vim.lsp.buf.hover, "Show documentation under cursor", opts },
+                { "n", "<leader>lr", ":LspRestart<CR>", "Restart LSP", opts },
+              })
             end
           end,
         })

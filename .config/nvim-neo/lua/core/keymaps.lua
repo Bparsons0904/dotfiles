@@ -1,12 +1,14 @@
 vim.g.mapleader = " "
 
-function _G.addToKeyMap(mode, key, cmd, desc)
-  vim.keymap.set(mode, key, cmd, { noremap = true, silent = true, desc = desc })
+function _G.addToKeyMap(mode, key, cmd, desc, opts)
+  local options = vim.tbl_extend("force", { noremap = true, silent = true, desc = desc }, opts or {})
+  vim.keymap.set(mode, key, cmd, options)
 end
 
 function _G.addKeyMaps(keymaps)
   for _, maps in pairs(keymaps) do
-    addToKeyMap(unpack(maps))
+    local mode, key, cmd, desc, opts = unpack(maps)
+    addToKeyMap(mode, key, cmd, desc, opts)
   end
 end
 
@@ -32,11 +34,11 @@ local keymaps = {
   { "n", "N", "Nzzzv", "Previous search result and center cursor" },
 
   -- Buffers
-  { "n", "<leader>x", ":Bdelete<CR>", "Close the current buffer" },
+  -- { "n", "<leader>x", ":Bdelete<CR>", "Close the current buffer" },
   { "n", "<leader>bb", ":bprevious<CR>", "Go to previous buffer" },
   { "n", "<leader>bn", ":bnext<CR>", "Go to next buffer" },
-  { "n", "<leader>ba", ":%bd|e#|bd#<CR>", "Close all buffers except current" },
-  { "n", "<leader>bx", ":bufdo Bdelete<CR>", "Close all buffers" },
+  -- { "n", "<leader>ba", ":%bd|e#|bd#<CR>", "Close all buffers except current" },
+  -- { "n", "<leader>bx", ":bufdo Bdelete<CR>", "Close all buffers" },
   { "n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", "Go to buffer 1" },
   { "n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", "Go to buffer 2" },
   { "n", "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>", "Go to buffer 3" },

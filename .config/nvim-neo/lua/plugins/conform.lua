@@ -17,20 +17,35 @@ return {
 
     format_on_save = function(bufnr)
       local disable_filetypes = { c = true, cpp = true }
-      local lsp_format_opt = disable_filetypes[vim.bo[bufnr].filetype] and "never" or "fallback"
+      -- Don't format if we're in a disabled filetype
+      if disable_filetypes[vim.bo[bufnr].filetype] then
+        return
+      end
+
       return {
         timeout_ms = 750,
-        lsp_fallback = true,
-        lsp_format = lsp_format_opt,
+        -- Run Prettier last, after any ESLint non-formatting fixes
         async = false,
+        lsp_fallback = false,
       }
     end,
 
     formatters_by_ft = {
       lua = { "stylua" },
       python = { "isort", "black" },
-      javascript = { { "prettierd", "prettier" }, stop_after_first = true },
       go = { "gofumpt", "golines", "goimport" },
+      javascript = { "prettierd", "prettier" },
+      typescript = { "prettierd", "prettier" },
+      javascriptreact = { "prettierd", "prettier" },
+      typescriptreact = { "prettierd", "prettier" },
+    },
+
+    -- Configure format options by filetype
+    format_options = {
+      javascript = { stop_after_first = true },
+      typescript = { stop_after_first = true },
+      javascriptreact = { stop_after_first = true },
+      typescriptreact = { stop_after_first = true },
     },
 
     formatters = {

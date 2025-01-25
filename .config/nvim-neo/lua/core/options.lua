@@ -35,3 +35,20 @@ opt.fileencoding = "utf-8" -- Sets file encoding for saving
 -- Performance
 opt.updatetime = 300 -- Reduces update time (affects CursorHold & swap file writing)
 opt.timeoutlen = 500 -- Time in milliseconds to wait for a mapped sequence to complete
+
+-- Undo Directory
+local undodir = vim.fn.stdpath("data") .. "/undodir"
+if vim.fn.isdirectory(undodir) == 0 then
+  vim.fn.mkdir(undodir, "p")
+end
+opt.undofile = true
+opt.undodir = undodir
+
+-- Highlight Yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("highlight_yank", {}),
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
+  end,
+})

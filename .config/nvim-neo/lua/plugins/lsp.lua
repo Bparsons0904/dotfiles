@@ -84,6 +84,11 @@ return {
             emmet_ls = {
               filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "templ" },
             },
+            templ = {
+              filetypes = { "templ" },
+              cmd = { "templ", "lsp" },
+              root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
+            },
           },
         }
 

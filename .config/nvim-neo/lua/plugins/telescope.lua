@@ -20,6 +20,18 @@ return {
       local telescope = require("telescope")
       local builtin = require("telescope.builtin")
       telescope.setup({
+        defaults = {
+          file_ignore_patterns = { "node_modules" },
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+          },
+        },
         extensions = {
           fzf = {
             fuzzy = true,

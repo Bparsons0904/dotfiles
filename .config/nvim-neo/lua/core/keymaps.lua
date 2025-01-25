@@ -26,12 +26,12 @@ local keymaps = {
   { "v", ">", ">gv", "Better indenting (increase)" },
 
   -- Scrolling and Centering
-  { "n", "<C-u>", "<C-u>zz", "Scroll up and center cursor" },
-  { "n", "<C-d>", "<C-d>zz", "Scroll down and center cursor" },
-  { "n", "<C-b>", "<C-b>zz", "Page up and center cursor" },
-  { "n", "<C-f>", "<C-f>zz", "Page down and center cursor" },
-  { "n", "n", "nzzzv", "Next search result and center cursor" },
-  { "n", "N", "Nzzzv", "Previous search result and center cursor" },
+  -- { "n", "<C-u>", "<C-u>zz", "Scroll up and center cursor" },
+  -- { "n", "<C-d>", "<C-d>zz", "Scroll down and center cursor" },
+  -- { "n", "<C-b>", "<C-b>zz", "Page up and center cursor" },
+  -- { "n", "<C-f>", "<C-f>zz", "Page down and center cursor" },
+  -- { "n", "n", "nzzzv", "Next search result and center cursor" },
+  -- { "n", "N", "Nzzzv", "Previous search result and center cursor" },
 
   -- Buffers
   -- { "n", "<leader>x", ":Bdelete<CR>", "Close the current buffer" },

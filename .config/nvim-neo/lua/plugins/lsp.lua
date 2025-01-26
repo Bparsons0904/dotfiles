@@ -59,7 +59,6 @@ return {
               { "n", "<leader>lr", ":LspRestart<CR>", "Restart LSP", opts },
             })
 
-            -- Add TypeScript-specific keymaps for relevant filetypes
             if client.name == "tsserver" then
               addKeyMaps({
                 {
@@ -183,7 +182,7 @@ return {
         "html-lsp",
         "htmx-lsp",
         "emmet-ls",
-        "typescript-language-server", -- Mason's actual package name for TypeScript
+        "typescript-language-server",
       }
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

@@ -17,14 +17,12 @@ return {
 
     format_on_save = function(bufnr)
       local disable_filetypes = { c = true, cpp = true }
-      -- Don't format if we're in a disabled filetype
       if disable_filetypes[vim.bo[bufnr].filetype] then
         return
       end
 
       return {
         timeout_ms = 750,
-        -- Run Prettier last, after any ESLint non-formatting fixes
         async = false,
         lsp_fallback = false,
       }
@@ -40,7 +38,6 @@ return {
       typescriptreact = { "prettierd", "prettier" },
     },
 
-    -- Configure format options by filetype
     format_options = {
       javascript = { stop_after_first = true },
       typescript = { stop_after_first = true },

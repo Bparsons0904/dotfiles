@@ -1,7 +1,7 @@
 return {
   "petertriho/nvim-scrollbar",
   dependencies = {
-    "lewis6991/gitsigns.nvim", -- for git integration
+    "lewis6991/gitsigns.nvim",
   },
   config = function()
     require("scrollbar").setup({

@@ -76,18 +76,12 @@ return {
       -- Debug controls
       { "n", "<leader>db", ":GoBreakToggle<CR>", "Toggle breakpoint" },
       { "n", "<leader>dbc", ":BreakCondition ", "Add conditional breakpoint" },
-
-      -- Start debug sessions
       { "n", "<leader>dT", ":GoDebug -t<CR>", "Debug test file" },
       { "n", "<leader>dt", ":GoDebug<CR>", "Start debug session" },
       { "n", "<leader>dn", ":GoDebug -n<CR>", "Debug nearest test" },
       { "n", "<leader>dr", ":GoDebug -R<CR>", "Restart debug session" },
       { "n", "<leader>dp", ":GoDebug -p<CR>", "Debug package tests" },
-
-      -- Stop debugging
       { "n", "<leader>ds", ":GoDebug -s<CR>", "Stop debug session" },
-
-      -- Show debug keys
       { "n", "<leader>dk", ":GoDbgKeys<CR>", "Show debug keymaps" },
     })
   end,

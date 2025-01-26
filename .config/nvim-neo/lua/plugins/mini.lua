@@ -89,7 +89,7 @@ return {
         }),
       })
       require("mini.pairs").setup()
-      require("mini.animate").setup()
+      -- require("mini.animate").setup()
     end,
   },
 }

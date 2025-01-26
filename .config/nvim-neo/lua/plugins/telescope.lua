@@ -4,13 +4,9 @@ return {
     build = "make",
   },
   {
-    {
-      "danielfalk/smart-open.nvim",
-      branch = "0.2.x",
-      dependencies = {
-        "kkharji/sqlite.lua",
-      },
-    },
+    "danielfalk/smart-open.nvim",
+    branch = "0.2.x",
+    dependencies = { "kkharji/sqlite.lua" },
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -19,8 +15,19 @@ return {
     config = function()
       local telescope = require("telescope")
       local builtin = require("telescope.builtin")
+
       telescope.setup({
         defaults = {
+          layout_config = {
+            horizontal = {
+              prompt_position = "top",
+            },
+          },
+          path_display = function(_, path)
+            local tail = require("telescope.utils").path_tail(path)
+            return string.format("%s\t\t\t(%s)", tail, path)
+          end,
+          sorting_strategy = "ascending",
           file_ignore_patterns = { "node_modules" },
           vimgrep_arguments = {
             "rg",
@@ -30,6 +37,17 @@ return {
             "--line-number",
             "--column",
             "--smart-case",
+          },
+        },
+        pickers = {
+          buffers = {
+            initial_mode = "normal",
+            mappings = {
+              n = {
+                ["dd"] = "delete_buffer",
+                ["x"] = "delete_buffer",
+              },
+            },
           },
         },
         extensions = {
@@ -47,6 +65,7 @@ return {
 
       telescope.load_extension("fzf")
       telescope.load_extension("smart_open")
+
       addKeyMaps({
         {
           "n",
@@ -56,7 +75,7 @@ return {
           end,
           "Find files the smart way",
         },
-        { "n", "<leader>fo", builtin.find_files, "Find files the smart way" },
+        { "n", "<leader>fo", builtin.find_files, "Find files" },
         { "n", "<leader>fg", builtin.live_grep, "Live grep" },
         { "n", "<leader>fb", builtin.buffers, "Buffers" },
         { "n", "<leader>fh", builtin.help_tags, "Help tags" },

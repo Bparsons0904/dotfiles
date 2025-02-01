@@ -7,15 +7,13 @@ return {
   end,
 
   opts = {
-    on_attach = function(bufnr)
+    on_attach = function()
       local gs = package.loaded.gitsigns
 
-      local function map(mode, l, r, desc)
-        vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
-      end
-
-      map("n", "<leader>gb", gs.toggle_current_line_blame, "Toggle line blame")
-      map("n", "<leader>hd", gs.diffthis, "Diff this")
+      addKeyMaps({
+        -- { "n", "<leader>gb", gs.toggle_current_line_blame, "Toggle line blame" },
+        { "n", "<leader>hd", gs.diffthis, "Diff this" },
+      })
     end,
   },
 }

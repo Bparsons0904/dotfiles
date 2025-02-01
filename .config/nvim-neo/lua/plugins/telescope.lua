@@ -46,6 +46,7 @@ return {
               n = {
                 ["dd"] = "delete_buffer",
                 ["x"] = "delete_buffer",
+                ["q"] = "close",
               },
             },
           },

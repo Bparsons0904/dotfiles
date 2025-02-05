@@ -36,6 +36,12 @@ return {
       typescript = { "prettierd", "prettier" },
       javascriptreact = { "prettierd", "prettier" },
       typescriptreact = { "prettierd", "prettier" },
+      css = { "prettierd", "prettier" },
+      scss = { "prettierd", "prettier" },
+      html = { "prettierd", "prettier" },
+      json = { "prettierd", "prettier" },
+      yaml = { "prettierd", "prettier" },
+      markdown = { "prettierd", "prettier" },
     },
 
     format_options = {

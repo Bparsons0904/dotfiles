@@ -3,8 +3,10 @@ font-family = FiraCode Nerd Font
 font-size = 14
 background-opacity = .9
 background-blur-radius = 20
-gtk-titlebar = true
+#gtk-titlebar = true
 window-theme = ghostty
 macos-titlebar-style = tabs
 theme = Brogrammer
-keybind = alt+t=new_tab
+#keybind = alt+t=new_tab
+maximize = true
+window-padding-x = 10

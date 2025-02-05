@@ -81,6 +81,11 @@ return {
         { "n", "<leader>fb", builtin.buffers, "Buffers" },
         { "n", "<leader>fh", builtin.help_tags, "Help tags" },
         { "n", "<leader>fk", builtin.keymaps, "Current Keymaps" },
+        -- LSP Symbols
+        { "n", "<leader>fs", builtin.lsp_document_symbols, "LSP document symbols" },
+        { "n", "<leader>fd", builtin.lsp_definitions, "LSP definitions" },
+        -- Last Search
+        { "n", "<leader>fl", builtin.resume, "Resume last search" },
       })
     end,
   },

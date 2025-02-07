@@ -28,7 +28,7 @@ return {
       rename = {
         quit = "<ESC>",
         in_select = false,
-        auto_save = true,
+        auto_save = false,
       },
       outline = {
         layout = "float",
@@ -69,7 +69,6 @@ return {
       { { "n", "t" }, "<A-t>", "<cmd>Lspsaga term_toggle<CR>", "Toggle Terminal" },
       { "n", "<leader>li", "<cmd>Lspsaga incoming_calls<CR>", "Toggle Terminal" },
       { "n", "<leader>lo", "<cmd>Lspsaga outgoing_calls<CR>", "Toggle Terminal" },
-      { "n", "<leader>ld", "<cmd>Lspsaga hover_doc<CR>", "Toggle Terminal" },
     })
   end,
 }

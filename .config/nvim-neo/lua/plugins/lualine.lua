@@ -53,7 +53,17 @@ return {
       },
       sections = {
         lualine_a = { { "mode", separator = { left = "" }, right_padding = 2 } },
-        lualine_b = { "filename", "branch", "diagnostics" },
+        lualine_b = {
+          "filename",
+          {
+            require("git-drift").status,
+            cond = function()
+              return vim.b.gitsigns_head ~= nil
+            end,
+          },
+          "branch",
+          "diagnostics",
+        },
         lualine_c = {
           "%=",
         },

@@ -45,6 +45,10 @@ return {
       { "n", "<leader>lp", "<cmd>Lspsaga peek_definition<CR>", "Peek Definition" },
       { "n", "<leader>ln", "<cmd>Lspsaga rename ++project<CR>", "Rename Symbol" },
       { "n", "K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation" },
+      { "n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle Outline" },
+      { { "n", "t" }, "<A-t>", "<cmd>Lspsaga term_toggle<CR>", "Toggle Terminal" },
+      { "n", "<leader>li", "<cmd>Lspsaga incoming_calls<CR>", "Toggle Terminal" },
+      { "n", "<leader>lo", "<cmd>Lspsaga outgoing_calls<CR>", "Toggle Terminal" },
       { "n", "<leader>ll", "<cmd>Lspsaga show_line_diagnostics<CR>", "Show Line Diagnostics" },
       { "n", "<leader>lc", "<cmd>Lspsaga show_cursor_diagnostics<CR>", "Show Cursor Diagnostics" },
       { "n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous Diagnostic" },
@@ -65,10 +69,6 @@ return {
         end,
         "Next Error",
       },
-      { "n", "<leader>o", "<cmd>Lspsaga outline<CR>", "Toggle Outline" },
-      { { "n", "t" }, "<A-t>", "<cmd>Lspsaga term_toggle<CR>", "Toggle Terminal" },
-      { "n", "<leader>li", "<cmd>Lspsaga incoming_calls<CR>", "Toggle Terminal" },
-      { "n", "<leader>lo", "<cmd>Lspsaga outgoing_calls<CR>", "Toggle Terminal" },
     })
   end,
 }

@@ -6,7 +6,8 @@ vim.filetype.add({ extension = { templ = "templ" } })
 require("core.lazy")
 
 local themes = {
-  tokyonight = "tokyonight",
+  tokyo = "tokyonight",
+  tokyonight = "tokyonight-night",
   tokyodark = "tokyodark",
   eldritch = "eldritch",
 }

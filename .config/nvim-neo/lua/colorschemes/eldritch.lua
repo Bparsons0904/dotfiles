@@ -1,22 +1,27 @@
 -- My best attempt
 local purple_base = {
-  deadstyle_color01 = "#7b68ee", -- Medium slate blue
-  deadstyle_color02 = "#2ac278", -- Emerald green
-  deadstyle_color03 = "#1a8cff", -- Bright blue
-  deadstyle_color04 = "#949ae5", -- Periwinkle
-  deadstyle_color05 = "#19dfcf", -- Bright turquoise
-  deadstyle_color06 = "#1682ef", -- Dodger blue
-  deadstyle_color07 = "#1c242f", -- Dark slate gray
-  deadstyle_color08 = "#f16c75", -- Light coral
-  deadstyle_color09 = "#a5afc2", -- Cadet blue
-  deadstyle_color10 = "#0D1116", -- Eerie black
-  deadstyle_color11 = "#f16c75", -- Light coral
-  deadstyle_color12 = "#f1fc79", -- Lemon yellow
-  deadstyle_color13 = "#314154", -- Charcoal blue
-  deadstyle_color14 = "#ebfafa", -- Azure white
-  deadstyle_color15 = "#013e4a", -- Midnight green
-  deadstyle_color16 = "#6c7a89", -- Slate gray (new suggestion)
-  deadstyle_color17 = "#141b22", -- Gunmetal
+  -- Core UI Elements
+  deadstyle_color10 = "#0D1116", -- Eerie black - Main background
+  deadstyle_color14 = "#ebfafa", -- Azure white - Main text color
+  deadstyle_color13 = "#1A222B", -- Charcoal blue - CursorLine background, darker background elements
+  deadstyle_color17 = "#141b22", -- Gunmetal - Alternative background
+  deadstyle_color07 = "#1c242f", -- Dark slate gray - Another background variant
+
+  -- Syntax Highlighting
+  deadstyle_color01 = "#7b68ee", -- Medium slate blue - Pink/magenta elements, used for special keywords
+  deadstyle_color02 = "#2ac278", -- Emerald green - Used for strings and git additions
+  deadstyle_color03 = "#1a8cff", -- Bright blue - Used for functions and git changes
+  deadstyle_color04 = "#949ae5", -- Periwinkle - Used for variables and purple accents
+  deadstyle_color05 = "#19dfcf", -- Bright turquoise - Used for special highlights
+  deadstyle_color06 = "#1682ef", -- Dodger blue - Used for preprocessor directives
+
+  -- UI Accents
+  deadstyle_color08 = "#f16c75", -- Light coral - Used for errors and warnings
+  deadstyle_color09 = "#a5afc2", -- Cadet blue - Used for comments
+  deadstyle_color11 = "#f16c75", -- Light coral - Used for deletion highlights and errors
+  deadstyle_color12 = "#f1fc79", -- Lemon yellow - Used for search highlights
+  deadstyle_color15 = "#013e4a", -- Midnight green - Used for darker accents
+  deadstyle_color16 = "#6c7a89", -- Slate gray - Used for selection highlights
 }
 
 -- Improved color cordination
@@ -318,6 +323,10 @@ return {
         NormalFloat = { bg = colors.deadstyle_color10 },
         FloatBorder = { bg = colors.deadstyle_color10 },
         FloatTitle = { bg = colors.deadstyle_color10 },
+        MatchParen = {
+          fg = colors.deadstyle_color12,
+          bold = true,
+        },
         NotifyBackground = { bg = colors.deadstyle_color10 },
         NeoTreeNormalNC = { bg = colors.deadstyle_color10 },
         NeoTreeNormal = { bg = colors.deadstyle_color10 },

@@ -1,5 +1,6 @@
 background = 000000
-font-family = FiraCode Nerd Font
+# font-family = FiraCode Nerd Font
+font-family = Go Mono
 font-size = 14
 background-opacity = .9
 background-blur-radius = 20

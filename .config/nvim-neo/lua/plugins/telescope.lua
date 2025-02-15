@@ -77,6 +77,7 @@ return {
           "Find files the smart way",
         },
         { "n", "<leader>fo", builtin.find_files, "Find files" },
+        { "n", "<leader>fr", builtin.oldfiles, "Find recent files" },
         { "n", "<leader>fg", builtin.live_grep, "Live grep" },
         { "n", "<leader>fb", builtin.buffers, "Buffers" },
         { "n", "<leader>fh", builtin.help_tags, "Help tags" },

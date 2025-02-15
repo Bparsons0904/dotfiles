@@ -7,9 +7,9 @@ alias neo='NVIM_APPNAME=nvim-neo nvim'
 # alias pro='nvim ~/.bash_profile'
 # alias src='source ~/.bashrc'
 # Zshrc
-alias rc='nvim ~/.zshrc' 
-alias rn='nvim ~/.zsh_aliases'
-alias pro='nvim ~/.zprofile' 
+alias rc='neo ~/.zshrc' 
+alias rn='neo ~/.config/zsh/aliases.zsh'
+alias pro='neo ~/.config/zsh' 
 alias src='source ~/.zshrc' 
 
 # Directory
@@ -52,3 +52,47 @@ alias ls='exa -l'
 alias lsa='exa -la'
 alias du='du -bch'
 alias cd='z'
+
+# FZF 
+export FZF_EXCLUDE="find . -type f \
+    -not -path '*/\.*' \
+    -not -path '*/node_modules/*' \
+    -not -path '*/venv/*' \
+    -not -path '*/__pycache__/*' \
+    -not -path '*/target/*' \
+    -not -path '*/dist/*' \
+    -not -path '*/build/*' \
+    -not -name '*.exe' \
+    -not -name '*.o' \
+    -not -name '*.so' \
+    -not -name '*.pyc' \
+    -not -name '*.class' \
+    -not -name '*.dll'"
+alias f='fzf'
+alias ff="$FZF_EXCLUDE | fzf --preview 'bat --color=always --style=numbers --line-range :500 {}'"
+
+# Read full file
+alias ffr="$FZF_EXCLUDE | fzf --preview 'bat --color=always --style=numbers --line-range :500 {}' | xargs bat"
+
+# Open with default application
+alias fff="$FZF_EXCLUDE | fzf --preview 'bat --color=always --style=numbers --line-range :500 {}' \
+    --bind 'enter:execute:xdg-open {}' \
+    --bind 'ctrl-o:execute:xdg-open {}'"
+# Quick directory navigation
+alias fcd='cd $(find . -type d | fzf)'
+
+# Search file content and open in editor
+alias fneo='neo $(fzf --preview "bat --color=always {}")'
+
+# Kill process
+alias fkill='ps aux | fzf | awk "{print $2}" | xargs kill -9'
+
+# Search command history
+alias fh='history | fzf --reverse | awk "{$1=\"\"; print substr($0,2)}" | bash'
+
+ffunc() {    # Different name for the function
+    file=$(find . -type f | fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}')
+    if [ -n "$file" ]; then
+        bat "$file"
+    fi
+}

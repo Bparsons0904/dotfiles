@@ -177,6 +177,7 @@ return {
         "black",
         "gopls",
         "gofumpt",
+        "golines",
         "goimports",
         "golangci-lint",
         "templ",

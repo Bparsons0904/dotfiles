@@ -49,8 +49,8 @@ alias python=python3
 alias zj='zellij'
 alias za='zellij a'
 alias server='ssh -X server'
-alias ls='exa -l'
-alias lsa='exa -la'
+alias ls='eza -l'
+alias lsa='eza -la'
 alias du='du -bch'
 alias cd='z'
 

@@ -3,6 +3,7 @@ return {
   cmd = "Codeium",
   event = "InsertEnter",
   build = ":Codeium Auth",
+  enabled = true,
   opts = {
     enable_cmp_source = false,
     virtual_text = {

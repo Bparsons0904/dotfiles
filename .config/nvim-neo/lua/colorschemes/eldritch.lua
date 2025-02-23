@@ -206,6 +206,52 @@ local blue = {
   deadstyle_color17 = "#1C2833", -- Dark Slate Gray (alternative dark background)
 }
 
+local royal_purple = {
+  -- Core UI Elements
+  deadstyle_color10 = "#0A0C15", -- Darker background for more contrast
+  deadstyle_color14 = "#f0f2ff", -- Slightly warmer white text
+  deadstyle_color13 = "#151C2F", -- Deeper blue-purple background
+  deadstyle_color17 = "#111526", -- Richer gunmetal with purple undertones
+  deadstyle_color07 = "#1A1E32", -- Deeper slate with purple hints
+  -- Syntax Highlighting
+  deadstyle_color01 = "#9370DB", -- Medium purple - softer on the eyes
+  deadstyle_color02 = "#34D399", -- Slightly warmer emerald
+  deadstyle_color03 = "#4785FF", -- Warmer bright blue
+  deadstyle_color04 = "#B39DDB", -- Lighter periwinkle
+  deadstyle_color05 = "#20B2AA", -- Slightly muted turquoise
+  deadstyle_color06 = "#2196F3", -- Brighter blue for better contrast
+  -- UI Accents
+  deadstyle_color08 = "#FF6B6B", -- Warmer coral
+  deadstyle_color09 = "#B0BEC5", -- Slightly warmer comments
+  deadstyle_color11 = "#FF6B6B", -- Matching coral
+  deadstyle_color12 = "#FFF59D", -- Softer yellow
+  deadstyle_color15 = "#012F3D", -- Deeper midnight green
+  deadstyle_color16 = "#78909C", -- Warmer slate gray
+}
+
+local twilight_purple = {
+  -- Core UI Elements
+  deadstyle_color10 = "#0E0E17", -- Neutral dark background
+  deadstyle_color14 = "#E8EAFD", -- Slightly cooler white
+  deadstyle_color13 = "#1B1B2B", -- Muted purple-gray background
+  deadstyle_color17 = "#13131F", -- Darker muted background
+  deadstyle_color07 = "#1D1D2D", -- Soft purple-gray
+  -- Syntax Highlighting
+  deadstyle_color01 = "#8B7BB3", -- Muted lavender
+  deadstyle_color02 = "#7AC29E", -- Muted sage green
+  deadstyle_color03 = "#7AA2F7", -- Softer blue
+  deadstyle_color04 = "#A39EC4", -- Dusty periwinkle
+  deadstyle_color05 = "#89B4BE", -- Muted teal
+  deadstyle_color06 = "#7795C4", -- Muted blue
+  -- UI Accents
+  deadstyle_color08 = "#E06C75", -- Slightly muted coral
+  deadstyle_color09 = "#9AA3B2", -- Softer comments
+  deadstyle_color11 = "#E06C75", -- Matching coral
+  deadstyle_color12 = "#E5E279", -- Muted yellow
+  deadstyle_color15 = "#1A2A35", -- Warmer dark accent
+  deadstyle_color16 = "#717C89", -- Darker slate gray
+}
+
 local function get_colors()
   local colors = {
     rubber_duck = rubber_duck,
@@ -237,7 +283,7 @@ local function get_colors()
 end
 
 -- local colors = get_colors()
-local colors = purple_base
+local colors = royal_purple
 
 return {
   "eldritch-theme/eldritch.nvim",

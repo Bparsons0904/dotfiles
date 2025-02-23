@@ -12,6 +12,7 @@ alias rn='neo ~/.config/zsh/aliases.zsh'
 alias pro='neo ~/.config/zsh' 
 alias src='source ~/.zshrc' 
 alias hy='cd ~/dotfiles/.config/hypr/ && neo'
+alias way='cd ~/dotfiles/.config/waybar/ && neo'
 
 # Directory
 alias lcon='cd ~/.config/lvim'

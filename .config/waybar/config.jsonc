@@ -1,81 +1,78 @@
 {
-    "modules-left": ["hyprland/workspaces", "sway/mode"],
-    "modules-center": ["clock", "idle_inhibitor"],
-    "modules-right": ["tray", "custom/scratchpad-indicator", "pulseaudio", "custom/power"],
-    "hyprland/workspaces": {
-         "disable-scroll": true,
-         "on-click": "activate",
-         // "all-outputs": false,
-         // "format": "{name}: {icon}",
-         "format": "{name}",
-         "on-scroll-up": "hyprctl dispatch workspace m-1 > /dev/null",
-         "on-scroll-down": "hyprctl dispatch workspace m+1 > /dev/null",
-         "format-icons": {
-             "1": "",
-             "2": "",
-             "3": "",
-             "4": "",
-             "5": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
-         }
-     },
-    // "sway/mode": {
-    //     "format": "<span style=\"italic\">{}</span>"
-    // },
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname} ",
-        "format-disconnected": "", 
-        "max-length": 50,
-        "on-click": "kitty -e 'nmtui'"
+    // Layout definition
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["idle_inhibitor", "tray", "battery",  "custom/power"],
+    
+    // Appearance
+    "spacing": 4,
+    "height": 30,
+    
+    // Module definitions (alphabetically ordered)
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
     },
+    
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}",
+        "on-click": "gnome-calendar"
+    },
+    
+    "custom/power": {
+        "format": " ",
+        "tooltip": "Power menu",
+        "on-click": "wlogout"
+    },
+    
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "on-click": "activate",
+        "format": "{name}",
+        "on-scroll-up": "hyprctl dispatch workspace m-1 > /dev/null",
+        "on-scroll-down": "hyprctl dispatch workspace m+1 > /dev/null",
+        "format-icons": {
+            "1": "",
+            "2": "",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+    
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "",
+            "deactivated": ""
         },
+        "tooltip": true
     },
+    
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname} ",
+        "format-disconnected": "", 
+        "max-length": 50,
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "on-click": "kitty -e 'nmtui'"
+    },
+    
     "tray": {
         "icon-size": 15,
         "spacing": 10
-    },
-    "clock": {
-        // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        // "format-alt": "{:%Y-%m-%d}"
-		"on-click": "gnome-calendar"
-    },
-    "pulseaudio": {
-        "format": "{volume}% {icon} ",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": "0% {icon} ",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-	"custom/power": {
-		"format": " ",
-		"on-click": "wlogout"
-	},
-    "custom/scratchpad-indicator": {
-        "format-text": "{}hi",
-        "return-type": "json",
-        "interval": 3,
-        "exec": "~/.local/bin/scratchpad-indicator 2> /dev/null",
-        "exec-if": "exit 0",
-        "on-click": "swaymsg 'scratchpad show'",
-        "on-click-right": "swaymsg 'move scratchpad'"
     }
 }

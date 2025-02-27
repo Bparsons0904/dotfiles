@@ -1,2 +1,24 @@
-scripts/logs/
+# Neovim/Vim
+lazy-lock.json
+.luarc.json
+**/tmp/
+*/undodir/
+*/build-errors.log
+
+# Package manager locks and caches
+*/lazy-lock.json
+
+# Logs
+**/logs/
 .zcompdump*
+
+# Backups
+*.bak
+*.backup
+**/config.back
+*.back
+*~
+
+# OS files
+.DS_Store
+

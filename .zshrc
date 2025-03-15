@@ -22,3 +22,7 @@ done
 # Load aliases and functions last so they can use everything defined above
 source "$ZDOTDIR/aliases.zsh"
 source "$ZDOTDIR/functions.zsh"
+
+setopt interactivecomments
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

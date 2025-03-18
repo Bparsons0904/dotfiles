@@ -87,6 +87,10 @@ section "Configuring /etc/security/limits.conf"
 cp /etc/security/limits.conf /etc/security/limits.conf.bak
 info "Backed up original limits.conf to limits.conf.bak"
 
+# Get current username
+CURRENT_USER=$(logname || echo $SUDO_USER || echo $USER)
+info "Detected current user: $CURRENT_USER"
+
 # Create new limits.conf file
 cat > /etc/security/limits.conf << EOF
 # /etc/security/limits.conf
@@ -98,18 +102,26 @@ cat > /etc/security/limits.conf << EOF
 # File descriptors - for handling many open files
 * soft nofile $FD_SOFT_LIMIT
 * hard nofile $FD_HARD_LIMIT
+$CURRENT_USER soft nofile $FD_SOFT_LIMIT
+$CURRENT_USER hard nofile $FD_HARD_LIMIT
 
 # Process limits - for running many concurrent processes/threads
 * soft nproc $PROC_SOFT_LIMIT
 * hard nproc $PROC_HARD_LIMIT
+$CURRENT_USER soft nproc $PROC_SOFT_LIMIT
+$CURRENT_USER hard nproc $PROC_HARD_LIMIT
 
 # Memory limits - for locking memory in RAM (databases, real-time apps)
 * soft memlock $MEM_SOFT_LIMIT
 * hard memlock $MEM_HARD_LIMIT
+$CURRENT_USER soft memlock $MEM_SOFT_LIMIT
+$CURRENT_USER hard memlock $MEM_HARD_LIMIT
 
 # Stack size - for deeply recursive apps or large stack frames
 * soft stack $STACK_SOFT_LIMIT
 * hard stack $STACK_HARD_LIMIT
+$CURRENT_USER soft stack $STACK_SOFT_LIMIT
+$CURRENT_USER hard stack $STACK_HARD_LIMIT
 
 # End of file
 EOF
@@ -175,13 +187,13 @@ EOF
 
 success "Updated /etc/sysctl.conf"
 
-section "Configuring /etc/systemd/system.conf"
+section "Configuring /etc/systemd/system.conf and user.conf"
 
-# Backup original file
+# Backup original system.conf file
 cp /etc/systemd/system.conf /etc/systemd/system.conf.bak
 info "Backed up original system.conf to system.conf.bak"
 
-# Update systemd file descriptor limits
+# Update systemd file descriptor limits in system.conf
 if grep -q "^DefaultLimitNOFILE=" /etc/systemd/system.conf; then
   # Replace existing setting
   sed -i "s/^DefaultLimitNOFILE=.*/DefaultLimitNOFILE=$FD_SOFT_LIMIT:$FD_HARD_LIMIT/" /etc/systemd/system.conf
@@ -190,7 +202,20 @@ else
   echo "DefaultLimitNOFILE=$FD_SOFT_LIMIT:$FD_HARD_LIMIT" >> /etc/systemd/system.conf
 fi
 
-success "Updated /etc/systemd/system.conf"
+# Backup original user.conf file
+cp /etc/systemd/user.conf /etc/systemd/user.conf.bak
+info "Backed up original user.conf to user.conf.bak"
+
+# Update systemd file descriptor limits in user.conf
+if grep -q "^DefaultLimitNOFILE=" /etc/systemd/user.conf; then
+  # Replace existing setting
+  sed -i "s/^DefaultLimitNOFILE=.*/DefaultLimitNOFILE=$FD_SOFT_LIMIT:$FD_HARD_LIMIT/" /etc/systemd/user.conf
+else
+  # Add new setting
+  echo "DefaultLimitNOFILE=$FD_SOFT_LIMIT:$FD_HARD_LIMIT" >> /etc/systemd/user.conf
+fi
+
+success "Updated /etc/systemd/system.conf and /etc/systemd/user.conf"
 
 section "Configuring Docker limits"
 
@@ -211,6 +236,28 @@ cat > /etc/docker/daemon.json << EOF
 EOF
 
 success "Updated /etc/docker/daemon.json"
+
+section "Configuring PAM session limits"
+
+# Ensure pam_limits is included in common-session
+if [ -f /etc/pam.d/common-session ]; then
+  if ! grep -q "pam_limits.so" /etc/pam.d/common-session; then
+    echo "session required pam_limits.so" >> /etc/pam.d/common-session
+    success "Added pam_limits.so to /etc/pam.d/common-session"
+  else
+    info "pam_limits.so already configured in /etc/pam.d/common-session"
+  fi
+fi
+
+# Ensure pam_limits is included in common-session-noninteractive
+if [ -f /etc/pam.d/common-session-noninteractive ]; then
+  if ! grep -q "pam_limits.so" /etc/pam.d/common-session-noninteractive; then
+    echo "session required pam_limits.so" >> /etc/pam.d/common-session-noninteractive
+    success "Added pam_limits.so to /etc/pam.d/common-session-noninteractive"
+  else
+    info "pam_limits.so already configured in /etc/pam.d/common-session-noninteractive"
+  fi
+fi
 
 section "Applying changes"
 
@@ -269,6 +316,7 @@ echo "Backups of the original files have been created:"
 echo "  - /etc/security/limits.conf.bak"
 echo "  - /etc/sysctl.conf.bak"
 echo "  - /etc/systemd/system.conf.bak"
+echo "  - /etc/systemd/user.conf.bak"
 echo ""
 echo "For changes to take full effect, you might need to log out and log back in"
 echo "or reboot your system."

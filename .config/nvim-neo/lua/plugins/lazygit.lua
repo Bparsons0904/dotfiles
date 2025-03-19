@@ -11,5 +11,8 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  addToKeyMap("n", "<leader>lg", "<cmd>LazyGit<cr>", "LazyGit"),
+  keys = {
+    { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+  },
+  -- addToKeyMap("n", "<leader>lg", "<cmd>LazyGit<cr>", "LazyGit"),
 }

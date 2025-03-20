@@ -149,56 +149,14 @@ return {
             },
           },
         },
-
         eslint = {
           settings = {
-            workingDirectory = { mode = "location" }, -- Change from "auto" to "location"
+            workingDirectory = { mode = "auto" },
             packageManager = "npm",
             options = {
-              resolvePluginsRelativeTo = nil, -- Change from "." to nil
-            },
-            codeAction = {
-              disableRuleComment = {
-                enable = true,
-                location = "separateLine",
-              },
-              showDocumentation = {
-                enable = true,
-              },
+              resolvePluginsRelativeTo = ".",
             },
           },
-          -- Override the root_dir detection for ESLint
-          root_dir = function(filename)
-            -- Try to find the nearest package.json, eslintrc, etc
-            local eslint_config = require("lspconfig.util").root_pattern(
-              ".eslintrc.js",
-              ".eslintrc.json",
-              ".eslintrc.yaml",
-              ".eslintrc.yml",
-              ".eslintrc",
-              "package.json"
-            )(filename)
-
-            -- If we found a config, use its directory
-            if eslint_config then
-              return require("lspconfig.util").path.dirname(eslint_config)
-            end
-
-            -- Fallback to the default root pattern
-            return require("lspconfig.util").find_git_ancestor(filename)
-          end,
-          filetypes = {
-            "javascript",
-            "javascriptreact",
-            "javascript.jsx",
-            "typescript",
-            "typescriptreact",
-            "typescript.tsx",
-            "vue",
-            "svelte",
-            "astro",
-          },
-          -- Ensure we provide format capabilities
           on_attach = function(client, bufnr)
             client.server_capabilities.documentFormattingProvider = true
             vim.api.nvim_create_autocmd("BufWritePre", {
@@ -208,23 +166,6 @@ return {
           end,
         },
       }
-      --   eslint = {
-      --     settings = {
-      --       workingDirectory = { mode = "auto" },
-      --       packageManager = "npm",
-      --       options = {
-      --         resolvePluginsRelativeTo = ".",
-      --       },
-      --     },
-      --     on_attach = function(client, bufnr)
-      --       client.server_capabilities.documentFormattingProvider = true
-      --       vim.api.nvim_create_autocmd("BufWritePre", {
-      --         buffer = bufnr,
-      --         command = "EslintFixAll",
-      --       })
-      --     end,
-      --   },
-      -- }
 
       local ensure_installed = {
         "stylua",

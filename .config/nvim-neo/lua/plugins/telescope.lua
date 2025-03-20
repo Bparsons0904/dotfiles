@@ -60,7 +60,7 @@ return {
           },
           smart_open = {
             match_algorithm = "fzf",
-            filename_first = true,
+            -- filename_first = true,
             cwd_only = true,
             ignore_patterns = {
               ".*_templ%.go",

@@ -29,6 +29,7 @@ return {
         "comment",
         "regex",
         "bash",
+        "dart",
       },
       sync_install = false,
       auto_install = true,

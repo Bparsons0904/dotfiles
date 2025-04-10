@@ -42,6 +42,7 @@ return {
       json = { "prettierd", "prettier" },
       yaml = { "prettierd", "prettier" },
       markdown = { "prettierd", "prettier" },
+      dart = { "dartfmt" },
     },
 
     format_options = {

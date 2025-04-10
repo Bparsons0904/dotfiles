@@ -149,26 +149,48 @@ return {
             },
           },
         },
-        eslint = {
+        eslint_d = {
+          capabilities = capabilities,
           settings = {
             workingDirectory = { mode = "auto" },
-            packageManager = "npm",
-            options = {
-              resolvePluginsRelativeTo = ".",
+            -- packageManager = "npm",
+            -- options = {
+            --   resolvePluginsRelativeTo = ".",
+            -- },
+          },
+          -- on_attach = function(client, bufnr)
+          --   client.server_capabilities.documentFormattingProvider = true
+          --   vim.api.nvim_create_autocmd("BufWritePre", {
+          --     buffer = bufnr,
+          --     command = "EslintFixAll",
+          --   })
+          -- end,
+        },
+        dartls = {
+          cmd = { "dart", "language-server", "--protocol=lsp" },
+          filetypes = { "dart" },
+          init_options = {
+            closingLabels = true,
+            flutterOutline = true,
+            onlyAnalyzeProjectsWithOpenFiles = true,
+            outline = true,
+            suggestFromUnimportedLibraries = true,
+          },
+          settings = {
+            dart = {
+              completeFunctionCalls = true,
+              showTodos = true,
+              enableSnippets = true,
+              updateImportsOnRename = true,
+              lineLength = 100,
             },
           },
-          on_attach = function(client, bufnr)
-            client.server_capabilities.documentFormattingProvider = true
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = bufnr,
-              command = "EslintFixAll",
-            })
-          end,
         },
       }
 
       local ensure_installed = {
         "stylua",
+        "eslint",
         "eslint_d",
         "ruff",
         "prettierd",
@@ -185,6 +207,7 @@ return {
         "htmx-lsp",
         "emmet-ls",
         "typescript-language-server",
+        "dart-debug-adapter",
       }
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

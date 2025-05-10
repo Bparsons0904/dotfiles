@@ -1,6 +1,7 @@
 require("core.keymaps")
 require("core.options")
 require("core.autocmds")
+require("core.commands")
 
 vim.filetype.add({ extension = { templ = "templ" } })
 
@@ -11,6 +12,7 @@ local themes = {
   tokyonight = "tokyonight-night",
   tokyodark = "tokyodark",
   eldritch = "eldritch",
+  cyberdream = "cyberdream",
 }
 
 vim.cmd.colorscheme(themes.eldritch)

@@ -210,7 +210,7 @@ local royal_purple = {
   -- Core UI Elements
   deadstyle_color10 = "#0A0C15", -- Darker background for more contrast
   deadstyle_color14 = "#f0f2ff", -- Slightly warmer white text
-  deadstyle_color13 = "#151C2F", -- Deeper blue-purple background
+  deadstyle_color13 = "#1d2741", -- Deeper blue-purple background
   deadstyle_color17 = "#111526", -- Richer gunmetal with purple undertones
   deadstyle_color07 = "#1A1E32", -- Deeper slate with purple hints
   -- Syntax Highlighting

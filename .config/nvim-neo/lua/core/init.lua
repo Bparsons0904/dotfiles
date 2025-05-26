@@ -12,7 +12,6 @@ local themes = {
   tokyonight = "tokyonight-night",
   tokyodark = "tokyodark",
   eldritch = "eldritch",
-  cyberdream = "cyberdream",
 }
 
 vim.cmd.colorscheme(themes.eldritch)

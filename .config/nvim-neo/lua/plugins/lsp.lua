@@ -18,6 +18,8 @@ return {
       "saghen/blink.cmp",
     },
     config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup()
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(event)
@@ -166,26 +168,25 @@ return {
           --   })
           -- end,
         },
-        dartls = {
-          cmd = { "dart", "language-server", "--protocol=lsp" },
-          filetypes = { "dart" },
-          init_options = {
-            closingLabels = true,
-            flutterOutline = true,
-            onlyAnalyzeProjectsWithOpenFiles = true,
-            outline = true,
-            suggestFromUnimportedLibraries = true,
-          },
-          settings = {
-            dart = {
-              completeFunctionCalls = true,
-              showTodos = true,
-              enableSnippets = true,
-              updateImportsOnRename = true,
-              lineLength = 100,
-            },
-          },
-        },
+        -- dartls = { cmd = { "dart", "language-server", "--protocol=lsp" },
+        --   filetypes = { "dart" },
+        --   init_options = {
+        --     closingLabels = true,
+        --     flutterOutline = true,
+        --     onlyAnalyzeProjectsWithOpenFiles = true,
+        --     outline = true,
+        --     suggestFromUnimportedLibraries = true,
+        --   },
+        --   settings = {
+        --     dart = {
+        --       completeFunctionCalls = true,
+        --       showTodos = true,
+        --       enableSnippets = true,
+        --       updateImportsOnRename = true,
+        --       lineLength = 100,
+        --     },
+        --   },
+        -- },
       }
 
       local ensure_installed = {
@@ -207,7 +208,7 @@ return {
         "htmx-lsp",
         "emmet-ls",
         "typescript-language-server",
-        "dart-debug-adapter",
+        -- "dart-debug-adapter",
       }
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

@@ -93,6 +93,10 @@ return {
         { "n", "<leader>fd", builtin.lsp_definitions, "LSP definitions" },
         -- Last Search
         { "n", "<leader>fl", builtin.resume, "Resume last search" },
+        -- Marks
+        { "n", "<leader>fm", builtin.marks, "Marks" },
+        -- Colorschemes
+        { "n", "<leader>fc", builtin.colorscheme, "Colorschemes" },
       })
     end,
   },

@@ -1,6 +1,7 @@
 require("core.keymaps")
 require("core.options")
 require("core.autocmds")
+require("core.commands")
 
 vim.filetype.add({ extension = { templ = "templ" } })
 

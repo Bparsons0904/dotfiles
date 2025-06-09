@@ -42,7 +42,7 @@ return {
       json = { "prettierd", "prettier" },
       yaml = { "prettierd", "prettier" },
       markdown = { "prettierd", "prettier" },
-      dart = { "dartfmt" },
+      dart = { "dart_format" },
     },
 
     format_options = {

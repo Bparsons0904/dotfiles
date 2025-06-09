@@ -11,3 +11,4 @@ theme = Brogrammer
 #keybind = alt+t=new_tab
 maximize = true
 window-padding-x = 10
+keybind = shift+enter=text:\n

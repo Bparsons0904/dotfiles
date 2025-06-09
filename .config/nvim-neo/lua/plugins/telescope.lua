@@ -60,11 +60,19 @@ return {
           },
           smart_open = {
             match_algorithm = "fzf",
-            -- filename_first = true,
             cwd_only = true,
             ignore_patterns = {
               ".*_templ%.go",
               ".*_templ%.txt",
+              -- Add test file patterns to ignore for main search
+              ".*_test%.go",
+              ".*%.test%.ts",
+              ".*%.test%.js",
+              ".*%.spec%.ts",
+              ".*%.spec%.js",
+              ".*/test/.*",
+              ".*/tests/.*",
+              ".*/__tests__/.*",
             },
           },
         },
@@ -73,6 +81,27 @@ return {
       telescope.load_extension("fzf")
       telescope.load_extension("smart_open")
 
+      -- Helper function to find test files
+      local function find_test_files()
+        builtin.find_files({
+          find_command = {
+            "fd",
+            "--type",
+            "f",
+            "--follow",
+            -- Include common test file patterns
+            "-e",
+            "go",
+            "-e",
+            "ts",
+            "-e",
+            "js",
+            ".*(_test|test|spec)\\.(go|ts|js)$|.*/tests?/.*\\.(go|ts|js)$|.*/__tests__/.*\\.(ts|js)$",
+          },
+          prompt_title = "Find Test Files",
+        })
+      end
+
       addKeyMaps({
         {
           "n",
@@ -80,7 +109,13 @@ return {
           function()
             telescope.extensions.smart_open.smart_open(require("telescope.themes").get_dropdown({ previewer = false }))
           end,
-          "Find files the smart way",
+          "Find files (excluding tests)",
+        },
+        {
+          "n",
+          "<leader>ft",
+          find_test_files,
+          "Find test files",
         },
         { "n", "<leader>fo", builtin.find_files, "Find files" },
         { "n", "<leader>fr", builtin.oldfiles, "Find recent files" },

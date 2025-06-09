@@ -252,6 +252,34 @@ local twilight_purple = {
   deadstyle_color16 = "#717C89", -- Darker slate gray
 }
 
+-- Serial Killer Red Theme - Dark, menacing, blood-soaked aesthetic
+local serial_killer = {
+  -- Core backgrounds - deep, unsettling blacks and dark reds
+  deadstyle_color10 = "#0A0000", -- Almost pure black with hint of red - main background
+  deadstyle_color13 = "#1A0505", -- Very dark blood red - cursor line, darker elements
+  deadstyle_color17 = "#0F0202", -- Slightly lighter black-red - alternative background
+  deadstyle_color07 = "#150404", -- Dark crimson undertone - another background variant
+
+  -- Main text and UI
+  deadstyle_color14 = "#E8D5D5", -- Pale, sickly white with red undertone - main text
+  deadstyle_color16 = "#2D0808", -- Dark blood red - selection highlights
+
+  -- Syntax highlighting - various shades of red, blood, and decay
+  deadstyle_color01 = "#CC2936", -- Deep crimson - keywords, special elements
+  deadstyle_color02 = "#8B0000", -- Dark red - strings, constants
+  deadstyle_color03 = "#DC143C", -- Crimson red - functions, methods
+  deadstyle_color04 = "#B22222", -- Fire brick red - variables, identifiers
+  deadstyle_color05 = "#800020", -- Burgundy - special highlights, operators
+  deadstyle_color06 = "#A0002A", -- Dark magenta-red - preprocessor, imports
+
+  -- Accent colors - warnings, errors, and highlights
+  deadstyle_color08 = "#FF4500", -- Blood orange - errors, critical warnings
+  deadstyle_color09 = "#704343", -- Muted brown-red - comments, less important text
+  deadstyle_color11 = "#FF1493", -- Deep pink-red - deletion highlights, severe errors
+  deadstyle_color12 = "#8B4513", -- Saddle brown - search highlights (dried blood)
+  deadstyle_color15 = "#2F0000", -- Very dark red - darker accents, shadows
+}
+
 local function get_colors()
   local colors = {
     rubber_duck = rubber_duck,

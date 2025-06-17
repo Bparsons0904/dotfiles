@@ -70,7 +70,8 @@ return {
 
     addKeyMaps({
       -- Basic Go commands
-      { "n", "<leader>Gc", ":GoCodeLen<CR>", "Show code lens" },
+      { "n", "<leader>gp", ":GoCodeLen<CR>", "Show code lens" },
+      { "n", "<leader>gm", ":GoGet -u<CR>", "Go get package updates" },
       { "n", "<leader>Gi", ":GoToggleInlay<CR>", "Toggle inlay hints" },
 
       -- Debug controls

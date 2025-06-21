@@ -456,6 +456,13 @@ return {
         KubectlExperimental = { fg = colors.deadstyle_color09 },
         KubectlNote = { fg = colors.deadstyle_color03 },
         KubectlGray = { fg = colors.deadstyle_color10 },
+        
+        -- Inlay Hints - make them subtle and readable
+        LspInlayHint = { 
+          fg = colors.deadstyle_color09, -- Using comment color for subtlety
+          bg = "NONE", -- No background to prevent "classified document" effect
+          italic = true -- Make them italic to distinguish from regular text
+        },
       }
 
       for group, props in pairs(highlight_definitions) do

@@ -4,7 +4,12 @@ return {
   "Bparsons0904/phantom-err.nvim",
   ft = "go",
   config = function()
-    require("phantom-err").setup()
+    require("phantom-err").setup({
+      auto_enable = true,
+      mode = "full",
+      dimming_mode = "conceal",
+      reveal_mode = "normal",
+    })
     addKeyMaps({
       {
         "n",

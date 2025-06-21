@@ -58,6 +58,9 @@ local keymaps = {
   { "n", "<C-j>", "<C-w>j", "Move to below split" },
   { "n", "<C-k>", "<C-w>k", "Move to above split" },
   { "n", "<C-l>", "<C-w>l", "Move to right split" },
+
+  -- LSP Inlay Hints (Global toggle)
+  { "n", "<leader>lh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, "Toggle Inlay Hints" },
 }
 
 addKeyMaps(keymaps)

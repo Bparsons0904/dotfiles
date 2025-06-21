@@ -62,38 +62,6 @@ return {
               { "n", "<leader>lr", ":LspRestart<CR>", "Restart LSP", opts },
             })
 
-            if client.name == "tsserver" then
-              addKeyMaps({
-                {
-                  "n",
-                  "<leader>tR",
-                  "<cmd>TypescriptRenameFile<CR>",
-                  "Rename File",
-                  opts,
-                },
-                {
-                  "n",
-                  "<leader>tI",
-                  "<cmd>TypescriptAddMissingImports<CR>",
-                  "Add Missing Imports",
-                  opts,
-                },
-                {
-                  "n",
-                  "<leader>tO",
-                  "<cmd>TypescriptOrganizeImports<CR>",
-                  "Organize Imports",
-                  opts,
-                },
-                {
-                  "n",
-                  "<leader>tF",
-                  "<cmd>TypescriptFixAll<CR>",
-                  "Fix All",
-                  opts,
-                },
-              })
-            end
           end
         end,
       })
@@ -116,6 +84,7 @@ return {
         },
         htmx = {
           filetypes = { "html", "templ" },
+          root_dir = require("lspconfig.util").root_pattern("*.html", "*.templ", ".git"),
         },
         emmet_ls = {
           filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "templ" },
@@ -124,32 +93,6 @@ return {
           filetypes = { "templ" },
           cmd = { "templ", "lsp" },
           root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
-        },
-        tsserver = {
-          settings = {
-            typescript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-            javascript = {
-              inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-              },
-            },
-          },
         },
         eslint_d = {
           capabilities = capabilities,
@@ -207,7 +150,6 @@ return {
         "html-lsp",
         "htmx-lsp",
         "emmet-ls",
-        "typescript-language-server",
         -- "dart-debug-adapter",
       }
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

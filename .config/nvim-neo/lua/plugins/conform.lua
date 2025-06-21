@@ -11,10 +11,23 @@ return {
       mode = "",
       desc = "Format buffer",
     },
+    {
+      "<leader>le",
+      function()
+        local filetype = vim.bo.filetype
+        local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
+        if vim.tbl_contains(js_ts_filetypes, filetype) then
+          require("conform").format({ formatters = { "eslint_d" }, async = true })
+        else
+          vim.notify("ESLint fix only available for JS/TS files", vim.log.levels.INFO)
+        end
+      end,
+      desc = "ESLint fix",
+    },
   },
   opts = {
     notify_on_error = true,
-
+    
     format_on_save = function(bufnr)
       local disable_filetypes = { c = true, cpp = true }
       if disable_filetypes[vim.bo[bufnr].filetype] then
@@ -32,10 +45,10 @@ return {
       lua = { "stylua" },
       python = { "isort", "black" },
       go = { "gofumpt", "golines", "goimport" },
-      javascript = { "prettierd", "prettier" },
-      typescript = { "prettierd", "prettier" },
-      javascriptreact = { "prettierd", "prettier" },
-      typescriptreact = { "prettierd", "prettier" },
+      javascript = { "eslint_d", "prettierd" },
+      typescript = { "eslint_d", "prettierd" },
+      javascriptreact = { "eslint_d", "prettierd" },
+      typescriptreact = { "eslint_d", "prettierd" },
       css = { "prettierd", "prettier" },
       scss = { "prettierd", "prettier" },
       html = { "prettierd", "prettier" },
@@ -46,15 +59,20 @@ return {
     },
 
     format_options = {
-      javascript = { stop_after_first = true },
-      typescript = { stop_after_first = true },
-      javascriptreact = { stop_after_first = true },
-      typescriptreact = { stop_after_first = true },
+      javascript = { stop_after_first = false },
+      typescript = { stop_after_first = false },
+      javascriptreact = { stop_after_first = false },
+      typescriptreact = { stop_after_first = false },
     },
 
     formatters = {
       stylua = {
         prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+      },
+      eslint_d = {
+        command = "eslint_d",
+        args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
+        stdin = true,
       },
     },
   },

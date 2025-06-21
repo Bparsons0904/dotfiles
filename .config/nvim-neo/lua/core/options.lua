@@ -43,3 +43,6 @@ if vim.fn.isdirectory(undodir) == 0 then
 end
 opt.undofile = true
 opt.undodir = undodir
+
+-- LSP Logging (reduce spam)
+vim.lsp.set_log_level("ERROR")

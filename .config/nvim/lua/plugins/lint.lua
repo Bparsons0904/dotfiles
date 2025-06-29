@@ -1,110 +1,154 @@
 return {
-	"mfussenegger/nvim-lint",
-	event = { "BufReadPre", "BufNewFile" },
-	config = function()
-		local lint = require("lint")
+  "mfussenegger/nvim-lint",
+  event = { "BufReadPre", "BufNewFile" },
+  config = function()
+    local lint = require("lint")
+    lint.linters_by_ft = {
+      javascript = { "eslint_d" },
+      typescript = { "eslint_d" },
+      javascriptreact = { "eslint_d" },
+      typescriptreact = { "eslint_d" },
+      python = { "ruff" },
+      go = { "golangcilint" },
+    }
 
-		lint.linters_by_ft = {
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
-			python = { "pylint" },
-		}
+    -- Custom parser for golangci-lint JSON output
+    local function golangci_lint_parser(output, _)
+      if output == "" then
+        return {}
+      end
 
-		-- Orignal version
-		-- local function find_eslint_config()
-		-- 	local possible_paths = {
-		-- 		"/packages/via-core/.eslintrc.js",
-		-- 		-- Add more possible paths as needed
-		-- 	}
-		-- 	local project_root = vim.fn.getcwd()
-		-- 	for _, path in ipairs(possible_paths) do
-		-- 		local full_path = project_root .. path
-		-- 		if vim.fn.filereadable(full_path) == 1 then
-		-- 			return full_path
-		-- 		end
-		-- 	end
-		-- 	return nil -- Return nil if no config is found
-		-- end
-		--
-		-- lint.linters.eslint_d.args = {
-		-- 	"--format",
-		-- 	"json",
-		-- 	"--stdin",
-		-- 	"--stdin-filename",
-		-- 	function(_, bufnr)
-		-- 		return vim.api.nvim_buf_get_name(bufnr)
-		-- 	end,
-		-- 	"--config",
-		-- 	function(_, _)
-		-- 		return find_eslint_config()
-		-- 	end,
-		-- }
-		--
-		-- lint.linters.pylint.cmd = "python"
-		-- lint.linters.pylint.args = { "-m", "pylint", "-f", "json" }
+      local diagnostics = {}
+      local decoded = vim.json.decode(output)
 
-		-- Improved, but still not great version
-		lint.linters.eslint_d = {
-			cmd = "eslint_d",
-			name = "eslint_d",
-			root = true,
-			args = {
-				"--format",
-				"json",
-				"--stdin",
-				"--stdin-filename",
-				function(_, bufnr)
-					if bufnr == nil or not vim.api.nvim_buf_is_loaded(bufnr) then
-						return ""
-					end
-					return vim.api.nvim_buf_get_name(bufnr)
-				end,
-			},
-			parser = function(output, _)
-				local diagnostics = {}
+      if type(decoded) ~= "table" or not decoded.Issues then
+        return {}
+      end
 
-				local json_start = output:find("%[")
-				if not json_start then
-					return diagnostics
-				end
+      for _, issue in ipairs(decoded.Issues) do
+        local severity = vim.diagnostic.severity.WARN
+        if issue.Severity == "error" then
+          severity = vim.diagnostic.severity.ERROR
+        elseif issue.Severity == "info" then
+          severity = vim.diagnostic.severity.INFO
+        elseif issue.Severity == "hint" then
+          severity = vim.diagnostic.severity.HINT
+        end
 
-				local json_output = output:sub(json_start)
+        table.insert(diagnostics, {
+          source = "golangci-lint",
+          lnum = issue.Pos.Line - 1,
+          col = issue.Pos.Column - 1,
+          end_lnum = issue.Pos.Line - 1, -- golangci-lint might not provide end positions
+          end_col = issue.Pos.Column, -- approximating end column
+          severity = severity,
+          message = issue.Text,
+          code = issue.FromLinter,
+        })
+      end
 
-				local decoded = vim.json.decode(json_output)
-				if decoded and decoded[1] and decoded[1].messages then
-					for _, message in ipairs(decoded[1].messages) do
-						table.insert(diagnostics, {
-							source = "eslint",
-							lnum = message.line - 1,
-							col = message.column - 1,
-							end_lnum = message.endLine and (message.endLine - 1) or nil,
-							end_col = message.endColumn and (message.endColumn - 1) or nil,
-							severity = message.severity == 2 and vim.diagnostic.severity.ERROR
-								or vim.diagnostic.severity.WARN,
-							message = message.message,
-							code = message.ruleId,
-						})
-					end
-				end
-				return diagnostics
-			end,
-			stream = "both",
-		}
+      return diagnostics
+    end
 
-		-- Set up autocommands for linting
-		local lint_augroup = vim.api.nvim_create_augroup("Linting", { clear = true })
-		vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
-			group = lint_augroup,
-			callback = function()
-				lint.try_lint()
-			end,
-		})
+    lint.linters.golangcilint = {
+      cmd = "golangci-lint",
+      args = {
+        "run",
+        "--out-format=json",
+        "--disable=ST1001", -- Disable dot import warning
+        function(_, bufnr)
+          return { vim.api.nvim_buf_get_name(bufnr) }
+        end,
+      },
+      stdin = false,
+      append_fname = false,
+      parser = golangci_lint_parser,
+      stream = "stdout",
+    }
 
-		-- Keymapping to manually trigger linting
-		vim.keymap.set("n", "<leader>ll", function()
-			lint.try_lint()
-		end, { desc = "Trigger linting for current file" })
-	end,
+    lint.linters.eslint_d = {
+      cmd = "eslint_d",
+      name = "eslint_d",
+      args = {
+        "--format",
+        "json",
+        "--stdin",
+        "--stdin-filename",
+        function(_, bufnr)
+          if bufnr == nil or not vim.api.nvim_buf_is_loaded(bufnr) then
+            return ""
+          end
+          return vim.api.nvim_buf_get_name(bufnr)
+        end,
+      },
+      stdin = true,
+      stream = "both",
+      ignore_exitcode = true,
+      parser = function(output, bufnr)
+        local diagnostics = {}
+        if output == "" then
+          return diagnostics
+        end
+        
+        local json_start = output:find("%[")
+        if not json_start then
+          return diagnostics
+        end
+        
+        local json_output = output:sub(json_start)
+        local ok, decoded = pcall(vim.json.decode, json_output)
+        if not ok or not decoded or not decoded[1] or not decoded[1].messages then
+          return diagnostics
+        end
+        
+        for _, message in ipairs(decoded[1].messages) do
+          local severity = vim.diagnostic.severity.WARN
+          if message.severity == 2 then
+            severity = vim.diagnostic.severity.ERROR
+          elseif message.severity == 1 then
+            severity = vim.diagnostic.severity.WARN
+          end
+          
+          table.insert(diagnostics, {
+            source = "eslint_d",
+            lnum = (message.line or 1) - 1,
+            col = (message.column or 1) - 1,
+            end_lnum = message.endLine and (message.endLine - 1) or nil,
+            end_col = message.endColumn and (message.endColumn - 1) or nil,
+            severity = severity,
+            message = message.message or "ESLint error",
+            code = message.ruleId,
+            user_data = {
+              lsp = {
+                code = message.ruleId,
+              },
+            },
+          })
+        end
+        
+        return diagnostics
+      end,
+    }
+
+    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+      group = lint_augroup,
+      callback = function()
+        lint.try_lint()
+      end,
+    })
+
+    addKeyMaps({
+      { "n", "<leader>ll", function() lint.try_lint() end, "Trigger linting for current file" },
+      { "n", "<leader>lL", function() 
+        local filetype = vim.bo.filetype
+        local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } 
+        if vim.tbl_contains(js_ts_filetypes, filetype) then
+          lint.try_lint("eslint_d")
+        else
+          lint.try_lint()
+        end
+      end, "Trigger ESLint linting" },
+    })
+  end,
 }

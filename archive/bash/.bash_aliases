@@ -1,5 +1,6 @@
 # Neovim 
-alias neo='NVIM_APPNAME=nvim-neo nvim'
+alias neo='nvim'
+alias nvim_old='NVIM_APPNAME=nvim-old nvim'
 
 # Bash
 alias rc='nvim ~/.bashrc'

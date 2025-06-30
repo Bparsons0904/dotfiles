@@ -2,6 +2,10 @@
 
 These instructions apply to all projects and override any default behavior.
 
+## Communication Guidelines
+
+- Comments with Claude: are specifically for you to review
+
 ## Code Standards
 - Do not add business logic to make tests pass
 - Go file names should be in camelCase

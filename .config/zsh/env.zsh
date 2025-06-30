@@ -4,5 +4,5 @@
 # export PATH="$(brew --prefix erlang)/bin:$PATH"
 export PATH="/opt/nvim-linux64/bin:$HOME/.local/bin:$PATH"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
-export GEMINI_MODEL="gemini-2.5-flash"
+export GEMINI_MODEL="gemini-2.5-pro"
 export EDITOR=nvim

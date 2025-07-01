@@ -39,3 +39,6 @@ mv /home/bobparsons/dotfiles/file1 /home/bobparsons/dotfiles/backup/
 - Use `\cd` instead of `cd` when directory changes are required
 - Prefer absolute paths over relative paths in all commands
 - Use `rg` (ripgrep) instead of `grep` for searching
+
+## Personal Information
+- Github username: Bparsons0904

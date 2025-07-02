@@ -22,3 +22,4 @@ lazy-lock.json
 # OS files
 .DS_Store
 
+*.local.zsh

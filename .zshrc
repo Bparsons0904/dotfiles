@@ -4,6 +4,9 @@ ZDOTDIR="$HOME/.config/zsh"
 # Load core settings
 source "$ZDOTDIR/env.zsh"
 
+# Load local environment variables (if exists, not tracked in git)
+[[ -f "$ZDOTDIR/env.local.zsh" ]] && source "$ZDOTDIR/env.local.zsh"
+
 # Load OS-specific settings
 case "$(uname)" in
   Darwin)

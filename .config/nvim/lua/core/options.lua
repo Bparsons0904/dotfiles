@@ -1,105 +1,48 @@
--- Set netrw list style
-vim.cmd("let g:netrw_liststyle = 3")
-
 local opt = vim.opt
 
-function Get_git_project_and_file()
-	local file = vim.fn.expand("%:t")
-	if file == "" then
-		file = "[No Name]"
-	end
-
-	local file_icon = "📄"
-	local dir_icon = "📁"
-	local file_dir = vim.fn.expand("%:p:h")
-	local git_dir = ""
-
-	local success = pcall(function()
-		local output =
-			vim.fn.system("git -C " .. vim.fn.shellescape(file_dir) .. " rev-parse --show-toplevel 2>/dev/null")
-		if vim.v.shell_error == 0 then
-			git_dir = output:gsub("\n", "")
-		end
-	end)
-
-	if success and git_dir ~= "" then
-		return dir_icon .. " " .. vim.fn.fnamemodify(git_dir, ":t") .. " " .. file_icon .. " " .. file
-	else
-		return file_icon .. " " .. file
-	end
-end
-
-local cached_titlestring = ""
-
-local function update_titlestring()
-	local new_titlestring = Get_git_project_and_file()
-	if new_titlestring ~= cached_titlestring then
-		cached_titlestring = new_titlestring
-		vim.opt.titlestring = new_titlestring
-	end
-end
-
-vim.api.nvim_create_autocmd({ "BufEnter", "BufFilePost", "BufWritePost" }, {
-	callback = update_titlestring,
-})
-
--- Initial setup
-vim.opt.title = true
-update_titlestring()
-vim.opt.titlestring = "%{v:lua.Get_git_project_and_file()}"
-
 -- Lines
-opt.relativenumber = true
-opt.number = true
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
-opt.autoindent = true
-opt.cursorline = true
-opt.backspace = "indent,eol,start"
-opt.scrolloff = 8
-opt.wrap = false
-opt.foldmethod = "marker"
+opt.relativenumber = true -- Shows line numbers relative to current cursor position
+opt.number = true -- Shows absolute line number on current line
+opt.tabstop = 2 -- Number of spaces a tab counts for
+opt.shiftwidth = 2 -- Number of spaces for each indentation level
+opt.expandtab = true -- Converts tabs to spaces
+opt.autoindent = true -- Copies indentation from previous line on new line
+opt.cursorline = true -- Highlights the current line
+opt.backspace = "indent,eol,start" -- Makes backspace work over indents, line breaks, and insertion start
+opt.scrolloff = 8 -- Keeps 8 lines visible above/below cursor when scrolling
+opt.wrap = false -- Prevents lines from wrapping
 
 -- Appearance
-opt.termguicolors = true
-opt.background = "dark"
-opt.signcolumn = "yes"
-opt.laststatus = 0
-opt.cmdheight = 0
+opt.termguicolors = true -- Enables 24-bit RGB colors
+opt.background = "dark" -- Sets the color scheme to dark mode
+opt.signcolumn = "yes" -- Always shows the sign column (where git/diagnostic icons appear)
+-- opt.laststatus = 0 -- Disables the status line completely (0 = never show)
+-- opt.cmdheight = 0 -- Minimizes command line height (0 = hide unless needed)
 
 -- Split Windows
-opt.splitright = true
-opt.splitbelow = true
+opt.splitright = true -- Opens vertical splits to the right
+opt.splitbelow = true -- Opens horizontal splits below
 
 -- System
-opt.mouse = "a"
-opt.ignorecase = true
-opt.smartcase = true
-opt.clipboard:append("unnamedplus")
-opt.swapfile = false
-opt.encoding = "utf-8"
-opt.fileencoding = "utf-8"
+opt.mouse = "a" -- Enables mouse support in all modes
+opt.ignorecase = true -- Makes search case-insensitive
+opt.smartcase = true -- Makes search case-sensitive if it contains uppercase
+opt.clipboard:append("unnamedplus") -- Uses system clipboard for all operations
+opt.swapfile = false -- Disables swap file creation
+opt.encoding = "utf-8" -- Sets internal encoding
+opt.fileencoding = "utf-8" -- Sets file encoding for saving
 
 -- Performance
-opt.updatetime = 300
-opt.timeoutlen = 500
-
--- Encoding
+opt.updatetime = 300 -- Reduces update time (affects CursorHold & swap file writing)
+opt.timeoutlen = 500 -- Time in milliseconds to wait for a mapped sequence to complete
 
 -- Undo Directory
 local undodir = vim.fn.stdpath("data") .. "/undodir"
 if vim.fn.isdirectory(undodir) == 0 then
-	vim.fn.mkdir(undodir, "p")
+  vim.fn.mkdir(undodir, "p")
 end
 opt.undofile = true
 opt.undodir = undodir
 
--- Highlight Yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", {}),
-	pattern = "*",
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 300 })
-	end,
-})
+-- LSP Logging (reduce spam)
+vim.lsp.set_log_level("ERROR")

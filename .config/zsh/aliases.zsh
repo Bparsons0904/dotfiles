@@ -1,5 +1,6 @@
 # Neovim 
-alias neo='NVIM_APPNAME=nvim-neo nvim'
+alias neo='nvim'
+alias nvim_old='NVIM_APPNAME=nvim-old nvim'
 
 # Bash
 # alias rc='nvim ~/.bashrc'
@@ -16,7 +17,7 @@ alias hy='cd ~/.config/hypr/ && neo'
 # Directory
 alias lcon='cd ~/.config/lvim'
 alias ncon='cd ~/.config/nvim'
-alias neocon='cd ~/.config/nvim-neo'
+alias ncon_old='cd ~/.config/nvim-old'
 alias dev='cd ~/Development/'
 alias bp='cd ~/Development/bobparsons.dev/'
 alias dead='cd ~/Development/deadigations/'

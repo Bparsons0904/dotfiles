@@ -55,6 +55,8 @@ alias lsa='eza -la'
 alias du='du -bch'
 alias cd='z'
 
+alias ripcd='~/Development/ripper/rip.sh'
+
 # FZF 
 export FZF_EXCLUDE="find . -type f \
     -not -path '*/\.*' \
@@ -98,3 +100,4 @@ ffunc() {    # Different name for the function
         bat "$file"
     fi
 }
+ # rg -l -U '<(td|tr)[^>]*>[\s\S]*?<a[\s\S]*?</(td|tr)>'

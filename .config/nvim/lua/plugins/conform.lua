@@ -28,18 +28,10 @@ return {
   opts = {
     notify_on_error = true,
 
-    format_on_save = function(bufnr)
-      local disable_filetypes = { c = true, cpp = true }
-      if disable_filetypes[vim.bo[bufnr].filetype] then
-        return
-      end
-
-      return {
-        timeout_ms = 1000,
-        async = false,
-        lsp_fallback = false,
-      }
-    end,
+    format_after_save = {
+      timeout_ms = 5000,
+      lsp_fallback = true,
+    },
 
     formatters_by_ft = {
       lua = { "stylua" },

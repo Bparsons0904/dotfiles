@@ -6,6 +6,11 @@
     "golines",
     "goimport",
     "waugze",
-    "bobparsons"
+    "bobparsons",
+    "traefik",
+    "deadstyle",
+    "certresolver",
+    "letsencrypt",
+    "jellyfin"
   ]
 }

@@ -37,6 +37,7 @@ return {
             "--line-number",
             "--column",
             "--smart-case",
+            "--multiline",
           },
         },
         pickers = {

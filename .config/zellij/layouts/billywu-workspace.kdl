@@ -1,0 +1,30 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+    
+    tab name="BillyWu Dev" {
+        pane split_direction="horizontal" {
+            pane name="BillyWu" {
+                command "bash"
+                args "-c" "\\cd /home/bobparsons/Development/billywu/BillyWu && tilt up"
+            }
+            pane split_direction="vertical" {
+                pane name="claude" {
+                    command "bash"
+                    args "-c" "\\cd /home/bobparsons/Development/billywu/claude && tilt up --port 10351"
+                }
+                pane name="gemini" {
+                    command "bash"
+                    args "-c" "\\cd /home/bobparsons/Development/billywu/gemini && tilt up --port 10352"
+                }
+            }
+        }
+    }
+}

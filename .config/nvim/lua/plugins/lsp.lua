@@ -150,6 +150,7 @@ return {
         "html-lsp",
         "htmx-lsp",
         "emmet-ls",
+        "sqlfmt",
         -- "dart-debug-adapter",
       }
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

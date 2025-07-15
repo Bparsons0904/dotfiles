@@ -56,6 +56,7 @@ return {
       yaml = { "prettierd", "prettier" },
       markdown = { "prettierd", "prettier" },
       dart = { "dart_format" },
+      sql = { "sqlfmt" },
     },
 
     format_options = {

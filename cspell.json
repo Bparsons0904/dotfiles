@@ -11,6 +11,15 @@
     "deadstyle",
     "certresolver",
     "letsencrypt",
-    "jellyfin"
+    "jellyfin",
+    "immich",
+    "localtime",
+    "valkey",
+    "vectorchord",
+    "pgvectors",
+    "INITDB",
+    "seafile",
+    "seafileltd",
+    "kleio"
   ]
 }

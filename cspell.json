@@ -20,6 +20,9 @@
     "INITDB",
     "seafile",
     "seafileltd",
-    "kleio"
+    "kleio",
+    "vaultwarden",
+    "healthcheck",
+    "mysqladmin"
   ]
 }

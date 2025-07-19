@@ -23,6 +23,25 @@
     "kleio",
     "vaultwarden",
     "healthcheck",
-    "mysqladmin"
+    "mysqladmin",
+    "tokyodark",
+    "autocmds",
+    "tokyonight",
+    "lspconfig",
+    "gopls",
+    "goimports",
+    "golangci",
+    "htmx",
+    "shellcheck",
+    "shfmt",
+    "folke",
+    "autocmd",
+    "bashls",
+    "dartls",
+    "lazydev",
+    "williamboman",
+    "saghen",
+    "augroup",
+    "stevearc"
   ]
 }

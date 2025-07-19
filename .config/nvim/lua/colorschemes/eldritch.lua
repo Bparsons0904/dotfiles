@@ -320,7 +320,7 @@ return {
   opts = {
     on_colors = function(global_colors)
       local color_definitions = {
-        bg = colors.deadstyle_color10,
+        bg = "NONE", -- Transparent background (default: colors.deadstyle_color10)
         fg = colors.deadstyle_color14,
         selection = colors.deadstyle_color16,
         comment = colors.deadstyle_color09,
@@ -338,12 +338,12 @@ return {
         bright_magenta = colors.deadstyle_color01,
         bright_cyan = colors.deadstyle_color03,
         bright_white = colors.deadstyle_color14,
-        menu = colors.deadstyle_color10,
+        menu = "NONE", -- Transparent menu (default: colors.deadstyle_color10)
         visual = colors.deadstyle_color16,
         gutter_fg = colors.deadstyle_color16,
         nontext = colors.deadstyle_color16,
         white = colors.deadstyle_color14,
-        black = colors.deadstyle_color10,
+        black = "NONE", -- Transparent black (default: colors.deadstyle_color10)
         git = {
           change = colors.deadstyle_color03,
           add = colors.deadstyle_color02,
@@ -394,14 +394,14 @@ return {
         MiniFilesBorder = { sp = colors.deadstyle_color10 },
         MiniFilesTitle = { sp = colors.deadstyle_color10 },
         MiniFilesTitleFocused = { sp = colors.deadstyle_color10 },
-        NormalFloat = { bg = colors.deadstyle_color10 },
-        FloatBorder = { bg = colors.deadstyle_color10 },
-        FloatTitle = { bg = colors.deadstyle_color10 },
+        NormalFloat = { bg = "NONE" }, -- Transparent float (default: colors.deadstyle_color10)
+        FloatBorder = { bg = "NONE" }, -- Transparent float border (default: colors.deadstyle_color10)  
+        FloatTitle = { bg = "NONE" }, -- Transparent float title (default: colors.deadstyle_color10)
         MatchParen = {
           fg = colors.deadstyle_color12,
           bold = true,
         },
-        NotifyBackground = { bg = colors.deadstyle_color10 },
+        NotifyBackground = { bg = "NONE" }, -- Transparent notifications (default: colors.deadstyle_color10)
         NeoTreeNormalNC = { bg = colors.deadstyle_color10 },
         NeoTreeNormal = { bg = colors.deadstyle_color10 },
         NvimTreeWinSeparator = { fg = colors.deadstyle_color10, bg = colors.linkarzu_color10 },

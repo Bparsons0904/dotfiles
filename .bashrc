@@ -32,6 +32,9 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias grep='grep --color=auto'
+alias src="source ~/.bashrc"
 
 # Note: Full configuration available in archived bash configs
 # See: archive/bash/ for previous comprehensive bash setup
+export TERM=xterm-256color
+

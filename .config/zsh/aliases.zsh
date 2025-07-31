@@ -1,6 +1,7 @@
 # Neovim 
 alias neo='nvim'
 alias nvim_old='NVIM_APPNAME=nvim-old nvim'
+alias nvim-lite='NVIM_APPNAME=nvim-lite nvim'
 
 # Bash
 # alias rc='nvim ~/.bashrc'
@@ -28,14 +29,14 @@ alias kcon='cd ~/.config/kitty/'
 alias dot='cd ~/dotfiles/'
 alias keydb='cd ~/Development/keydb-switches/'
 alias auth='cd ~/Development/zitadel-auth/'
-alias dev='cd ~/Development/'
+alias mount-server="sshfs server:/ /mnt/server"
+alias umount-server="fusermount3 -u /mnt/server"
 
 # Via 
 alias via='cd ~/Development/bickford/via-platform/'
 alias serviam='cd ~/Development/serviam-via/serviam-platform'
 alias migrations='cd ~/Development/bickford/via-platform/packages/serviam-db/migrations/'
 alias core='cd ~/Development/bickford/via-platform/packages/via-core/'
-alias thp='cd ~/Development/serviam-thp/'
 
 # Services
 alias gcp='~/cloud_sql_proxy -instances=bickford-nonprod-system:us-central1:nonprod-1=tcp:2234 &'

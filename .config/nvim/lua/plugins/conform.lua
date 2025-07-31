@@ -49,6 +49,9 @@ return {
       markdown = { "prettierd", "prettier" },
       dart = { "dart_format" },
       sql = { "sqlfmt" },
+      sh = { "shfmt" },
+      bash = { "shfmt" },
+      zsh = { "shfmt" },
     },
 
     format_options = {
@@ -66,6 +69,14 @@ return {
         command = "eslint_d",
         args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
         stdin = true,
+      },
+      shfmt = {
+        prepend_args = {
+          "--indent",
+          "2", -- Use 2 spaces for indentation
+          "--case-indent", -- Indent case statements
+          "--binary-next-line", -- Binary ops like && and || on next line
+        },
       },
     },
   },

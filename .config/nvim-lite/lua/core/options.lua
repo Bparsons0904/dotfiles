@@ -16,8 +16,6 @@ opt.wrap = false -- Prevents lines from wrapping
 opt.termguicolors = true -- Enables 24-bit RGB colors
 opt.background = "dark" -- Sets the color scheme to dark mode
 opt.signcolumn = "yes" -- Always shows the sign column (where git/diagnostic icons appear)
--- opt.laststatus = 0 -- Disables the status line completely (0 = never show)
--- opt.cmdheight = 0 -- Minimizes command line height (0 = hide unless needed)
 
 -- Split Windows
 opt.splitright = true -- Opens vertical splits to the right
@@ -46,35 +44,3 @@ opt.undodir = undodir
 
 -- LSP Logging (reduce spam)
 vim.lsp.set_log_level("ERROR")
-
--- Diagnostic Configuration
-vim.diagnostic.config({
-  virtual_text = {
-    prefix = "●", -- Could also be "■", "▎", "▸", etc.
-    spacing = 2,
-    severity = { min = vim.diagnostic.severity.WARN }, -- Only show warnings and errors in virtual text
-  },
-  float = {
-    border = "rounded",
-    source = "always", -- Show diagnostic source
-    header = "",
-    prefix = "",
-    format = function(diagnostic)
-      local code = diagnostic.code and string.format("[%s]", diagnostic.code) or ""
-      return string.format("%s %s", code, diagnostic.message)
-    end,
-  },
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = "✘",
-      [vim.diagnostic.severity.WARN] = "▲", 
-      [vim.diagnostic.severity.HINT] = "⚑",
-      [vim.diagnostic.severity.INFO] = "»",
-    },
-    linehl = {},
-    numhl = {},
-  },
-  underline = true,
-  update_in_insert = false, -- Don't update diagnostics while typing
-  severity_sort = true, -- Show more severe diagnostics first
-})

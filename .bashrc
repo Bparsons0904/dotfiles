@@ -32,6 +32,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias grep='grep --color=auto'
+alias src="source ~/.bashrc"
 
 export EDITOR=nvim
 export PATH="$PATH:/opt/nvim-linux64/bin"
@@ -47,3 +48,7 @@ PATH=~/.console-ninja/.bin:$PATH
 # set -o vi
 
 . "$HOME/.local/bin/env"
+# Note: Full configuration available in archived bash configs
+# See: archive/bash/ for previous comprehensive bash setup
+export TERM=xterm-256color
+

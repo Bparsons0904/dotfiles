@@ -25,7 +25,7 @@ return {
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client.server_capabilities.documentHighlightProvider then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -61,7 +61,6 @@ return {
               -- { "n", "K", vim.lsp.buf.hover, "Show documentation under cursor", opts },
               { "n", "<leader>lr", ":LspRestart<CR>", "Restart LSP", opts },
             })
-
           end
         end,
       })
@@ -111,6 +110,14 @@ return {
           --   })
           -- end,
         },
+        bashls = {
+          filetypes = { "sh", "bash", "zsh" },
+          settings = {
+            bashIde = {
+              globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
+            },
+          },
+        },
         -- dartls = { cmd = { "dart", "language-server", "--protocol=lsp" },
         --   filetypes = { "dart" },
         --   init_options = {
@@ -151,6 +158,9 @@ return {
         "htmx-lsp",
         "emmet-ls",
         "sqlfmt",
+        "bash-language-server",
+        "shellcheck",
+        "shfmt",
         -- "dart-debug-adapter",
       }
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })

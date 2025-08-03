@@ -42,3 +42,6 @@ mv /home/bobparsons/dotfiles/file1 /home/bobparsons/dotfiles/backup/
 
 ## Personal Information
 - Github username: Bparsons0904
+
+## Security Guidelines
+- Do not attempt to run sudo commands. Ask the user to run them

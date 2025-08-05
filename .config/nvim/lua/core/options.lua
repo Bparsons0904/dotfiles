@@ -67,7 +67,7 @@ vim.diagnostic.config({
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = "✘",
-      [vim.diagnostic.severity.WARN] = "▲", 
+      [vim.diagnostic.severity.WARN] = "▲",
       [vim.diagnostic.severity.HINT] = "⚑",
       [vim.diagnostic.severity.INFO] = "»",
     },
@@ -78,3 +78,5 @@ vim.diagnostic.config({
   update_in_insert = false, -- Don't update diagnostics while typing
   severity_sort = true, -- Show more severe diagnostics first
 })
+
+vim.opt.fillchars = { eob = " " }

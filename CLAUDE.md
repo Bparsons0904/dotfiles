@@ -9,6 +9,7 @@ This is a personal dotfiles repository using GNU Stow for symlink management. Th
 - **Shell Configuration**: Modular zsh setup with OS-specific configurations and tool-specific modules
 - **Neovim Configurations**: Multiple Neovim setups including LazyVim and a custom "neo" configuration
 - **Terminal Tools**: Kitty terminal, Oh My Posh themes, and various CLI tool configurations
+- **Hyprland Desktop**: Hyprland window manager with Waybar status bar configuration
 - **System Scripts**: Development environment setup and system limit configuration
 
 ## Common Commands
@@ -42,20 +43,28 @@ sudo ./scripts/linux-system-limits.sh
 **CRITICAL**: This repository uses `alias cd='z'` (zoxide). Claude Code must use absolute paths or `\cd` to avoid failures.
 
 **Examples:**
-- ✅ `ls /home/bobparsons/dotfiles/.config/nvim/`
-- ✅ `\cd /home/bobparsons/dotfiles && ls`  
-- ❌ `cd /home/bobparsons/dotfiles && ls` (will fail)
+- ✅ `ls ~/dotfiles/.config/nvim/`
+- ✅ `\cd ~/dotfiles && ls`  
+- ❌ `cd ~/dotfiles && ls` (will fail)
 
 ### Navigation and Aliases
-Key aliases defined in `.bash_aliases`:
+Key aliases defined in `.config/zsh/aliases.zsh`:
 - `neo` - Launch Neovim (same as `nvim`, kept for consistency)
 - `nvim_old` - Launch backup Neovim configuration (`NVIM_APPNAME=nvim-old nvim`)
+- `nvim-lite` - Launch lightweight Neovim configuration (`NVIM_APPNAME=nvim-lite nvim`)
 - `lg` - LazyGit
 - `zj` - Zellij terminal multiplexer
-- `rc` - Edit bashrc (`nvim ~/.bashrc`)
-- `src` - Source bashrc (`source ~/.bashrc`)
+- `rc` - Edit zshrc (`nvim ~/.zshrc`)
+- `src` - Source zshrc (`source ~/.zshrc`)
+- `dot` - Navigate to dotfiles directory (`cd ~/dotfiles/`)
 
-Directory shortcuts for development projects are extensively defined in the aliases file.
+Development directory shortcuts:
+- `dev` - ~/Development/
+- `bp` - ~/Development/bobparsons.dev/
+- `ncon` - ~/.config/nvim/
+- `kcon` - ~/.config/kitty/
+
+Extensive project shortcuts are defined in the aliases file.
 
 ## Architecture Overview
 
@@ -67,14 +76,17 @@ Directory shortcuts for development projects are extensively defined in the alia
 - **Development Tools**: Go, Rust, Node.js, Lua toolchains configured
 
 ### Editor Configurations
-- **Primary Neovim Setup**: Custom configuration (formerly "neo") with modular plugin architecture
-- **Backup Neovim Setup**: Previous LazyVim-based configuration kept as `nvim-old` for emergencies
+- **Primary Neovim Setup**: Custom configuration with modular plugin architecture
+- **Backup Neovim Setup**: LazyVim-based configuration kept as `nvim-old` for emergencies
+- **Lightweight Neovim Setup**: Minimal configuration as `nvim-lite` for quick editing
 - **Plugin Architecture**: Modular plugin configuration with theme system
 
 ### System Configuration
-- **Terminal**: Kitty with custom themes and configurations
+- **Terminals**: Kitty and Ghostty with custom themes and configurations
+- **Terminal Multiplexer**: Zellij configuration for session management
 - **Prompt**: Oh My Posh with multiple theme options
 - **File Management**: GNU Stow for dotfile deployment
+- **Development Tools**: Lunar IDE configuration included
 
 ## Development Patterns
 
@@ -90,7 +102,13 @@ When working with this dotfiles repository:
 - `.config/zsh/` - Modular zsh configuration system (primary shell)
 - `.config/nvim/` - Primary Neovim configuration (custom setup)
 - `.config/nvim-old/` - Backup Neovim configuration (LazyVim-based)
-- `.config/kitty/` - Terminal configuration
+- `.config/nvim-lite/` - Lightweight Neovim configuration
+- `.config/kitty/` - Kitty terminal configuration
+- `.config/ghostty/` - Ghostty terminal configuration
+- `.config/zellij/` - Zellij terminal multiplexer configuration
+- `.config/hypr/` - Hyprland window manager configuration
+- `.config/waybar/` - Waybar status bar configuration
+- `.config/lunar/` - Lunar IDE configuration
 - `.config/oh-my-posh/themes/` - Prompt themes
 - `scripts/` - System setup and utility scripts
 - `.bashrc` - Minimal bash compatibility configuration

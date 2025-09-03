@@ -19,19 +19,18 @@
         //"custom/rofi",
         "hyprland/workspaces",
         //"hyprland/submap",
-        "temperature",
         //"idle_inhibitor",
         //"mpd"
         "custom/spotify"
     ],
     "modules-center": [
         //"hyprland/window"
-        "clock#date",
-        "custom/weather"
+        "clock#date"
         //"custom/gammastep"
     ],
     "modules-right": [
         "backlight",
+        "temperature",
         "custom/storage",
         "memory",
         "cpu",
@@ -88,7 +87,7 @@
     },
 
     "temperature": {
-        // "thermal-zone": 1,
+        "thermal-zone": 2,  // Use thermal_zone2 for CPU temp
         "interval": 4,
         //"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
         "critical-threshold": 80,

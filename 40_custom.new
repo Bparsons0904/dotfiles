@@ -1,0 +1,21 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+menuentry 'Pop!_OS' --class pop --class gnu-linux --class gnu --class os {
+    insmod part_gpt
+    insmod fat
+    search --no-floppy --fs-uuid --set=root 6644-D788
+    linux /EFI/Pop_OS-b12ba3b8-dcca-4fc0-8631-79fe513e9ec2/vmlinuz.efi root=UUID=b12ba3b8-dcca-4fc0-8631-79fe513e9ec2 ro quiet loglevel=0 systemd.show_status=false splash
+    initrd /EFI/Pop_OS-b12ba3b8-dcca-4fc0-8631-79fe513e9ec2/initrd.img
+}
+
+menuentry 'EndeavourOS' --class endeavouros --class gnu-linux --class gnu --class os {
+    insmod part_gpt
+    insmod ext2
+    search --no-floppy --fs-uuid --set=root 55AA-061F
+    linux /2ad615afb3584d44888faae3b6179214/6.15.8-arch1-1/linux root=UUID=c6e0756e-3657-4ab4-b3fb-5a113e1f116c rw
+    initrd /2ad615afb3584d44888faae3b6179214/6.15.8-arch1-1/initrd
+}

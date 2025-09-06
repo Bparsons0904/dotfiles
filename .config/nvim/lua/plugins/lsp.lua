@@ -9,17 +9,31 @@ return {
     },
   },
   {
-    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
     dependencies = {
-      { "williamboman/mason.nvim", opts = {} },
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
       { "j-hui/fidget.nvim", opts = {} },
       "saghen/blink.cmp",
     },
     config = function()
       require("mason").setup()
-      require("mason-lspconfig").setup()
+      
+      -- Setup native LSP capabilities
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
+      
+      -- Configure native LSP servers
+      local config_path = vim.fn.stdpath("config")
+      vim.lsp.config['lua_ls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/lua_ls.lua'), { capabilities = capabilities })
+      vim.lsp.config['html'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/html.lua'), { capabilities = capabilities })
+      vim.lsp.config['htmx'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/htmx.lua'), { capabilities = capabilities })
+      vim.lsp.config['emmet_ls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/emmet_ls.lua'), { capabilities = capabilities })
+      vim.lsp.config['templ'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/templ.lua'), { capabilities = capabilities })
+      vim.lsp.config['eslint_d'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/eslint_d.lua'), { capabilities = capabilities })
+      vim.lsp.config['bashls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/bashls.lua'), { capabilities = capabilities })
+      vim.lsp.config['gopls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/gopls.lua'), { capabilities = capabilities })
+      
+      -- Enable LSP servers
+      vim.lsp.enable({ 'lua_ls', 'html', 'htmx', 'emmet_ls', 'templ', 'eslint_d', 'bashls', 'gopls' })
+      
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
         callback = function(event)
@@ -52,93 +66,17 @@ return {
               { "n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Show LSP definitions", opts },
               { "n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Show LSP implementations", opts },
               { "n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show LSP type definitions", opts },
-              -- { { "n", "v" }, "<leader>la", vim.lsp.buf.code_action, "See available code actions", opts },
-              -- { "n", "<leader>lr", vim.lsp.buf.rename, "Smart rename", opts },
+              -- Native LSP provides built-in keymaps: grn (rename), gra (code actions), grr (references), gri (implementation), gO (document symbols), CTRL-S (signature help)
               { "n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics", opts },
               { "n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics", opts },
-              -- { "n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic", opts },
-              -- { "n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic", opts },
-              -- { "n", "K", vim.lsp.buf.hover, "Show documentation under cursor", opts },
               { "n", "<leader>lr", ":LspRestart<CR>", "Restart LSP", opts },
             })
           end
         end,
       })
 
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      local servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = "Replace",
-              },
-              diagnostics = { disable = { "missing-fields" } },
-            },
-          },
-        },
-        html = {
-          filetypes = { "html", "templ" },
-        },
-        htmx = {
-          filetypes = { "html", "templ" },
-          root_dir = require("lspconfig.util").root_pattern("*.html", "*.templ", ".git"),
-        },
-        emmet_ls = {
-          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "templ" },
-        },
-        templ = {
-          filetypes = { "templ" },
-          cmd = { "templ", "lsp" },
-          root_dir = require("lspconfig.util").root_pattern("go.mod", ".git"),
-        },
-        eslint_d = {
-          capabilities = capabilities,
-          settings = {
-            workingDirectory = { mode = "auto" },
-            -- packageManager = "npm",
-            -- options = {
-            --   resolvePluginsRelativeTo = ".",
-            -- },
-          },
-          -- on_attach = function(client, bufnr)
-          --   client.server_capabilities.documentFormattingProvider = true
-          --   vim.api.nvim_create_autocmd("BufWritePre", {
-          --     buffer = bufnr,
-          --     command = "EslintFixAll",
-          --   })
-          -- end,
-        },
-        bashls = {
-          filetypes = { "sh", "bash", "zsh" },
-          settings = {
-            bashIde = {
-              globPattern = "*@(.sh|.inc|.bash|.command|.zsh)",
-            },
-          },
-        },
-        -- dartls = { cmd = { "dart", "language-server", "--protocol=lsp" },
-        --   filetypes = { "dart" },
-        --   init_options = {
-        --     closingLabels = true,
-        --     flutterOutline = true,
-        --     onlyAnalyzeProjectsWithOpenFiles = true,
-        --     outline = true,
-        --     suggestFromUnimportedLibraries = true,
-        --   },
-        --   settings = {
-        --     dart = {
-        --       completeFunctionCalls = true,
-        --       showTodos = true,
-        --       enableSnippets = true,
-        --       updateImportsOnRename = true,
-        --       lineLength = 100,
-        --     },
-        --   },
-        -- },
-      }
-
+      -- Tool installation through Mason (for formatters, linters, etc.)
       local ensure_installed = {
         "stylua",
         "eslint",
@@ -160,19 +98,13 @@ return {
         "bash-language-server",
         "shellcheck",
         "shfmt",
-        -- "dart-debug-adapter",
+        "lua-language-server",
       }
-      require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-      require("mason-lspconfig").setup({
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
-      })
+      
+      -- Simple tool installer for Mason
+      vim.api.nvim_create_user_command('MasonInstallAll', function()
+        vim.cmd('MasonInstall ' .. table.concat(ensure_installed, ' '))
+      end, {})
     end,
   },
 }

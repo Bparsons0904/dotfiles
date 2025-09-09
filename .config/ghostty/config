@@ -12,3 +12,5 @@ theme = Brogrammer
 maximize = true
 window-padding-x = 10
 keybind = shift+enter=text:\n
+shell-integration = zsh
+command = /usr/bin/zsh

@@ -54,7 +54,8 @@ return {
       cmd = "golangci-lint",
       args = {
         "run",
-        "--format=json",
+        "--output.json.path",
+        "stdout",
         function(_, bufnr)
           return { vim.api.nvim_buf_get_name(bufnr) }
         end,

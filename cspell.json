@@ -67,6 +67,8 @@
     "gofiber",
     "uuidv",
     "ZITADEL_CLIENT_SECRET",
-    "Zitadel"
+    "Zitadel",
+    "PKCE",
+    "solidjs"
   ]
 }

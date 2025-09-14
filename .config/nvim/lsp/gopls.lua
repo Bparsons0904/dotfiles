@@ -18,6 +18,9 @@ return {
       diagnosticsDelay = "500ms",
       -- Let external linters handle more detailed checks
       experimentalPostfixCompletions = true,
+      inlayHints = {
+        enable = false,
+      },
       hints = {
         assignVariableTypes = true,
         compositeLiteralFields = true,

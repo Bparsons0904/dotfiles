@@ -69,6 +69,7 @@
     "ZITADEL_CLIENT_SECRET",
     "Zitadel",
     "PKCE",
-    "solidjs"
+    "solidjs",
+    "gocron"
   ]
 }

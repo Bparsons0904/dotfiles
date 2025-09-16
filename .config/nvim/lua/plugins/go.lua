@@ -66,6 +66,9 @@ return {
       dap_debug_keymap = true,
       dap_debug_vt = true,
       dap_port = 38697,
+      lsp_inlay_hints = {
+        enable = false,
+      },
     })
 
     addKeyMaps({

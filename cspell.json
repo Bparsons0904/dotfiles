@@ -70,6 +70,7 @@
     "Zitadel",
     "PKCE",
     "solidjs",
-    "gocron"
+    "gocron",
+    "upsertion"
   ]
 }

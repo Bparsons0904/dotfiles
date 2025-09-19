@@ -71,6 +71,11 @@
     "PKCE",
     "solidjs",
     "gocron",
-    "upsertion"
+    "upsertion",
+    "Imageable",
+    "upserts",
+    "dedupe",
+    "Upserted",
+    "DBEE"
   ]
 }

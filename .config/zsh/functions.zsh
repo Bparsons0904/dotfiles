@@ -11,13 +11,13 @@ function load-nvmrc() {
   fi
 }
 
-# Auto-load .env files
-load_dotenv() {
-  if [ -f .env ]; then
-    set -o allexport
-    source .env
-    set +o allexport
-  fi
-}
-add-zsh-hook chpwd load_dotenv
-load_dotenv
+# # Auto-load .env files
+# load_dotenv() {
+#   if [ -f .env ]; then
+#     set -o allexport
+#     source .env
+#     set +o allexport
+#   fi
+# }
+# add-zsh-hook chpwd load_dotenv
+# load_dotenv

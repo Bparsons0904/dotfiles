@@ -32,6 +32,7 @@ alias keydb='cd ~/Development/keydb-switches/'
 alias auth='cd ~/Development/zitadel-auth/'
 alias mount-server="sshfs server:/ /mnt/server"
 alias umount-server="fusermount3 -u /mnt/server"
+alias waug='cd ~/Development/waugzee/'
 
 # Via
 alias via='cd ~/Development/bickford/via-platform/'

@@ -8,3 +8,6 @@ export PATH="$PATH:/root/.local/bin"
 export GEMINI_MODEL="gemini-2.5-pro"
 export EDITOR=nvim
 # GITHUB_PERSONAL_ACCESS_TOKEN moved to env.local.zsh
+
+# Disable vim mode in terminal (keep emacs mode for better terminal experience)
+bindkey -e

@@ -37,11 +37,58 @@ return {
           quit = { "q", "<ESC>" },
         },
       },
+      code_action = {
+        num_shortcut = true,
+        show_server_name = false,
+        keys = {
+          quit = { "q", "<ESC>" },
+          exec = "<CR>",
+        },
+        filter = function(actions)
+          -- Sort actions to prioritize import-related ones
+          table.sort(actions, function(a, b)
+            local a_title = (a.title or ""):lower()
+            local b_title = (b.title or ""):lower()
+
+            -- Prioritize import actions
+            local a_is_import = a_title:match("import") or a_title:match("add missing") or a_title:match("organize")
+            local b_is_import = b_title:match("import") or b_title:match("add missing") or b_title:match("organize")
+
+            if a_is_import and not b_is_import then
+              return true
+            elseif not a_is_import and b_is_import then
+              return false
+            end
+
+            -- Among import actions, prioritize "add missing imports"
+            local a_is_add_import = a_title:match("add missing")
+            local b_is_add_import = b_title:match("add missing")
+
+            if a_is_add_import and not b_is_add_import then
+              return true
+            elseif not a_is_add_import and b_is_add_import then
+              return false
+            end
+
+            return false
+          end)
+          return actions
+        end,
+      },
     })
 
     addKeyMaps({
       { "n", "<leader>lf", "<cmd>Lspsaga finder<CR>", "LSP Finder" },
       { { "n", "v" }, "<leader>la", "<cmd>Lspsaga code_action<CR>", "Code Actions" },
+      { "n", "<leader>lI", function()
+        vim.lsp.buf.code_action({
+          filter = function(action)
+            local title = (action.title or ""):lower()
+            return title:match("import") or title:match("add missing") or title:match("organize")
+          end,
+          apply = true,
+        })
+      end, "Import Actions Only" },
       { "n", "<leader>lp", "<cmd>Lspsaga peek_definition<CR>", "Peek Definition" },
       { "n", "<leader>ln", "<cmd>Lspsaga rename ++project<CR>", "Rename Symbol" },
       { "n", "K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation" },

@@ -65,3 +65,7 @@ fi
 cd ~/dotfiles
 git checkout neo-lsp
 stow .
+
+echo "Setup complete! Restarting in 5 seconds..."
+sleep 5
+sudo reboot

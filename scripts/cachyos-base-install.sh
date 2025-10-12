@@ -51,8 +51,8 @@ rm -f ~/.bashrc
 rm -rf ~/.config/hypr
 rm -rf ~/.config/waybar
 
-git --global config user.email "deadstylebp@gmail.com"
-git --global config user.name "Bob Parsons"
+git config --global user.email "deadstylebp@gmail.com"
+git config --global user.name "Bob Parsons"
 
 echo "Setting up dotfiles..."
 if [ ! -d ~/dotfiles ]; then

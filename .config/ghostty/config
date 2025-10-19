@@ -13,8 +13,10 @@ theme = Deep
 #keybind = alt+t=new_tab
 # maximize = true
 window-padding-x = 10
-keybind = shift+enter=text:\n
+keybind = shift+enter=text:
+
 shell-integration = zsh
 command = /usr/bin/zsh
 link-url = true
 window-vsync = true
+clipboard-paste-protection = false

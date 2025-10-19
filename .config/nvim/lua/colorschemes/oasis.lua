@@ -4,20 +4,12 @@ return {
   priority = 1000,
   config = function()
     require("oasis").setup({
-      style = "abyss",
+      style = "starlight",
     })
   end,
 }
--- colorscheme oasis-abyss
--- colorscheme oasis-cactus
--- colorscheme oasis-canyon
--- colorscheme oasis-desert
--- colorscheme oasis-dune
--- colorscheme oasis-lagoon
--- colorscheme oasis-mirage
--- colorscheme oasis-night
--- colorscheme oasis-midnight
--- colorscheme oasis-rose
--- colorscheme oasis-sol
--- colorscheme oasis-starlight
--- colorscheme oasis-twilight
+-- colorscheme oasis-abyss // I like this one, something I am not loving but lets keep it for now
+-- colorscheme oasis-lagoon // Blue background... better than I thought
+-- colorscheme oasis-night // Med black
+-- colorscheme oasis-midnight // Dark black
+-- colorscheme oasis-starlight // Full black

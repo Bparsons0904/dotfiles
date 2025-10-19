@@ -9,36 +9,36 @@
 
     "height": 30,
 
-    "margin-left": 10,
-    "margin-bottom": 0,
-    "margin-right": 10,
+    "margin-left": 0,
+    "margin-bottom": 2,
+    "margin-right": 0,
 
     "spacing": 5, // Gaps between modules (4px)
 
     "modules-left": [
         //"custom/rofi",
-        "hyprland/workspaces",
+        "hyprland/workspaces"
         //"hyprland/submap",
         //"idle_inhibitor",
         //"mpd"
-        "custom/spotify"
+        //"custom/spotify"
     ],
     "modules-center": [
-        //"hyprland/window"
+        //"hyprland/window",
         "clock#date"
         //"custom/gammastep"
     ],
     "modules-right": [
-        "backlight",
+        //"backlight",
         "temperature",
         "custom/storage",
         "memory",
         "cpu",
-        "battery",
         //"pulseaudio",
         "wireplumber",
         "custom/screenshot_t",
         "tray",
+        "battery",
         "custom/power"
     ],
 
@@ -309,12 +309,12 @@
             "7": "七",
             "8": "八",
             "9": "九",
-            "10": "十",
+            "10": "十"
         },
         "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
         "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
         "sort-by-number": true,
-        "active-only": false,
+        "active-only": false
     },
 
     "hyprland/window": {

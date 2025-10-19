@@ -56,4 +56,8 @@ fi
 
 mkdir -p $HOME/Development
 
+echo "Enabling Docker service..."
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+
 echo "Setup complete!"

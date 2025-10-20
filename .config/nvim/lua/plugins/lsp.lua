@@ -27,13 +27,14 @@ return {
       vim.lsp.config['htmx'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/htmx.lua'), { capabilities = capabilities })
       vim.lsp.config['emmet_ls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/emmet_ls.lua'), { capabilities = capabilities })
       vim.lsp.config['templ'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/templ.lua'), { capabilities = capabilities })
+      vim.lsp.config['biome'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/biome.lua'), { capabilities = capabilities })
       vim.lsp.config['eslint_d'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/eslint_d.lua'), { capabilities = capabilities })
       vim.lsp.config['bashls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/bashls.lua'), { capabilities = capabilities })
       vim.lsp.config['gopls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/gopls.lua'), { capabilities = capabilities })
       vim.lsp.config['cspell'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/cspell.lua'), { capabilities = capabilities })
-      
-      -- Enable LSP servers
-      vim.lsp.enable({ 'lua_ls', 'html', 'htmx', 'emmet_ls', 'templ', 'eslint_d', 'bashls', 'gopls', 'cspell' })
+
+      -- Enable all LSP servers - root_markers will determine which ones attach
+      vim.lsp.enable({ 'lua_ls', 'html', 'htmx', 'emmet_ls', 'templ', 'biome', 'eslint_d', 'bashls', 'gopls', 'cspell' })
       
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -80,6 +81,7 @@ return {
       -- Tool installation through Mason (for formatters, linters, etc.)
       local ensure_installed = {
         "stylua",
+        "biome",
         "eslint",
         "eslint_d",
         "ruff",

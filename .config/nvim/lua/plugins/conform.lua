@@ -1,3 +1,41 @@
+-- Helper function to detect if project uses Biome
+local function has_biome_config(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+  if bufname == '' then
+    return false
+  end
+
+  -- Search up from the buffer's directory to find biome.json
+  local path = require('lspconfig.util').path
+  local current_dir = vim.fn.fnamemodify(bufname, ':h')
+
+  while current_dir and current_dir ~= '/' and current_dir ~= '.' do
+    if vim.fn.filereadable(current_dir .. '/biome.json') == 1 or
+       vim.fn.filereadable(current_dir .. '/biome.jsonc') == 1 then
+      return true
+    end
+    -- Move up one directory
+    local parent = vim.fn.fnamemodify(current_dir, ':h')
+    if parent == current_dir then
+      break
+    end
+    current_dir = parent
+  end
+
+  return false
+end
+
+-- Determine formatters based on project configuration
+local function get_js_formatters()
+  if has_biome_config() then
+    return { "biome" }
+  else
+    return { "eslint_d", "prettierd" }
+  end
+end
+
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -17,66 +55,92 @@ return {
         local filetype = vim.bo.filetype
         local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
         if vim.tbl_contains(js_ts_filetypes, filetype) then
-          require("conform").format({ formatters = { "eslint_d" }, async = true })
+          if has_biome_config() then
+            require("conform").format({ formatters = { "biome" }, async = true })
+          else
+            require("conform").format({ formatters = { "eslint_d" }, async = true })
+          end
         else
-          vim.notify("ESLint fix only available for JS/TS files", vim.log.levels.INFO)
+          vim.notify("Format/fix only available for JS/TS files", vim.log.levels.INFO)
         end
       end,
-      desc = "ESLint fix",
+      desc = "Fix/format JS/TS",
     },
   },
-  opts = {
-    notify_on_error = true,
+  config = function()
+    local conform = require("conform")
 
-    format_after_save = {
-      timeout_ms = 5000,
-      lsp_fallback = true,
-    },
+    conform.setup({
+      notify_on_error = true,
 
-    formatters_by_ft = {
-      lua = { "stylua" },
-      python = { "isort", "black" },
-      go = { "goimport", "gofumpt", "golines" },
-      javascript = { "eslint_d", "prettierd" },
-      typescript = { "eslint_d", "prettierd" },
-      javascriptreact = { "eslint_d", "prettierd" },
-      typescriptreact = { "eslint_d", "prettierd" },
-      css = { "prettierd", "prettier" },
-      scss = { "prettierd", "prettier" },
-      html = { "prettierd", "prettier" },
-      json = { "prettierd", "prettier" },
-      yaml = { "prettierd", "prettier" },
-      markdown = { "prettierd", "prettier" },
-      dart = { "dart_format" },
-      sh = { "shfmt" },
-      bash = { "shfmt" },
-      zsh = { "shfmt" },
-    },
-
-    format_options = {
-      javascript = { stop_after_first = false },
-      typescript = { stop_after_first = false },
-      javascriptreact = { stop_after_first = false },
-      typescriptreact = { stop_after_first = false },
-    },
-
-    formatters = {
-      stylua = {
-        prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+      format_after_save = {
+        timeout_ms = 5000,
+        lsp_fallback = true,
       },
-      eslint_d = {
-        command = "eslint_d",
-        args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
-        stdin = true,
+
+      formatters_by_ft = {
+        lua = { "stylua" },
+        python = { "isort", "black" },
+        go = { "goimport", "gofumpt", "golines" },
+        javascript = function(bufnr)
+          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+        end,
+        typescript = function(bufnr)
+          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+        end,
+        javascriptreact = function(bufnr)
+          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+        end,
+        typescriptreact = function(bufnr)
+          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+        end,
+        json = function(bufnr)
+          return has_biome_config() and { "biome" } or { "prettierd", "prettier" }
+        end,
+        jsonc = function(bufnr)
+          return has_biome_config() and { "biome" } or { "prettierd", "prettier" }
+        end,
+        css = function(bufnr)
+          return has_biome_config() and { "biome" } or { "prettierd", "prettier" }
+        end,
+        scss = { "prettierd", "prettier" },
+        html = { "prettierd", "prettier" },
+        yaml = { "prettierd", "prettier" },
+        markdown = { "prettierd", "prettier" },
+        dart = { "dart_format" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
+        zsh = { "shfmt" },
       },
-      shfmt = {
-        prepend_args = {
-          "--indent",
-          "2", -- Use 2 spaces for indentation
-          "--case-indent", -- Indent case statements
-          "--binary-next-line", -- Binary ops like && and || on next line
+
+      formatters = {
+        stylua = {
+          prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
+        },
+        biome = {
+          command = "biome",
+          args = {
+            "check",
+            "--write",
+            "--stdin-file-path",
+            "$FILENAME",
+          },
+          stdin = true,
+        },
+        eslint_d = {
+          command = "eslint_d",
+          args = { "--fix-to-stdout", "--stdin", "--stdin-filename", "$FILENAME" },
+          stdin = true,
+        },
+        shfmt = {
+          prepend_args = {
+            "--indent",
+            "2", -- Use 2 spaces for indentation
+            "--case-indent", -- Indent case statements
+            "--binary-next-line", -- Binary ops like && and || on next line
+          },
         },
       },
-    },
-  },
+    })
+  end,
 }

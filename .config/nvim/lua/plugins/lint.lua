@@ -1,13 +1,51 @@
+-- Helper function to detect if project uses Biome
+local function has_biome_config(bufnr)
+  bufnr = bufnr or vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+  if bufname == '' then
+    return false
+  end
+
+  -- Search up from the buffer's directory to find biome.json
+  local current_dir = vim.fn.fnamemodify(bufname, ':h')
+
+  while current_dir and current_dir ~= '/' and current_dir ~= '.' do
+    if vim.fn.filereadable(current_dir .. '/biome.json') == 1 or
+       vim.fn.filereadable(current_dir .. '/biome.jsonc') == 1 then
+      return true
+    end
+    -- Move up one directory
+    local parent = vim.fn.fnamemodify(current_dir, ':h')
+    if parent == current_dir then
+      break
+    end
+    current_dir = parent
+  end
+
+  return false
+end
+
+-- Determine linter based on project configuration
+local function get_js_linter()
+  return has_biome_config() and "biomejs" or "eslint_d"
+end
+
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lint = require("lint")
+    local js_linter = get_js_linter()
+
     lint.linters_by_ft = {
-      javascript = { "eslint_d" },
-      typescript = { "eslint_d" },
-      javascriptreact = { "eslint_d" },
-      typescriptreact = { "eslint_d" },
+      javascript = { js_linter },
+      typescript = { js_linter },
+      javascriptreact = { js_linter },
+      typescriptreact = { js_linter },
+      json = has_biome_config() and { "biomejs" } or {},
+      jsonc = has_biome_config() and { "biomejs" } or {},
+      css = has_biome_config() and { "biomejs" } or {},
       python = { "ruff" },
       go = { "golangcilint" },
     }
@@ -66,6 +104,63 @@ return {
       stream = "stdout",
     }
 
+    lint.linters.biomejs = {
+      cmd = "biome",
+      name = "biomejs",
+      args = {
+        "lint",
+        "--reporter=json",
+        "--stdin-file-path",
+        function(_, bufnr)
+          if bufnr == nil or not vim.api.nvim_buf_is_loaded(bufnr) then
+            return ""
+          end
+          return vim.api.nvim_buf_get_name(bufnr)
+        end,
+      },
+      stdin = true,
+      stream = "both",
+      ignore_exitcode = true,
+      parser = function(output, bufnr)
+        local diagnostics = {}
+        if output == "" then
+          return diagnostics
+        end
+
+        local ok, decoded = pcall(vim.json.decode, output)
+        if not ok or not decoded or not decoded.diagnostics then
+          return diagnostics
+        end
+
+        for _, diagnostic in ipairs(decoded.diagnostics) do
+          local severity = vim.diagnostic.severity.WARN
+          if diagnostic.severity == "error" then
+            severity = vim.diagnostic.severity.ERROR
+          elseif diagnostic.severity == "warning" then
+            severity = vim.diagnostic.severity.WARN
+          elseif diagnostic.severity == "info" then
+            severity = vim.diagnostic.severity.INFO
+          end
+
+          local location = diagnostic.location
+          if location then
+            table.insert(diagnostics, {
+              source = "biome",
+              lnum = (location.span.start.line or 1) - 1,
+              col = (location.span.start.column or 1) - 1,
+              end_lnum = location.span["end"].line and (location.span["end"].line - 1) or nil,
+              end_col = location.span["end"].column and (location.span["end"].column - 1) or nil,
+              severity = severity,
+              message = diagnostic.description or "Biome error",
+              code = diagnostic.category,
+            })
+          end
+        end
+
+        return diagnostics
+      end,
+    }
+
     lint.linters.eslint_d = {
       cmd = "eslint_d",
       name = "eslint_d",
@@ -89,18 +184,18 @@ return {
         if output == "" then
           return diagnostics
         end
-        
+
         local json_start = output:find("%[")
         if not json_start then
           return diagnostics
         end
-        
+
         local json_output = output:sub(json_start)
         local ok, decoded = pcall(vim.json.decode, json_output)
         if not ok or not decoded or not decoded[1] or not decoded[1].messages then
           return diagnostics
         end
-        
+
         for _, message in ipairs(decoded[1].messages) do
           local severity = vim.diagnostic.severity.WARN
           if message.severity == 2 then
@@ -108,7 +203,7 @@ return {
           elseif message.severity == 1 then
             severity = vim.diagnostic.severity.WARN
           end
-          
+
           table.insert(diagnostics, {
             source = "eslint_d",
             lnum = (message.line or 1) - 1,
@@ -125,13 +220,13 @@ return {
             },
           })
         end
-        
+
         return diagnostics
       end,
     }
 
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-    vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       group = lint_augroup,
       callback = function()
         lint.try_lint()
@@ -140,15 +235,19 @@ return {
 
     addKeyMaps({
       { "n", "<leader>ll", function() lint.try_lint() end, "Trigger linting for current file" },
-      { "n", "<leader>lL", function() 
+      { "n", "<leader>lL", function()
         local filetype = vim.bo.filetype
-        local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" } 
+        local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
         if vim.tbl_contains(js_ts_filetypes, filetype) then
-          lint.try_lint("eslint_d")
+          if has_biome_config() then
+            lint.try_lint("biomejs")
+          else
+            lint.try_lint("eslint_d")
+          end
         else
           lint.try_lint()
         end
-      end, "Trigger ESLint linting" },
+      end, "Trigger linting for JS/TS" },
     })
   end,
 }

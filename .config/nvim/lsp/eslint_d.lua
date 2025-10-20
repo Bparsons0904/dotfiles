@@ -2,6 +2,7 @@ return {
   cmd = { 'vscode-eslint-language-server', '--stdio' },
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte', 'astro' },
   root_markers = { '.eslintrc', '.eslintrc.js', '.eslintrc.cjs', '.eslintrc.yaml', '.eslintrc.yml', '.eslintrc.json', 'eslint.config.js', 'eslint.config.mjs', 'eslint.config.cjs' },
+  single_file_support = false,
   settings = {
     codeAction = {
       disableRuleComment = {

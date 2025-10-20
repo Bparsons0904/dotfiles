@@ -41,6 +41,12 @@ return {
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
+          -- Prevent LSPs from attaching if they have no root directory
+          if client and client.name == "eslint_d" and client.root_dir == nil then
+            vim.lsp.stop_client(client.id)
+            return
+          end
+
           if client and client.server_capabilities.documentHighlightProvider then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -86,7 +92,6 @@ return {
         "eslint_d",
         "ruff",
         "prettierd",
-        "prettier",
         "isort",
         "black",
         "gopls",

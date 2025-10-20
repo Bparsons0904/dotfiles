@@ -26,26 +26,14 @@ local function has_biome_config(bufnr)
   return false
 end
 
--- Determine linter based on project configuration
-local function get_js_linter()
-  return has_biome_config() and "biomejs" or "eslint_d"
-end
-
 return {
   "mfussenegger/nvim-lint",
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lint = require("lint")
-    local js_linter = get_js_linter()
 
+    -- Static linters (non-JS/TS languages)
     lint.linters_by_ft = {
-      javascript = { js_linter },
-      typescript = { js_linter },
-      javascriptreact = { js_linter },
-      typescriptreact = { js_linter },
-      json = has_biome_config() and { "biomejs" } or {},
-      jsonc = has_biome_config() and { "biomejs" } or {},
-      css = has_biome_config() and { "biomejs" } or {},
       python = { "ruff" },
       go = { "golangcilint" },
     }
@@ -229,21 +217,48 @@ return {
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
       group = lint_augroup,
       callback = function()
+        local ft = vim.bo.filetype
+        local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
+        local json_filetypes = { "json", "jsonc" }
+        local css_filetypes = { "css" }
+
+        -- Dynamically set linters based on project config
+        if vim.tbl_contains(js_ts_filetypes, ft) then
+          lint.linters_by_ft[ft] = has_biome_config() and { "biomejs" } or { "eslint_d" }
+        elseif vim.tbl_contains(json_filetypes, ft) then
+          lint.linters_by_ft[ft] = has_biome_config() and { "biomejs" } or {}
+        elseif vim.tbl_contains(css_filetypes, ft) then
+          lint.linters_by_ft[ft] = has_biome_config() and { "biomejs" } or {}
+        end
+
         lint.try_lint()
       end,
     })
 
     addKeyMaps({
-      { "n", "<leader>ll", function() lint.try_lint() end, "Trigger linting for current file" },
-      { "n", "<leader>lL", function()
-        local filetype = vim.bo.filetype
+      { "n", "<leader>ll", function()
+        local ft = vim.bo.filetype
         local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
-        if vim.tbl_contains(js_ts_filetypes, filetype) then
-          if has_biome_config() then
-            lint.try_lint("biomejs")
-          else
-            lint.try_lint("eslint_d")
-          end
+        local json_filetypes = { "json", "jsonc" }
+        local css_filetypes = { "css" }
+
+        -- Dynamically set linters based on project config
+        if vim.tbl_contains(js_ts_filetypes, ft) then
+          lint.linters_by_ft[ft] = has_biome_config() and { "biomejs" } or { "eslint_d" }
+        elseif vim.tbl_contains(json_filetypes, ft) then
+          lint.linters_by_ft[ft] = has_biome_config() and { "biomejs" } or {}
+        elseif vim.tbl_contains(css_filetypes, ft) then
+          lint.linters_by_ft[ft] = has_biome_config() and { "biomejs" } or {}
+        end
+
+        lint.try_lint()
+      end, "Trigger linting for current file" },
+      { "n", "<leader>lL", function()
+        local ft = vim.bo.filetype
+        local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
+        if vim.tbl_contains(js_ts_filetypes, ft) then
+          lint.linters_by_ft[ft] = has_biome_config() and { "biomejs" } or { "eslint_d" }
+          lint.try_lint()
         else
           lint.try_lint()
         end

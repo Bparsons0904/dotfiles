@@ -8,7 +8,6 @@ local function has_biome_config(bufnr)
   end
 
   -- Search up from the buffer's directory to find biome.json
-  local path = require('lspconfig.util').path
   local current_dir = vim.fn.fnamemodify(bufname, ':h')
 
   while current_dir and current_dir ~= '/' and current_dir ~= '.' do
@@ -25,15 +24,6 @@ local function has_biome_config(bufnr)
   end
 
   return false
-end
-
--- Determine formatters based on project configuration
-local function get_js_formatters()
-  if has_biome_config() then
-    return { "biome" }
-  else
-    return { "eslint_d", "prettierd" }
-  end
 end
 
 return {
@@ -55,11 +45,8 @@ return {
         local filetype = vim.bo.filetype
         local js_ts_filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" }
         if vim.tbl_contains(js_ts_filetypes, filetype) then
-          if has_biome_config() then
-            require("conform").format({ formatters = { "biome" }, async = true })
-          else
-            require("conform").format({ formatters = { "eslint_d" }, async = true })
-          end
+          -- Use the configured formatter (Biome, or ESLint+Prettier based on has_biome_config)
+          require("conform").format({ async = true, lsp_format = "fallback" })
         else
           vim.notify("Format/fix only available for JS/TS files", vim.log.levels.INFO)
         end
@@ -83,30 +70,30 @@ return {
         python = { "isort", "black" },
         go = { "goimport", "gofumpt", "golines" },
         javascript = function(bufnr)
-          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+          return has_biome_config(bufnr) and { "biome" } or { "eslint_d", "prettierd" }
         end,
         typescript = function(bufnr)
-          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+          return has_biome_config(bufnr) and { "biome" } or { "eslint_d", "prettierd" }
         end,
         javascriptreact = function(bufnr)
-          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+          return has_biome_config(bufnr) and { "biome" } or { "eslint_d", "prettierd" }
         end,
         typescriptreact = function(bufnr)
-          return has_biome_config() and { "biome" } or { "eslint_d", "prettierd" }
+          return has_biome_config(bufnr) and { "biome" } or { "eslint_d", "prettierd" }
         end,
         json = function(bufnr)
-          return has_biome_config() and { "biome" } or { "prettierd", "prettier" }
+          return has_biome_config(bufnr) and { "biome" } or { "prettierd" }
         end,
         jsonc = function(bufnr)
-          return has_biome_config() and { "biome" } or { "prettierd", "prettier" }
+          return has_biome_config(bufnr) and { "biome" } or { "prettierd" }
         end,
         css = function(bufnr)
-          return has_biome_config() and { "biome" } or { "prettierd", "prettier" }
+          return has_biome_config(bufnr) and { "biome" } or { "prettierd" }
         end,
-        scss = { "prettierd", "prettier" },
-        html = { "prettierd", "prettier" },
-        yaml = { "prettierd", "prettier" },
-        markdown = { "prettierd", "prettier" },
+        scss = { "prettierd" },
+        html = { "prettierd" },
+        yaml = { "prettierd" },
+        markdown = { "prettierd" },
         dart = { "dart_format" },
         sh = { "shfmt" },
         bash = { "shfmt" },

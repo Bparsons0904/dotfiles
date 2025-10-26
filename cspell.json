@@ -79,6 +79,7 @@
     "DBEE",
     "Microline",
     "Shibata",
-    "Discog"
+    "Discog",
+    "timestamptz"
   ]
 }

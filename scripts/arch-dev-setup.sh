@@ -22,6 +22,7 @@ core_packages=(
   zellij
   fzf
   ripgrep
+  cliphist
 )
 
 for pkg in "${core_packages[@]}"; do

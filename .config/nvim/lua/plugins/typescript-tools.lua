@@ -7,7 +7,7 @@ return {
       -- Disable tsserver formatting in favor of prettier via conform
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
-      
+
       local opts = { buffer = bufnr }
       addKeyMaps({
         -- TypeScript specific commands
@@ -21,9 +21,33 @@ return {
         { "n", "<leader>tG", "<cmd>TSToolsGoToSourceDefinition<CR>", "Go to Source Definition", opts },
         { "n", "<leader>tD", "<cmd>TSToolsFileReferences<CR>", "File References", opts },
         -- Inlay Hints Toggle
-        { "n", "<leader>th", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, "Toggle Inlay Hints", opts },
-        { "n", "<leader>tH", function() vim.lsp.inlay_hint.enable(true) end, "Enable Inlay Hints", opts },
-        { "n", "<leader>tn", function() vim.lsp.inlay_hint.enable(false) end, "Disable Inlay Hints", opts },
+        {
+          "n",
+          "<leader>th",
+          function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end,
+          "Toggle Inlay Hints",
+          opts,
+        },
+        {
+          "n",
+          "<leader>tH",
+          function()
+            vim.lsp.inlay_hint.enable(true)
+          end,
+          "Enable Inlay Hints",
+          opts,
+        },
+        {
+          "n",
+          "<leader>tn",
+          function()
+            vim.lsp.inlay_hint.enable(false)
+          end,
+          "Disable Inlay Hints",
+          opts,
+        },
       })
     end,
     settings = {
@@ -37,7 +61,7 @@ return {
       -- specify commands exposed as code_actions
       expose_as_code_action = {
         "fix_all",
-        "add_missing_imports", 
+        "add_missing_imports",
         "remove_unused",
         "remove_unused_imports",
         "organize_imports",

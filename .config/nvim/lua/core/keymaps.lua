@@ -40,6 +40,7 @@ local keymaps = {
   { "n", "<leader>bb", ":bprevious<CR>", "Go to previous buffer" },
   { "n", "<leader>bn", ":bnext<CR>", "Go to next buffer" },
   -- { "n", "<leader>ba", ":%bd|e#|bd#<CR>", "Close all buffers except current" },
+  { "n", "<leader>lb", ":BiomeFix<CR>", "Biome: Fix all issues" },
   -- { "n", "<leader>bx", ":bufdo Bdelete<CR>", "Close all buffers" },
   { "n", "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>", "Go to buffer 1" },
   { "n", "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>", "Go to buffer 2" },

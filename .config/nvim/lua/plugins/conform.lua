@@ -3,20 +3,22 @@ local function has_biome_config(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   local bufname = vim.api.nvim_buf_get_name(bufnr)
 
-  if bufname == '' then
+  if bufname == "" then
     return false
   end
 
   -- Search up from the buffer's directory to find biome.json
-  local current_dir = vim.fn.fnamemodify(bufname, ':h')
+  local current_dir = vim.fn.fnamemodify(bufname, ":h")
 
-  while current_dir and current_dir ~= '/' and current_dir ~= '.' do
-    if vim.fn.filereadable(current_dir .. '/biome.json') == 1 or
-       vim.fn.filereadable(current_dir .. '/biome.jsonc') == 1 then
+  while current_dir and current_dir ~= "/" and current_dir ~= "." do
+    if
+      vim.fn.filereadable(current_dir .. "/biome.json") == 1
+      or vim.fn.filereadable(current_dir .. "/biome.jsonc") == 1
+    then
       return true
     end
     -- Move up one directory
-    local parent = vim.fn.fnamemodify(current_dir, ':h')
+    local parent = vim.fn.fnamemodify(current_dir, ":h")
     if parent == current_dir then
       break
     end
@@ -68,7 +70,7 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "isort", "black" },
-        go = { "goimport", "gofumpt", "golines" },
+        go = { "goimports", "gofumpt", "golines" },
         javascript = function(bufnr)
           return has_biome_config(bufnr) and { "biome" } or { "eslint_d", "prettierd" }
         end,
@@ -94,7 +96,7 @@ return {
         html = { "prettierd" },
         yaml = { "prettierd" },
         markdown = { "prettierd" },
-        dart = { "dart_format" },
+        -- dart = { "dart_format" },
         sh = { "shfmt" },
         bash = { "shfmt" },
         zsh = { "shfmt" },

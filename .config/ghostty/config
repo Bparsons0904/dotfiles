@@ -1,3 +1,4 @@
+# Base Ghostty Configuration
 background = 000000
 # font-family = FiraCode Nerd Font
 # font-family =  GoMono Nerd Font Mono
@@ -15,7 +16,12 @@ theme = Deep
 window-padding-x = 10
 
 shell-integration = zsh
-command = /usr/bin/zsh
+
+# OS-specific configurations (optional imports)
+# Must come before other keys to allow them to override
+config-file = ?~/.config/ghostty/config.darwin
+config-file = ?~/.config/ghostty/config.linux
+
 link-url = true
 window-vsync = true
 clipboard-paste-protection = false

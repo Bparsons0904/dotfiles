@@ -1,3 +1,10 @@
+# Load .env file if it exists (for local environment variables and secrets)
+if [[ -f "$HOME/dotfiles/.env" ]]; then
+  set -a  # automatically export all variables
+  source "$HOME/dotfiles/.env"
+  set +a  # disable auto-export
+fi
+
 # export PATH="$PATH:$HOME/.local/bin"
 # export PATH="$PATH:$HOME/.local/bin:/opt/nvim-linux64/bin"
 # export EDITOR=nvim

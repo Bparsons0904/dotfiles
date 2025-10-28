@@ -9,3 +9,6 @@ export GEMINI_MODEL="gemini-2.5-pro"
 export EDITOR=nvim
 export PATH="/opt/homebrew/sbin:$PATH"
 # $HOME/.local/bin
+
+# Disable vim mode in terminal (keep emacs mode for better terminal experience)
+bindkey -e

@@ -69,9 +69,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
 elif command_exists pacman; then
     # Arch Linux installation
     print_step "Detected Arch Linux system"
-    
+
     print_step "Installing base development tools and packages..."
-    sudo pacman -S --noconfirm base-devel go nodejs npm lua luarocks fzf cmake
+    sudo pacman -S --noconfirm base-devel go nodejs npm lua luarocks fzf cmake inotify-tools
 
     # Setup fzf for zsh
     setup_zsh_config /usr/share/fzf
@@ -139,6 +139,7 @@ COMMANDS=(
     "luarocks:LuaRocks"
     "fzf:fzf"
     "cmake:CMake"
+    "inotifywait:inotify-tools"
 )
 
 for cmd in "${COMMANDS[@]}"; do

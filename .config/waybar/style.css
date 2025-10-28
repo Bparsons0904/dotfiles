@@ -2,7 +2,7 @@
   font-family:
     "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, Roboto, Helvetica,
     Arial, sans-serif;
-  font-size: 14px; /* Readable font size */
+  font-size: 16px;
   font-weight: 900;
   margin: 0;
   padding: 0;
@@ -13,19 +13,20 @@
 /* Reset all styles */
 * {
   border: none;
-  border-radius: 3px;
+  border-radius: 0px;
   min-height: 0;
-  margin: 0.1em 0.15em 0.1em 0.15em;
+  margin: 0;
 }
 
-/* The whole bar */
+/* The whole bar - solid with transparency, no margins except bottom */
 #waybar {
-  background-color: transparent;
+  background-color: rgba(17, 24, 39, 0.85);
   color: #ffffff;
   transition-property: background-color;
   transition-duration: 0.5s;
   border-radius: 0px;
-  margin: 0px 0px;
+  margin: 0px;
+  padding: 4px 8px;
 }
 
 window#waybar.hidden {
@@ -33,42 +34,46 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-  padding: 2px 4px; /* Further reduced padding */
-  margin: 2px 3px; /* Further reduced margin */
-  border-radius: 6px;
+  padding: 4px 8px;
+  margin: 0px 2px;
+  border-radius: 0px;
   color: @foreground;
-  background-color: #111827;
+  background-color: transparent;
   transition: all 0.3s ease-in-out;
-  font-size: 13px; /* Slightly smaller font size */
+  font-size: 13px;
+  border-bottom: 2px solid transparent;
 }
 
 #workspaces button.active {
   color: @foreground;
-  background: #025939;
+  background: rgba(2, 89, 57, 0.4);
+  border-bottom: 2px solid #025939;
 }
 
 #workspaces button:hover {
-  background: #333333;
+  background: rgba(51, 51, 51, 0.3);
 }
 
 #workspaces button.urgent {
-  background-color: #eb4d4b;
+  background-color: rgba(235, 77, 75, 0.4);
+  border-bottom: 2px solid #eb4d4b;
 }
 
 #workspaces {
-  background-color: #111827;
-  border-radius: 14px;
-  padding: 2px 4px; /* Further reduced padding */
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 0px;
+  margin: 0px 8px;
 }
 
 #window {
-  background-color: #111827;
-  font-size: 15px; /* Slightly smaller font size */
+  background-color: transparent;
+  font-size: 15px;
   font-weight: 800;
   color: @foreground;
-  border-radius: 14px;
-  padding: 2px 4px; /* Further reduced padding */
-  margin: 2px;
+  border-radius: 0px;
+  padding: 4px 12px;
+  margin: 0px 8px;
   opacity: 1;
 }
 
@@ -101,58 +106,65 @@ window#waybar.hidden {
 #custom-weather.showyIcyDay,
 #custom-weather.snowyIcyNight,
 #custom-weather.default {
-  background-color: #111827;
-  border-radius: 14px;
-  padding: 2px 8px; /* Less vertical, more horizontal padding */
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 4px 10px;
+  margin: 0px 2px;
 }
 
 #custom-screenshot_t {
-  background-color: #111827;
-  border-radius: 14px;
-  padding: 2px 8px;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 4px 10px;
+  margin: 0px 2px;
 }
 
 #custom-spotify {
-  background-color: #111827;
-  border-radius: 14px;
-  padding: 3px 12px;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 4px 12px;
+  margin: 0px 2px;
 }
 
 #tray {
-  background-color: #111827;
-  border-radius: 14px;
-  padding: 2px 8px; /* Less vertical, more horizontal padding */
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 4px 10px;
+  margin: 0px 2px;
 }
 
 #cpu {
   color: #fb958b;
-  background-color: #111827;
-  padding: 2px 8px;
+  background-color: transparent;
+  padding: 4px 10px;
 }
 
 #memory {
   color: #ebcb8b;
-  background-color: #111827;
-  padding: 2px 8px;
+  background-color: transparent;
+  padding: 4px 10px;
 }
 
 #custom-power {
-  background-color: #111827;
-  border-radius: 14px;
-  padding: 2px 8px;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 4px 10px;
+  margin: 0px 2px;
 }
 
 #custom-storage {
-  background-color: #111827;
-  border-radius: 14px;
-  padding: 2px 8px;
+  background-color: transparent;
+  border-radius: 0px;
+  padding: 4px 10px;
+  margin: 0px 2px;
 }
 
 #custom-launcher {
-  background-color: #1b242b;
+  background-color: rgba(27, 36, 43, 0.5);
   color: #6a92d7;
-  border-radius: 7.5px;
-  padding: 2px 4px; /* Further reduced padding */
+  border-radius: 0px;
+  padding: 4px 10px;
+  margin: 0px 2px;
 }
 
 #custom-weather.severe {

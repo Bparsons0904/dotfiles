@@ -54,8 +54,8 @@ return {
       cmd = "golangci-lint",
       args = {
         "run",
-        "--out-format=json",
-        "--disable=ST1001", -- Disable dot import warning
+        "--output.json.path",
+        "stdout",
         function(_, bufnr)
           return { vim.api.nvim_buf_get_name(bufnr) }
         end,

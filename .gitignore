@@ -23,3 +23,6 @@ lazy-lock.json
 .DS_Store
 
 *.local.zsh
+
+# Claude Code
+.claude/

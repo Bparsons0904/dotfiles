@@ -1,16 +1,22 @@
 background = 000000
 # font-family = FiraCode Nerd Font
-font-family =  GoMono Nerd Font Mono
+# font-family =  GoMono Nerd Font Mono
+font-family = JetBrains Mono
 font-size = 14
 background-opacity = .9
-background-blur-radius = 20
+background-blur-radius = 25
 #gtk-titlebar = true
 window-theme = ghostty
 macos-titlebar-style = tabs
-theme = Brogrammer
+# theme = Brogrammer
+theme = Deep
 #keybind = alt+t=new_tab
-maximize = true
+# maximize = true
 window-padding-x = 10
-keybind = shift+enter=text:\n
+
 shell-integration = zsh
 command = /usr/bin/zsh
+link-url = true
+window-vsync = true
+clipboard-paste-protection = false
+keybind = shift+enter=text:\x1b\r

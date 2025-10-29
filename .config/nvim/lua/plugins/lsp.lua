@@ -41,8 +41,24 @@ return {
         callback = function(event)
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-          -- Prevent LSPs from attaching if they have no root directory
-          if client and client.name == "eslint_d" and client.root_dir == nil then
+          -- Prevent eslint_d from attaching if no root directory or if biome config exists
+          if client and client.name == "eslint_d" then
+            if client.root_dir == nil then
+              vim.lsp.stop_client(client.id)
+              return
+            end
+
+            -- Check for biome config in the root directory
+            local biome_json = client.root_dir .. "/biome.json"
+            local biome_jsonc = client.root_dir .. "/biome.jsonc"
+            if vim.fn.filereadable(biome_json) == 1 or vim.fn.filereadable(biome_jsonc) == 1 then
+              vim.lsp.stop_client(client.id)
+              return
+            end
+          end
+
+          -- Prevent biome from attaching if no root directory
+          if client and client.name == "biome" and client.root_dir == nil then
             vim.lsp.stop_client(client.id)
             return
           end

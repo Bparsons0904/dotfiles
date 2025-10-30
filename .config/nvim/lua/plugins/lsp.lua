@@ -63,6 +63,21 @@ return {
             return
           end
 
+          -- Set up LSP keybindings for all attached clients
+          local opts = { buffer = event.buf }
+          addKeyMaps({
+            { "n", "gR", "<cmd>Telescope lsp_references<CR>", "Show LSP references", opts },
+            { "n", "gD", vim.lsp.buf.declaration, "Go to declaration", opts },
+            { "n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Show LSP definitions", opts },
+            { "n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Show LSP implementations", opts },
+            { "n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show LSP type definitions", opts },
+            -- Native LSP provides built-in keymaps: grn (rename), gra (code actions), grr (references), gri (implementation), gO (document symbols), CTRL-S (signature help)
+            { "n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics", opts },
+            { "n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics", opts },
+            { "n", "<leader>lr", ":LspRestart<CR>", "Restart LSP", opts },
+          })
+
+          -- Set up document highlight if supported by the client
           if client and client.server_capabilities.documentHighlightProvider then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -81,19 +96,6 @@ return {
                 vim.lsp.buf.clear_references()
                 vim.api.nvim_clear_autocmds({ group = "lsp-highlight", buffer = event2.buf })
               end,
-            })
-
-            local opts = { buffer = event.buf }
-            addKeyMaps({
-              { "n", "gR", "<cmd>Telescope lsp_references<CR>", "Show LSP references", opts },
-              { "n", "gD", vim.lsp.buf.declaration, "Go to declaration", opts },
-              { "n", "gd", "<cmd>Telescope lsp_definitions<CR>", "Show LSP definitions", opts },
-              { "n", "gi", "<cmd>Telescope lsp_implementations<CR>", "Show LSP implementations", opts },
-              { "n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", "Show LSP type definitions", opts },
-              -- Native LSP provides built-in keymaps: grn (rename), gra (code actions), grr (references), gri (implementation), gO (document symbols), CTRL-S (signature help)
-              { "n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", "Show buffer diagnostics", opts },
-              { "n", "<leader>d", vim.diagnostic.open_float, "Show line diagnostics", opts },
-              { "n", "<leader>lr", ":LspRestart<CR>", "Restart LSP", opts },
             })
           end
         end,

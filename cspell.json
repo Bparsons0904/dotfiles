@@ -80,6 +80,8 @@
     "Microline",
     "Shibata",
     "Discog",
-    "timestamptz"
+    "timestamptz",
+    "datatypes",
+    "Tracklist"
   ]
 }

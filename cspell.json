@@ -82,6 +82,7 @@
     "Discog",
     "timestamptz",
     "datatypes",
-    "Tracklist"
+    "Tracklist",
+    "mapstructure"
   ]
 }

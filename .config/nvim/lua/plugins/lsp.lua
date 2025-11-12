@@ -121,6 +121,7 @@ return {
         "html-lsp",
         "htmx-lsp",
         "emmet-ls",
+        "sqlfmt",
         "bash-language-server",
         "shellcheck",
         "shfmt",

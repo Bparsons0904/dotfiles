@@ -62,9 +62,37 @@ return {
     conform.setup({
       notify_on_error = true,
 
-      format_after_save = {
-        timeout_ms = 5000,
-        lsp_fallback = true,
+    formatters_by_ft = {
+      lua = { "stylua" },
+      python = { "isort", "black" },
+      go = { "goimport", "gofumpt", "golines" },
+      javascript = { "eslint_d", "prettierd" },
+      typescript = { "eslint_d", "prettierd" },
+      javascriptreact = { "eslint_d", "prettierd" },
+      typescriptreact = { "eslint_d", "prettierd" },
+      css = { "prettierd", "prettier" },
+      scss = { "prettierd", "prettier" },
+      html = { "prettierd", "prettier" },
+      json = { "prettierd", "prettier" },
+      yaml = { "prettierd", "prettier" },
+      markdown = { "prettierd", "prettier" },
+      dart = { "dart_format" },
+      sql = { "sqlfmt" },
+      sh = { "shfmt" },
+      bash = { "shfmt" },
+      zsh = { "shfmt" },
+    },
+
+    format_options = {
+      javascript = { stop_after_first = false },
+      typescript = { stop_after_first = false },
+      javascriptreact = { stop_after_first = false },
+      typescriptreact = { stop_after_first = false },
+    },
+
+    formatters = {
+      stylua = {
+        prepend_args = { "--indent-type", "Spaces", "--indent-width", "2" },
       },
 
       formatters_by_ft = {

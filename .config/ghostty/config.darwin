@@ -1,0 +1,8 @@
+# macOS-specific Ghostty configuration
+command = /bin/zsh
+
+# Use Ctrl keybindings to match Linux
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab

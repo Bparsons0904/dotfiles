@@ -17,7 +17,9 @@
 
     "modules-left": [
         //"custom/rofi",
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "custom/gap",
+        "custom/deezer"
         //"hyprland/submap",
         //"idle_inhibitor",
         //"mpd"
@@ -119,8 +121,8 @@
         ]
     },
     "network": {
-        "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-wifi": " {essid}  {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "format-ethernet": " {ifname}  {bandwidthDownBytes}  {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP) ",
         "format": "",
         "format-disconnected": "",
@@ -188,6 +190,20 @@
     "on-scroll-down": "playerctl previous"
 },
 
+"custom/deezer": {
+    "exec": "~/.config/waybar/mediaplayer.py --player deezer",
+    "format": "{}",
+    "max-length": 100,
+    "return-type": "json",
+    "on-click": "playerctl --player=deezer play-pause",
+    "on-scroll-up": "playerctl --player=deezer next",
+    "on-scroll-down": "playerctl --player=deezer previous"
+},
+
+"custom/gap": {
+    "format": "  "
+},
+
     "custom/media": {
         "format": "{0} {1}",
         "return-type": "json",
@@ -245,9 +261,9 @@
     },
 
     "cpu": {
-        "interval": 1,
+        "interval": 5,
         //"format": " {}%", // Icon: microchip
-        "format": "{max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
+        "format": " {max_frequency}GHz <span color=\"darkgray\">| {usage}%</span>",
         "max-length": 13,
         "min-length": 13
     },

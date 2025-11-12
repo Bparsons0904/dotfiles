@@ -10,39 +10,49 @@ from gi.repository import Playerctl, GLib
 
 logger = logging.getLogger(__name__)
 
-
 def write_output(text, player):
     logger.info('Writing output')
 
     output = {'text': text,
               'class': 'custom-' + player.props.player_name,
-              'alt': player.props.player_name}
+              'alt': player.props.player_name,
+              'tooltip': ''}
 
     sys.stdout.write(json.dumps(output) + '\n')
     sys.stdout.flush()
 
 
 def on_play(player, status, manager):
-    logger.info('Received new playback status')
-    on_metadata(player, player.props.metadata, manager)
+    logger.info(f'Received new playback status: {status}')
+    update_output(player)
 
 
 def on_metadata(player, metadata, manager):
     logger.info('Received new metadata')
+    update_output(player)
+
+
+def update_output(player):
     track_info = ''
 
-    if player.props.player_name == 'spotify' and \
-            'mpris:trackid' in metadata.keys() and \
-            ':ad:' in player.props.metadata['mpris:trackid']:
+    try:
+        is_ad = player.props.player_name == 'spotify' and ':ad:' in player.props.metadata['mpris:trackid']
+    except KeyError:
+        is_ad = False
+
+    if is_ad:
         track_info = 'AD PLAYING'
     elif player.get_artist() != '' and player.get_title() != '':
-        track_info = '{artist} - {title}'.format(artist=player.get_artist(),
-                                                 title=player.get_title())
+        if player.get_album() != '':
+            track_info = f' {player.get_artist()}  {player.get_title()} from {player.get_album()}'
+        else:
+            track_info = f' {player.get_artist()}  {player.get_title()}'
     else:
         track_info = player.get_title()
 
     if player.props.status != 'Playing' and track_info:
         track_info = ' ' + track_info
+        
     write_output(track_info, player)
 
 

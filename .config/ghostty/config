@@ -1,11 +1,23 @@
 # Base Ghostty Configuration
 background = 000000
+foreground = c0caf5
+
+# Font Configuration
 # font-family = FiraCode Nerd Font
 # font-family =  GoMono Nerd Font Mono
 font-family = JetBrains Mono
 font-size = 14
+
+# macOS Font Rendering Optimizations
+font-thicken = true
+font-thicken-strength = 70
+minimum-contrast = 2
+bold-is-bright = true
+
+# Window Settings
 background-opacity = .9
 background-blur-radius = 25
+window-colorspace = display-p3
 #gtk-titlebar = true
 window-theme = ghostty
 macos-titlebar-style = tabs

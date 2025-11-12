@@ -83,6 +83,7 @@
     "timestamptz",
     "datatypes",
     "Tracklist",
-    "mapstructure"
+    "mapstructure",
+    "Upserting"
   ]
 }

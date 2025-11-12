@@ -19,3 +19,6 @@ export PATH="/opt/homebrew/sbin:$PATH"
 
 # Disable vim mode in terminal (keep emacs mode for better terminal experience)
 bindkey -e
+
+# Fix macOS temp directory permissions issue for tools like lazygit
+export TMPDIR="/tmp"

@@ -84,6 +84,7 @@
     "datatypes",
     "Tracklist",
     "mapstructure",
-    "Upserting"
+    "Upserting",
+    "Unlistened"
   ]
 }

@@ -62,6 +62,11 @@ return {
     conform.setup({
       notify_on_error = true,
 
+      format_after_save = {
+        timeout_ms = 5000,
+        lsp_format = "fallback",
+      },
+
       formatters_by_ft = {
         lua = { "stylua" },
         python = { "isort", "black" },

@@ -102,6 +102,7 @@ return {
         "shfmt",
         "lua-language-server",
         "cspell",
+        "dart-debug-adapter",
       }
       
       -- Simple tool installer for Mason

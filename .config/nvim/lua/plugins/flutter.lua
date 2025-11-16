@@ -3,7 +3,8 @@ return {
   lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "stevearc/dressing.nvim", -- optional for vim.ui.select
+    "stevearc/dressing.nvim",
+    "mfussenegger/nvim-dap",
   },
   -- config = function()
   --   require("flutter-tools").setup({})
@@ -25,15 +26,17 @@ return {
         },
       },
       debugger = {
-        -- We're skipping debugger setup as mentioned
-        enabled = false,
-        run_via_dap = false,
-        exception_breakpoints = {},
+        enabled = true,
+        run_via_dap = true,
+        register_configurations = function(_)
+          require("dap").configurations.dart = {}
+          require("dap.ext.vscode").load_launchjs()
+        end,
       },
       root_patterns = { ".git", "pubspec.yaml" }, -- Find Flutter project root
       fvm = true, -- Support Flutter Version Management
       widget_guides = {
-        enabled = false,
+        enabled = true,
       },
       closing_tags = {
         highlight = "Comment",
@@ -47,7 +50,7 @@ return {
       },
       dev_tools = {
         autostart = false,
-        auto_open_browser = false,
+        auto_open_browser = true,
       },
       outline = {
         open_cmd = "30vnew",
@@ -107,6 +110,64 @@ return {
       -- Run
       { "n", "<leader>Fu", ":FlutterRun<CR>", "Flutter Run" },
       { "n", "<leader>Fq", ":FlutterQuit<CR>", "Flutter Quit" },
+
+      -- Debug controls (DAP)
+      {
+        "n",
+        "<leader>Fdb",
+        function()
+          require("dap").toggle_breakpoint()
+        end,
+        "Toggle breakpoint",
+      },
+      {
+        "n",
+        "<leader>Fdc",
+        function()
+          require("dap").continue()
+        end,
+        "Debug: Continue",
+      },
+      {
+        "n",
+        "<leader>Fds",
+        function()
+          require("dap").step_over()
+        end,
+        "Debug: Step Over",
+      },
+      {
+        "n",
+        "<leader>Fdi",
+        function()
+          require("dap").step_into()
+        end,
+        "Debug: Step Into",
+      },
+      {
+        "n",
+        "<leader>Fdo",
+        function()
+          require("dap").step_out()
+        end,
+        "Debug: Step Out",
+      },
+      {
+        "n",
+        "<leader>Fdx",
+        function()
+          require("dap").terminate()
+        end,
+        "Debug: Terminate",
+      },
+      {
+        "n",
+        "<leader>Fdl",
+        function()
+          require("dapui").toggle()
+        end,
+        "Debug: Toggle UI",
+      },
     })
   end,
   ft = "dart",

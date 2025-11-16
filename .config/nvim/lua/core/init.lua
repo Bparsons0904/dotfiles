@@ -17,4 +17,4 @@ local themes = {
   oasis = "oasis",
 }
 
-vim.cmd.colorscheme(themes.eldritch)
+vim.cmd.colorscheme(themes.oasis)

@@ -31,9 +31,11 @@ return {
       vim.lsp.config['bashls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/bashls.lua'), { capabilities = capabilities })
       vim.lsp.config['gopls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/gopls.lua'), { capabilities = capabilities })
       vim.lsp.config['cspell'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/cspell.lua'), { capabilities = capabilities })
-      
+      vim.lsp.config['basedpyright'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/basedpyright.lua'), { capabilities = capabilities })
+      vim.lsp.config['ruff'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/ruff.lua'), { capabilities = capabilities })
+
       -- Enable LSP servers
-      vim.lsp.enable({ 'lua_ls', 'html', 'htmx', 'emmet_ls', 'templ', 'eslint_d', 'bashls', 'gopls', 'cspell' })
+      vim.lsp.enable({ 'lua_ls', 'html', 'htmx', 'emmet_ls', 'templ', 'eslint_d', 'bashls', 'gopls', 'cspell', 'basedpyright', 'ruff' })
       
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -82,11 +84,8 @@ return {
         "stylua",
         "eslint",
         "eslint_d",
-        "ruff",
         "prettierd",
         "prettier",
-        "isort",
-        "black",
         "gopls",
         "gofumpt",
         "golines",
@@ -102,6 +101,9 @@ return {
         "shfmt",
         "lua-language-server",
         "cspell",
+        -- Python tools
+        "basedpyright",
+        "ruff",
       }
       
       -- Simple tool installer for Mason

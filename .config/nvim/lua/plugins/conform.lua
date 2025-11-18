@@ -35,7 +35,7 @@ return {
 
     formatters_by_ft = {
       lua = { "stylua" },
-      python = { "isort", "black" },
+      python = { "ruff_organize_imports", "ruff_format" },
       go = { "goimport", "gofumpt", "golines" },
       javascript = { "eslint_d", "prettierd" },
       typescript = { "eslint_d", "prettierd" },
@@ -77,6 +77,26 @@ return {
           "--case-indent", -- Indent case statements
           "--binary-next-line", -- Binary ops like && and || on next line
         },
+      },
+      ruff_organize_imports = {
+        command = "ruff",
+        args = {
+          "check",
+          "--select", "I",
+          "--fix",
+          "--stdin-filename", "$FILENAME",
+          "-",
+        },
+        stdin = true,
+      },
+      ruff_format = {
+        command = "ruff",
+        args = {
+          "format",
+          "--stdin-filename", "$FILENAME",
+          "-",
+        },
+        stdin = true,
       },
     },
   },

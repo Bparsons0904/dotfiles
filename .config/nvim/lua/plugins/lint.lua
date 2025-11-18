@@ -8,7 +8,7 @@ return {
       typescript = { "eslint_d" },
       javascriptreact = { "eslint_d" },
       typescriptreact = { "eslint_d" },
-      python = { "ruff" },
+      -- Python linting handled by ruff-lsp
       go = { "golangcilint" },
     }
 

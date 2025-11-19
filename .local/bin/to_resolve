@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+  echo "Usage: ./to_resolve.sh <input_file>"
+  exit 1
+fi
+
+INPUT="$1"
+# Extract filename without extension
+BASENAME=$(basename "$INPUT" | sed 's/\.[^.]*$//')
+# Create new filename
+OUTPUT="${BASENAME}_edited.mov"
+
+echo "Transcoding $INPUT -> $OUTPUT"
+
+ffmpeg -i "$INPUT" \
+  -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p \
+  -c:a pcm_s16le \
+  -f mov \
+  "$OUTPUT"
+
+echo "Success."

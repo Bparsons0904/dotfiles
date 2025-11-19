@@ -58,8 +58,6 @@ alias ls='eza -l'
 alias lsa='eza -la'
 alias du='du -bch'
 alias cd='z'
-alias sg='skate get'
-alias ss='skate set'
 alias font='oh-my-posh font install'
 
 alias ripcd='~/Development/ripper/rip.sh'

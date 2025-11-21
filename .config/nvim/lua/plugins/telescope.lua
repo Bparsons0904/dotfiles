@@ -37,6 +37,9 @@ return {
             "--column",
             "--smart-case",
             "--multiline",
+            "--hidden",
+            "--glob",
+            "!**/.git/*",
           },
         },
         pickers = {

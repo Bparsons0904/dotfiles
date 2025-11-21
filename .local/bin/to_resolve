@@ -1,22 +1,21 @@
 #!/bin/bash
 
-if [ -z "$1" ]; then
-  echo "Usage: ./to_resolve.sh <input_file>"
+# Check if user provided both arguments
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Usage: ./convert_resolve.sh <input_file> <output_file>"
   exit 1
 fi
 
-INPUT="$1"
-# Extract filename without extension
-BASENAME=$(basename "$INPUT" | sed 's/\.[^.]*$//')
-# Create new filename
-OUTPUT="${BASENAME}_edited.mov"
+INPUT_FILE="$1"
+OUTPUT_FILE="$2"
 
-echo "Transcoding $INPUT -> $OUTPUT"
+echo "Converting $INPUT_FILE to DNxHR format..."
 
-ffmpeg -i "$INPUT" \
+# The FFmpeg command
+ffmpeg -i "$INPUT_FILE" \
   -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p \
   -c:a pcm_s16le \
   -f mov \
-  "$OUTPUT"
+  "$OUTPUT_FILE"
 
-echo "Success."
+echo "Done! Saved to $OUTPUT_FILE"

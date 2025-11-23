@@ -11,15 +11,11 @@ INPUT_FILE="$1"
 
 # LOGIC: Determine Output Filename
 if [ -z "$2" ]; then
-  # Case 1: No output name provided. Use input name + _edit.mov
-  # ${INPUT_FILE%.*} strips the extension (e.g. .mkv)
   OUTPUT_FILE="${INPUT_FILE%.*}_edit.mov"
 else
-  # Case 2: Output name provided. Check if it has .mov extension
   if [[ "$2" == *.mov ]]; then
     OUTPUT_FILE="$2"
   else
-    # If user forgot the extension, add it for them
     OUTPUT_FILE="$2.mov"
   fi
 fi
@@ -27,20 +23,22 @@ fi
 echo "--------------------------------------------------"
 echo "Input:  $INPUT_FILE"
 echo "Output: $OUTPUT_FILE"
-echo "Video:  DNxHR HQX (10-bit)"
-echo "Audio:  PCM (Copy)"
+echo "Video:  DNxHR HQX (10-bit) [Multithreaded]"
+echo "Audio:  PCM 24-bit [Universal]"
+echo "CPU:    Uncapped Threading"
 echo "--------------------------------------------------"
 
 # The FFmpeg command
-ffmpeg -i "$INPUT_FILE" \
+# -threads 0 : Lets FFmpeg use all 32 threads if needed
+# -nostdin   : Prevents input errors if running inside loops
+
+ffmpeg -nostdin -i "$INPUT_FILE" \
+  -threads 0 \
   -c:v dnxhd -profile:v dnxhr_hqx -pix_fmt yuv422p10le \
-  -c:a copy \
+  -c:a pcm_s24le \
   -f mov \
   -y \
   "$OUTPUT_FILE"
-
-# -y flag automatically overwrites the output file if it already exists
-# without asking you for permission every time.
 
 echo "--------------------------------------------------"
 echo "Conversion Complete!"

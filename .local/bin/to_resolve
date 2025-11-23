@@ -1,21 +1,46 @@
 #!/bin/bash
 
-# Check if user provided both arguments
-if [ -z "$1" ] || [ -z "$2" ]; then
-  echo "Usage: ./convert_resolve.sh <input_file> <output_file>"
+# Check if input file is provided
+if [ -z "$1" ]; then
+  echo "Error: Input file missing."
+  echo "Usage: ./convert_resolve.sh <input_file> [output_name]"
   exit 1
 fi
 
 INPUT_FILE="$1"
-OUTPUT_FILE="$2"
 
-echo "Converting $INPUT_FILE to DNxHR format..."
+# LOGIC: Determine Output Filename
+if [ -z "$2" ]; then
+  # Case 1: No output name provided. Use input name + _edit.mov
+  # ${INPUT_FILE%.*} strips the extension (e.g. .mkv)
+  OUTPUT_FILE="${INPUT_FILE%.*}_edit.mov"
+else
+  # Case 2: Output name provided. Check if it has .mov extension
+  if [[ "$2" == *.mov ]]; then
+    OUTPUT_FILE="$2"
+  else
+    # If user forgot the extension, add it for them
+    OUTPUT_FILE="$2.mov"
+  fi
+fi
+
+echo "--------------------------------------------------"
+echo "Input:  $INPUT_FILE"
+echo "Output: $OUTPUT_FILE"
+echo "Video:  DNxHR HQX (10-bit)"
+echo "Audio:  PCM (Copy)"
+echo "--------------------------------------------------"
 
 # The FFmpeg command
 ffmpeg -i "$INPUT_FILE" \
-  -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p \
-  -c:a pcm_s16le \
+  -c:v dnxhd -profile:v dnxhr_hqx -pix_fmt yuv422p10le \
+  -c:a copy \
   -f mov \
+  -y \
   "$OUTPUT_FILE"
 
-echo "Done! Saved to $OUTPUT_FILE"
+# -y flag automatically overwrites the output file if it already exists
+# without asking you for permission every time.
+
+echo "--------------------------------------------------"
+echo "Conversion Complete!"

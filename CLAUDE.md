@@ -88,6 +88,21 @@ Extensive project shortcuts are defined in the aliases file.
 - **File Management**: GNU Stow for dotfile deployment
 - **Development Tools**: Lunar IDE configuration included
 
+### Hyprland Multi-Computer Setup
+Monitor configuration uses a gitignored `local.conf` that each computer creates locally:
+
+```bash
+# Set up monitor config for a new computer
+cp ~/.config/hypr/config/monitors/cachyos-xps15.conf ~/.config/hypr/config/monitors/local.conf
+# Edit local.conf for your monitor setup, then reload
+hyprctl reload
+
+# Example configs to copy from:
+# - cachyos-xps15.conf (XPS 15 4K laptop, 2x scale)
+# - cachyos-x8664.conf (Desktop ultrawide + 4K)
+# - miracachy.conf
+```
+
 ## Development Patterns
 
 When working with this dotfiles repository:

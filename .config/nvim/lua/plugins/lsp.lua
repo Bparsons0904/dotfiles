@@ -13,6 +13,7 @@ return {
     dependencies = {
       { "j-hui/fidget.nvim", opts = {} },
       "saghen/blink.cmp",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
       require("mason").setup()
@@ -106,7 +107,6 @@ return {
       local ensure_installed = {
         "stylua",
         "biome",
-        "eslint",
         "eslint_d",
         "ruff",
         "prettierd",
@@ -133,6 +133,13 @@ return {
       vim.api.nvim_create_user_command('MasonInstallAll', function()
         vim.cmd('MasonInstall ' .. table.concat(ensure_installed, ' '))
       end, {})
+
+      -- Auto-install tools on startup
+      require("mason-tool-installer").setup({
+        ensure_installed = ensure_installed,
+        auto_update = false,
+        run_on_start = true,
+      })
     end,
   },
 }

@@ -27,6 +27,10 @@ local keymaps = {
   { "v", "<", "<gv", "Better indenting (decrease)" },
   { "v", ">", ">gv", "Better indenting (increase)" },
 
+  -- Wrapped line navigation
+  { "n", "j", "v:count == 0 ? 'gj' : 'j'", "Move down (display lines)", { expr = true } },
+  { "n", "k", "v:count == 0 ? 'gk' : 'k'", "Move up (display lines)", { expr = true } },
+
   -- Scrolling and Centering
   { "n", "<C-u>", "<C-u>zz", "Scroll up and center cursor" },
   { "n", "<C-d>", "<C-d>zz", "Scroll down and center cursor" },

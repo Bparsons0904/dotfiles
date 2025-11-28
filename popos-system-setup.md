@@ -1,12 +1,43 @@
-# System Setup Documentation
+# Pop!_OS System Setup Documentation
 
 ## Completed Steps
 - Install Chrome and Deezer flatpaks
 - Install nala (apt replacement)
-- Install Neovim
+- Install Neovim (see detailed instructions below)
 - Configure Git username and email
 - Install Zsh
 - Install Homebrew
+
+## Neovim Installation (Official Tarball Method)
+
+This system uses the official Neovim tarball release for better version control and consistency.
+
+### Download
+1. Visit https://github.com/neovim/neovim/releases
+2. Download the latest `nvim-linux-x86_64.tar.gz`
+3. Save to `~/Downloads/`
+
+### Installation Steps
+```bash
+# Remove old installation if exists
+sudo rm -rf /opt/nvim-linux-x86_64
+sudo rm -f /usr/local/bin/nvim
+
+# Extract tarball to /opt
+sudo tar -C /opt -xzf ~/Downloads/nvim-linux-x86_64.tar.gz
+
+# Create symlink in /usr/local/bin
+sudo ln -s /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+
+# Verify installation
+nvim --version
+```
+
+### Update Process
+To update Neovim to a newer version:
+1. Download the new tarball to `~/Downloads/`
+2. Run the installation steps above (the removal steps will clean up the old version)
+3. Restart any open terminal sessions
 
 ## Current Steps
 ### GitHub Setup with SSH

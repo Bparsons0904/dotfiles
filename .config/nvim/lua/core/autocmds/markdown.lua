@@ -14,7 +14,6 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = enable_soft_wrap,
 })
 
--- Also trigger on BufEnter to catch cases where FileType might have already fired
 vim.api.nvim_create_autocmd("BufEnter", {
   group = augroup,
   pattern = { "*.md", "*.txt", "*.markdown" },

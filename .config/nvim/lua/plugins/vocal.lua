@@ -1,7 +1,11 @@
 -- Voice-to-text transcription using OpenAI Whisper
 -- System dependencies:
 --   Arch/paru: paru -S sox python-openai-whisper
---   Ubuntu/nala: nala install sox python3-pip && pip3 install openai-whisper
+--   Ubuntu/Pop!_OS:
+--     1. Create python symlink: sudo ln -s /usr/bin/python3 /usr/bin/python
+--     2. Install dependencies: nala install sox python3-pip
+--     3. Install whisper: pip3 install openai-whisper
+--     4. If import errors occur: pip3 install --upgrade openai-whisper numba coverage
 -- First run will download whisper models to ~/whisper/
 return {
   "kyza0d/vocal.nvim",

@@ -395,7 +395,7 @@ return {
         MiniFilesTitle = { sp = colors.deadstyle_color10 },
         MiniFilesTitleFocused = { sp = colors.deadstyle_color10 },
         NormalFloat = { bg = "NONE" }, -- Transparent float (default: colors.deadstyle_color10)
-        FloatBorder = { bg = "NONE" }, -- Transparent float border (default: colors.deadstyle_color10)  
+        FloatBorder = { bg = "NONE" }, -- Transparent float border (default: colors.deadstyle_color10)
         FloatTitle = { bg = "NONE" }, -- Transparent float title (default: colors.deadstyle_color10)
         MatchParen = {
           fg = colors.deadstyle_color12,
@@ -456,12 +456,16 @@ return {
         KubectlExperimental = { fg = colors.deadstyle_color09 },
         KubectlNote = { fg = colors.deadstyle_color03 },
         KubectlGray = { fg = colors.deadstyle_color10 },
-        
+
         -- Inlay Hints - make them subtle and readable
-        LspInlayHint = { 
+        LspInlayHint = {
           fg = colors.deadstyle_color09, -- Using comment color for subtlety
           bg = "NONE", -- No background to prevent "classified document" effect
-          italic = true -- Make them italic to distinguish from regular text
+          italic = true, -- Make them italic to distinguish from regular text
+        },
+        Conceal = {
+          fg = "#444444",
+          bg = "NONE",
         },
       }
 

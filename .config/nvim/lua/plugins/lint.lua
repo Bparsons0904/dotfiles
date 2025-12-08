@@ -36,6 +36,8 @@ return {
     lint.linters_by_ft = {
       python = { "ruff" },
       go = { "golangcilint" },
+      terraform = { "tflint" },
+      tf = { "tflint" },
     }
 
     -- Custom parser for golangci-lint JSON output

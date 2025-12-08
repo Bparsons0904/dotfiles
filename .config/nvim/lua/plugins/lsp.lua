@@ -33,9 +33,10 @@ return {
       vim.lsp.config['bashls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/bashls.lua'), { capabilities = capabilities })
       vim.lsp.config['gopls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/gopls.lua'), { capabilities = capabilities })
       vim.lsp.config['cspell'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/cspell.lua'), { capabilities = capabilities })
+      vim.lsp.config['terraformls'] = vim.tbl_deep_extend('force', dofile(config_path .. '/lsp/terraformls.lua'), { capabilities = capabilities })
 
       -- Enable all LSP servers - root_markers will determine which ones attach
-      vim.lsp.enable({ 'lua_ls', 'html', 'htmx', 'emmet_ls', 'templ', 'biome', 'eslint_d', 'bashls', 'gopls', 'cspell' })
+      vim.lsp.enable({ 'lua_ls', 'html', 'htmx', 'emmet_ls', 'templ', 'biome', 'eslint_d', 'bashls', 'gopls', 'cspell', 'terraformls' })
       
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -127,6 +128,8 @@ return {
         "shfmt",
         "lua-language-server",
         "cspell",
+        "terraform-ls",
+        "tflint",
       }
       
       -- Simple tool installer for Mason

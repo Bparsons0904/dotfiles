@@ -88,6 +88,17 @@ Extensive project shortcuts are defined in the aliases file.
 - **File Management**: GNU Stow for dotfile deployment
 - **Development Tools**: Lunar IDE configuration included
 
+### Multi-Boot Setup (rEFInd)
+Desktop uses rEFInd bootloader for multi-OS setup across 3 NVMe drives. rEFInd auto-detects OSes without manual configuration.
+
+```bash
+# Revert to GRUB if needed
+sudo efibootmgr -o 000A,0000,0001,0005  # Put GRUB (000A) first in boot order
+
+# Switch back to rEFInd
+sudo efibootmgr -o 0000,000A,0001,0005  # Put rEFInd (0000) first
+```
+
 ### Hyprland Multi-Computer Setup
 Monitor configuration uses a gitignored `local.conf` that each computer creates locally:
 

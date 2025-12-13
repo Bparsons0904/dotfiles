@@ -15,6 +15,8 @@ local themes = {
   stoics = "stoics",
   nightfall = "nightfall",
   oasis = "oasis",
+  nightingale = "nightingale",
+  yoda = "yoda",
 }
 
-vim.cmd.colorscheme(themes.eldritch)
+vim.cmd.colorscheme(themes.nightingale)

@@ -1,3 +1,4 @@
 - Ask the user to run any sudo commands
 - Keep comments limited to critical and hard to understand areas
 - Testing should start as a minimal implementation, focusing on the most critical functionality only.
+- You can not run sudo commands. When one is needed provide to the user to run

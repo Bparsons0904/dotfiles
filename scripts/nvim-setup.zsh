@@ -103,7 +103,7 @@ elif command_exists apt; then
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
   fi
 
-  sudo apt install -y golang-go nodejs lua5.4 luarocks fzf cmake python3-pip python3-venv python3-dev ripgrep wl-clipboard
+  sudo apt install -y golang-go nodejs lua5.4 luarocks fzf cmake python3-pip python3-venv python3-dev python3-pynvim ripgrep wl-clipboard
 
   # Setup fzf for zsh
   setup_zsh_config

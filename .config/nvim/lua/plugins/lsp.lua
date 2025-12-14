@@ -108,7 +108,7 @@ return {
       local ensure_installed = {
         "stylua",
         "biome",
-        "eslint_d",
+        "eslint-lsp",
         "ruff",
         "prettierd",
         "isort",
@@ -127,7 +127,7 @@ return {
         "shellcheck",
         "shfmt",
         "lua-language-server",
-        "cspell",
+        "cspell-lsp",
         "terraform-ls",
         "tflint",
       }

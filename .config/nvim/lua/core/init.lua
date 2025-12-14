@@ -19,4 +19,4 @@ local themes = {
   yoda = "yoda",
 }
 
-vim.cmd.colorscheme(themes.nightingale)
+vim.cmd.colorscheme(themes.oasis)

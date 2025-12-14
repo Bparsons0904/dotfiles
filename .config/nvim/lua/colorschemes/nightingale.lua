@@ -6,6 +6,5 @@ return {
     require("nightingale").setup({
       transparent = true, -- set to true for transparent background
     })
-    -- vim.cmd("colorscheme nightingale")
   end,
 }
